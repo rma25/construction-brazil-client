@@ -89,6 +89,23 @@ body {
   background: url('./assets/images/loading.gif') no-repeat;
 }
 
+/** Table Header Fixed **/
+.tableHeaderFixed thead th {
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  border: none;
+}
+
+.tableHeaderFixed table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.tableHeaderFixed th,
+.tableHeaderFixed td {
+  padding: 8px 16px;
+}
+
 app-home,
 app-admin-menu {
   height: 100%;

@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center pt-2">
+  <div
+    *ngIf="paginationName"
+    [ngClass]="{
+      'me-2': true,
+      'mt-2': !size || size !== 'sm',
+      'mt-1': size === 'sm'
+    }"
+  >
+    <span class="text-dark fw-bold">{{ paginationName }}</span>
+  </div>
+
+  <!-- Max Size Can't change or it will create issues (it has to be hardcoded) -->
+  <ngb-pagination
+    *ngIf="totalCollectionSize > totalPerPageFilter"
+    [collectionSize]="totalCollectionSize"
+    [maxSize]="maxSize"
+    [pageSize]="totalPerPageFilter"
+    [ellipses]="true"
+    [boundaryLinks]="true"
+    [rotate]="true"
+    [(page)]="currentPage"
+    aria-label="Custom pagination"
+    (pageChange)="onPageChange($event)"
+    size="{{ size ? size : 'md' }}"
+  >
+    <ng-template ngbPaginationPrevious>Prev</ng-template>
+    <ng-template ngbPaginationNext> Next </ng-template>
+  </ngb-pagination>
+
+  <div class="ms-3">
+    <select
+      class="form-select"
+      [ngClass]="{ 'form-select': true, smallPagination: size === 'sm' }"
+      name="totalPerPageFilter"
+      [(ngModel)]="totalPerPageFilter"
+      (change)="onPageChange(currentPage)"
+    >
+      <option [ngValue]="10" [defaultSelected]="true">10 Per Page</option>
+      <option [ngValue]="25">25 Per Page</option>
+      <option [ngValue]="50">50 Per Page</option>
+    </select>
+  </div>
+</div>

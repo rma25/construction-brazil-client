@@ -1,4 +1,83 @@
 <div class="go-back">
-  <app-go-back [routePath]="'/admin'" [pageTitle]="'Professionais de Rodeio Configurações'"></app-go-back>
+  <app-go-back [routePath]="'/admin'" pageTitle="Professionais de Rodeio Configurações"></app-go-back>
 </div>
-<app-under-construction></app-under-construction>
+<div class="pt-1 h100p flex-col">
+  <div>
+    <div class="d-inline-flex mb-3">
+      <button class="btn btn-success me-3" (click)="openModal(add)">
+        <fa-icon icon="plus" class="me-2"></fa-icon>
+        Add
+      </button>
+      <div class="h5">{{ totalFAQs }} FAQs</div>
+    </div>
+  </div>
+  <div class="table-responsive scrollbarContent flex-111 tableHeaderFixed">
+    <table class="table table-striped" *ngIf="faqs?.length > 0 && !isLoading && !isUserPaging; else noFAQs">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">{{ faqs?.length }} Rows</th>
+          <th scope="col"></th>
+          <th scope="col">Question</th>
+          <th scope="col">Answer</th>
+          <th scope="col">CreatedOn</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let faq of faqs"
+          app-faq-settings-row
+          [faq]="faq"
+          [companyId]="currentCompany?.id"
+          (deletedId)="onRowRemoved($event)"
+          (rowChange)="onRowChanges($event)"
+        ></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+    *ngIf="totalFAQs > 0 && faqs?.length > 0"
+    [totalCollectionSize]="totalFAQs"
+    (pageChanged)="onPageChange($event)"
+  ></app-pagination>
+</div>
+
+<ng-template #noFAQs>
+  <app-not-found-message [isLoading]="isLoading" name="FAQs"></app-not-found-message>
+</ng-template>
+
+<ng-template #add let-modal>
+  <!-- <app-modal-header title="Add FAQ"></app-modal-header>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <label for="addQuestion">Question</label>
+          <input
+            type="text"
+            id="question"
+            class="form-control"
+            [(ngModel)]="newFAQ.question"
+            #question="ngModel"
+            placeholder="Please type in a question..."
+            maxlength="256"
+          />
+          <div class="text-danger font-italic" *ngIf="question.touched && !newFAQ.question">Please type in a question.</div>
+        </div>
+        <div class="mb-3">
+          <label for="addAnswer">Answer</label>
+          <quill-editor id="addAnswer" [(ngModel)]="newFAQ.answer" #answer="ngModel"> </quill-editor>
+          <div class="text-danger font-italic" *ngIf="answer.touched && !newFAQ.answer">Please type in an answer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <span class="font-italic text-danger" [hidden]="isAddFormValid()"> Please fill in the required fields. </span>
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+    <button type="submit" class="btn btn-success" (click)="onAdd()" [hidden]="!isAddFormValid()">
+      <fa-icon class="me-2 biggerIcon" icon="save"></fa-icon>
+      Save
+    </button>
+  </div> -->
+</ng-template>

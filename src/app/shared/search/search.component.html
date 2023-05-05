@@ -1,0 +1,125 @@
+<div class="row">
+  <!-- Search Input Text-->
+  <div
+    class="{{
+      'mb-3 ' +
+        (searchDisplay.searchTextColumns
+          ? searchDisplay.searchTextColumns
+          : 'col-sm-12 col-lg-6')
+    }}"
+  >
+    <div class="input-group">
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="onSearch()"
+        id="btn-search-template2"
+        [disabled]="searchDisplay.disabled"
+      >
+        <fa-icon icon="search" class="me-2"></fa-icon>
+        Search
+      </button>
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="onClearSearchText()"
+        id="btn-search-clear-search-text2"
+        ngbTooltip="Clear"
+        placement="top"
+        [hidden]="
+          !searchFilter.searchText || searchFilter.searchText.length === 0
+        "
+      >
+        <fa-icon icon="xmark"></fa-icon>
+      </button>
+      <input
+        type="text"
+        class="form-control"
+        [maxlength]="256"
+        placeholder="{{
+          searchDisplay.searchTextPlaceholder
+            ? searchDisplay.searchTextPlaceholder
+            : 'Search...'
+        }}"
+        aria-label="Search..."
+        aria-describedby="search-bar"
+        (input)="searchText.next($event.target.value)"
+        [(ngModel)]="searchFilter.searchText"
+        id="btn-search-template2"
+        [disabled]="searchDisplay.disabled"
+      />
+    </div>
+  </div>
+  <!-- Date Filter -->
+  <div
+    class="mb-3 {{
+      searchDisplay.dateFilterColumns
+        ? searchDisplay.dateFilterColumns
+        : 'col-sm-12 col-lg-6'
+    }}"
+    *ngIf="searchDisplay?.dateFilterColumns"
+  >
+    <div class="input-group">
+      <label class="input-group-text text-light bg-primary" for="dateFilter">
+        Date Filter:
+      </label>
+      <select
+        [ngStyle]="{ color: searchFilter.dateFilterOption ? '#28a745' : '' }"
+        class="form-select"
+        name="dateFilter"
+        [(ngModel)]="searchFilter.dateFilterOption"
+        (change)="onSearch()"
+        id="select-search-dateFilter"
+      >
+        <option [ngValue]="''" [defaultSelected]="true">
+          Select Date Filter...
+        </option>
+        <option
+          *ngFor="let dateFilterOption of dateFilterOptions"
+          [ngValue]="dateFilterOption"
+        >
+          {{ dateFilterOption }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <!-- Calendar Search-->
+  <div
+    *ngIf="
+      searchDisplay?.fromColumns &&
+      (searchDisplay?.dateFilterColumns
+        ? searchFilter.dateFilterOption === dateFilterCustomRangeOption
+        : true)
+    "
+    class="mb-3 {{
+      searchDisplay.fromColumns
+        ? searchDisplay.fromColumns
+        : 'col-sm-12 col-lg-6'
+    }}"
+  >
+    <app-date-picker-input
+      [(datePicked)]="searchFilter.fromDate"
+      (datePickedChange)="onSearch()"
+      calendarText="From"
+      id="input-search-fromDate"
+    ></app-date-picker-input>
+  </div>
+  <div
+    *ngIf="
+      searchDisplay?.toColumns &&
+      (searchDisplay?.dateFilterColumns
+        ? searchFilter.dateFilterOption === dateFilterCustomRangeOption
+        : true)
+    "
+    class="mb-3 {{
+      searchDisplay.toColumns ? searchDisplay.toColumns : 'col-sm-12 col-lg-6'
+    }}"
+  >
+    <app-date-picker-input
+      [(datePicked)]="searchFilter.toDate"
+      (datePickedChange)="onSearch()"
+      calendarText="To"
+      id="input-search-toDate"
+    ></app-date-picker-input>
+  </div>
+</div>

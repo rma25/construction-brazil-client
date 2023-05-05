@@ -1,0 +1,59 @@
+<form class="row">
+  <div class="col-12">
+    <div class="input-group">
+      <button
+        class="btn btn-outline-secondary calendar"
+        (click)="datePicker.toggle()"
+        type="button"
+      >
+        <fa-icon
+          icon="calendar-alt"
+          [ngClass]="{
+            'me-2': !!calendarText && calendarText.length > 0 && !model
+          }"
+        ></fa-icon>
+        <span *ngIf="!!calendarText && calendarText.length > 0 && !model">{{
+          calendarText
+        }}</span>
+      </button>
+      <button
+        class="btn btn-secondary"
+        [hidden]="!model"
+        (click)="onDateSelected(undefined)"
+        ngbTooltip="Clear"
+        placement="top"
+      >
+        <fa-icon icon="xmark"></fa-icon>
+      </button>
+      <input
+        (click)="datePicker.toggle()"
+        class="form-control rounded-en"
+        placeholder="yyyy-mm-dd"
+        name="dp"
+        [(ngModel)]="model"
+        ngbDatepicker
+        [footerTemplate]="footerTemplate"
+        #datePicker="ngbDatepicker"
+        (change)="onDateSelected($event)"
+        (dateSelect)="onDateSelected($event)"
+        readonly
+      />
+    </div>
+  </div>
+</form>
+
+<ng-template #footerTemplate>
+  <hr class="my-0" />
+  <button
+    class="btn btn-primary btn-sm m-2 float-start"
+    (click)="model = today; datePicker.close(); onDateSelected(today)"
+  >
+    Today
+  </button>
+  <button
+    class="btn btn-secondary btn-sm m-2 float-end"
+    (click)="datePicker.close()"
+  >
+    Close
+  </button>
+</ng-template>
