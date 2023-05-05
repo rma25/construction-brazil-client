@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faBug, faCheck, faExclamationTriangle, faSave } from '@fortawesome/free-solid-svg-icons';
 import {
   NgbDropdownModule,
   NgbModalModule,
@@ -31,7 +32,9 @@ import {
   ],
 })
 export class SharedModule {
-  constructor() {}
+  constructor(public faLib: FaIconLibrary) {
+    faLib.addIcons(faSave, faExclamationTriangle, faBug, faCheck);
+  }
 
   // static forRoot(): ModuleWithProviders<SharedModule> {
   //   return {

@@ -1,0 +1,67 @@
+<div class="toastStyle">
+  <ngb-toast
+    *ngFor="let filteredToast of filteredToasts"
+    [ngClass]="{
+      'bg-warning': filteredToast.toast.isWarning,
+      'bg-danger':
+        filteredToast.toast.isDanger && !filteredToast.toast.isWarning,
+      'bg-success':
+        !filteredToast.toast.isDanger && !filteredToast.toast.isWarning,
+      'text-light': true,
+      rounded: true,
+      border: true
+    }"
+    [autohide]="true"
+    [delay]="filteredToast.toast.delay || 5000"
+    (hide)="onHideToast(filteredToast)"
+  >
+    <ng-template ngbToastHeader>
+      <fa-icon
+        style="font-size: 1.25rem !important"
+        [ngClass]="{
+          'me-2': true,
+          'text-warning':
+            filteredToast.toast.isDanger || filteredToast.toast.isWarning,
+          'text-success':
+            !filteredToast.toast.isDanger && !filteredToast.toast.isWarning,
+          'text-danger': filteredToast.toast.httpStatusCode === 500
+        }"
+        icon="{{ getToastIcon(filteredToast) }}"
+      ></fa-icon>
+      <strong class="mx-1">
+        {{ filteredToast.toast.httpStatusCode }} -
+        {{ filteredToast.toast.header }}
+      </strong>
+    </ng-template>
+    <div
+      style="font-size: 1rem"
+      [ngClass]="{
+        'd-inline-flex': true,
+        'text-capitalize': filteredToast.toast.isDanger
+      }"
+    >
+      <div
+        [innerHTML]="filteredToast.toast.body"
+        [ngClass]="{
+          'text-wrap': true,
+          'text-dark': filteredToast.toast.isWarning,
+          'text-light': !filteredToast.toast.isWarning
+        }"
+      ></div>
+    </div>
+    <div class="pt-2">
+      <ngb-progressbar
+        *ngIf="filteredToast.toast.isWarning"
+        type="dark"
+        [value]="filteredToast.timer.timeLeft"
+        height=".5rem"
+      ></ngb-progressbar>
+      <ngb-progressbar
+        *ngIf="!filteredToast.toast.isWarning"
+        type="warning"
+        [value]="filteredToast.timer.timeLeft"
+        height=".5rem"
+      ></ngb-progressbar>
+    </div>
+  </ngb-toast>
+</div>
