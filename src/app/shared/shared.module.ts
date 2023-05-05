@@ -26,6 +26,8 @@ import { SearchComponent } from './search/search.component';
 import { ToastsComponent } from './toasts/toasts.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { DatePickerInputComponent } from './date-picker-input/date-picker-input.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { ModalHeaderComponent } from './modals/modal-header/modal-header.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { DatePickerInputComponent } from './date-picker-input/date-picker-input.
     PaginationComponent,
     SearchComponent,
     DatePickerInputComponent,
+    DialogComponent,
+    ModalHeaderComponent,
   ],
   imports: [
     CommonModule,
