@@ -7,7 +7,6 @@ html {
   height: 100%;
 }
 
-
 body {
   height: 100%;
   padding-top: 10px;
@@ -79,6 +78,15 @@ body {
 
 .flex-111 {
   flex: 1 1 1px;
+}
+
+.btn-loading-inline {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
+  z-index: 999;
+  background: url('./assets/images/loading.gif') no-repeat;
 }
 
 app-home,

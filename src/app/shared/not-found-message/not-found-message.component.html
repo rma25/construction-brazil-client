@@ -1,0 +1,9 @@
+<div *ngIf="isLoading; else doneLoading">
+  <div class="text-center text-primary h5 text-wrap">
+    Searching for {{ name }}...
+    <span class="btn-loading-inline"></span>
+  </div>
+</div>
+<ng-template #doneLoading>
+  <div class="text-center text-primary h5">No {{ name }} available.</div>
+</ng-template>

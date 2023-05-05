@@ -17,11 +17,21 @@ import {
 import { WINDOW_PROVIDERS } from '../providers/window.provider';
 import { HostNameService } from '../services/hostname.service';
 import { CardButtonComponent } from './card-button/card-button.component';
+import { GoBackComponent } from './go-back/go-back.component';
+import { NotFoundMessageComponent } from './not-found-message/not-found-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ToastsComponent } from './toasts/toasts.component';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 @NgModule({
-  declarations: [ToastsComponent, PageNotFoundComponent, CardButtonComponent],
+  declarations: [
+    ToastsComponent,
+    PageNotFoundComponent,
+    CardButtonComponent,
+    GoBackComponent,
+    NotFoundMessageComponent,
+    UnderConstructionComponent,
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -40,7 +50,9 @@ import { ToastsComponent } from './toasts/toasts.component';
     ToastsComponent,
     CommonModule,
     FontAwesomeModule,
-    CardButtonComponent
+    CardButtonComponent,
+    GoBackComponent,
+    UnderConstructionComponent
   ],
 })
 export class SharedModule {
