@@ -1,0 +1,59 @@
+/*Custom Card*/
+.after-loop {
+  padding: 3rem 0 5rem;
+}
+
+button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+button.after-loop-item {
+  color: #fff;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 15%;
+  font-size: 1.25rem;
+  left: 1rem;
+  color: rgb(51, 51, 51);
+}
+
+button.border-dark:disabled {
+  border-color: #cccccc !important;
+}
+
+button.bg-light:disabled {
+  background-color: #f8f9fa !important;
+}
+
+button.bg-light:disabled > div > .icon {
+  color: #cccccc !important;
+}
+
+button.bg-light:disabled > div > span {
+  color: #cccccc !important;
+}
+
+button.after-loop-item:hover {
+  text-decoration: none;
+}
+
+@media (min-width: 992px) {
+  .mb-lg-0,
+  .my-lg-0 {
+    margin-bottom: 0;
+  }
+}
+
+/* Only wrap text if not on mobile */
+@media (min-width: 1551px) {
+  .text-nowrap-sm {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

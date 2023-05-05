@@ -2,3 +2,56 @@
 .h100p{
   height: 100%;
 }
+
+/* Tablet */
+@media (max-width: 768px) {
+  .scrollContentBox {
+    max-height: 50vh;
+  }
+
+  .scrollContentBoxLarge {
+    max-height: 65vh;
+  }
+}
+
+.scrollbarContent {
+  overflow-y: auto !important;
+}
+
+/* width */
+.scrollbarContent::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.scrollbarContent::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.3rem !important;
+}
+
+/* Handle */
+.scrollbarContent::-webkit-scrollbar-thumb {
+  background: #bdc3c7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 0.3rem !important;
+}
+
+/* Handle on hover */
+.scrollbarContent::-webkit-scrollbar-thumb:hover {
+  background: #343a40;
+}
+
+.go-back {
+  padding: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.container-padding {
+  padding: 0 15px;
+}
+
+.pointerCursor {
+  cursor: pointer;
+}

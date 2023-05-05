@@ -1,0 +1,22 @@
+<div class="mx-auto pointerCursor py-2">
+  <!-- If user passed a file information, it means it will download the file and it's not a component-->
+  <button
+    [disabled]="disabled"
+    type="button"
+    (click)="onClick()"
+    class="after-loop-item card border-dark text-dark bg-light"
+  >
+    <div class="py-2 px-5 align-items-left text-start d-flex text-nowrap-sm">
+      <fa-icon
+        class="icon"
+        [ngStyle]="{ color: btnInfo.bgColor }"
+        [icon]="btnInfo.faIcon"
+      ></fa-icon>
+      <span
+        [ngClass]="{ 'text-capitalize': capitalizeText }"
+        [innerHTML]="btnInfo.title"
+      >
+      </span>
+    </div>
+  </button>
+</div>

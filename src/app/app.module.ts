@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,26 +11,23 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './home/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ShellComponent } from './home/shell/shell.component';
-import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { ToastsComponent } from './shared/toasts/toasts.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ShellComponent, HeaderComponent, PageNotFoundComponent, ToastsComponent],
+  declarations: [AppComponent, HomeComponent, ShellComponent, HeaderComponent],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    SharedModule,
+    SharedModule.forRoot(),
     FontAwesomeModule,
     ReactiveFormsModule,
   ],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(public faLib: FaIconLibrary,){
-
-  }
+  constructor(public faLib: FaIconLibrary) {}
 }

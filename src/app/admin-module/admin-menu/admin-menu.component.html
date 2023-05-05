@@ -1,0 +1,26 @@
+<div class="h100p flex-col">
+  <div>
+    <div class="h3 text-capitalize">Admin Settings</div>
+    <hr />
+  </div>
+  <div class="h100p flex-111 scrollbarContent">
+    <div class="row">
+      <div class="col-12">
+        <div class="row border-bottom">
+          <div class="h5 text-capitalize col-12">Registros</div>
+        </div>
+        <div class="row pt-2">
+          <app-card-button
+            class="col-lg-3 col-md-4"
+            [btnInfo]="{
+              routerLink: '/admin/profissionais-de-rodeio',
+              title: 'Profissionais de Rodeio',
+              faIcon: 'id-card',
+              bgColor: 'rgb(0, 51, 127)'
+            }"
+          ></app-card-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

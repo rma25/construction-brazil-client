@@ -12,10 +12,10 @@ const routes: Routes = [
     component: ShellComponent,
     children: [
       { path: 'home', component: HomeComponent },
-      // {
-      //   path: 'general',
-      //   loadChildren: () => import('./general-module/general.module').then((m) => m.GeneralModule)
-      // }
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin-module/admin.module').then((m) => m.AdminModule)
+      }
     ],
   },
   { path: '**', component: PageNotFoundComponent },
