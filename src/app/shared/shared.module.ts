@@ -40,7 +40,7 @@ import { ToastsComponent } from './toasts/toasts.component';
     ToastsComponent,
     CommonModule,
     FontAwesomeModule,
-    CardButtonComponent,
+    CardButtonComponent
   ],
 })
 export class SharedModule {

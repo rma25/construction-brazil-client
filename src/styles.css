@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Proxima';
+  src: url('assets/fonts/proxima_nova/regular/proxima-regular-webfont.ttf');
+}
+
+html {
+  height: 100%;
+}
+
+
+body {
+  height: 100%;
+  padding-top: 10px;
+  font-family: 'Proxima';
+}
+
 /* You can add global styles to this file, and also import other style files */
 .h100p{
   height: 100%;
@@ -54,4 +70,21 @@
 
 .pointerCursor {
   cursor: pointer;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-111 {
+  flex: 1 1 1px;
+}
+
+app-home,
+app-admin-menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 1px;
 }

@@ -6,7 +6,6 @@ import { ProfissionaisDeRodeioComponent } from './profissionais-de-rodeio/profis
 
 const routes: Routes = [
   { path: '', component: AdminMenuComponent},
-  { path: 'admin', component: AdminMenuComponent},
   { path: 'profissionais-de-rodeio', component: ProfissionaisDeRodeioComponent },
 ];
 

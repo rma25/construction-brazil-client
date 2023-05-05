@@ -14,8 +14,9 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       {
         path: 'admin',
-        loadChildren: () => import('./admin-module/admin.module').then((m) => m.AdminModule)
-      }
+        loadChildren: () =>
+          import('./admin-module/admin.module').then((m) => m.AdminModule),
+      },
     ],
   },
   { path: '**', component: PageNotFoundComponent },
