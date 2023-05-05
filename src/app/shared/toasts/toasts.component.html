@@ -18,15 +18,8 @@
     <ng-template ngbToastHeader>
       <fa-icon
         style="font-size: 1.25rem !important"
-        [ngClass]="{
-          'me-2': true,
-          'text-warning':
-            filteredToast.toast.isDanger || filteredToast.toast.isWarning,
-          'text-success':
-            !filteredToast.toast.isDanger && !filteredToast.toast.isWarning,
-          'text-danger': filteredToast.toast.httpStatusCode === 500
-        }"
-        icon="{{ getToastIcon(filteredToast) }}"
+        [ngClass]="['me-2', getToastIconClass(filteredToast)]"
+        [icon]="getToastIcon(filteredToast)"
       ></fa-icon>
       <strong class="mx-1">
         {{ filteredToast.toast.httpStatusCode }} -

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { map, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
@@ -71,11 +72,22 @@ export class ToastsComponent extends AbstractBaseComponent implements OnInit {
   public getToastIcon(filteredToast: {
     timer: ToastTimer;
     toast: Toast;
+  }): IconName {
+    if (filteredToast.toast.httpStatusCode === 500) return 'bug';
+    else if (filteredToast.toast.isDanger || filteredToast.toast.isWarning)
+      return 'exclamation-triangle';
+    else return 'check';
+  }
+
+  public getToastIconClass(filteredToast: {
+    timer: ToastTimer;
+    toast: Toast;
   }): string {
-    return filteredToast.toast.httpStatusCode === 500
-      ? 'bug'
-      : filteredToast.toast.isDanger || filteredToast.toast.isWarning
-      ? 'exclamation-triangle'
-      : 'check';
+    if (filteredToast.toast.isDanger || filteredToast.toast.isWarning)
+      return 'text-warning';
+    else if (!filteredToast.toast.isDanger && !filteredToast.toast.isWarning)
+      return 'text-success';
+    else if (filteredToast.toast.httpStatusCode === 500) return 'text-danger';
+    else return '';
   }
 }
