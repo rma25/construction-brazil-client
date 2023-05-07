@@ -22,7 +22,7 @@
           profissionaisDeRodeio.length > 0 &&
           !isLoading &&
           !isUserPaging;
-        else noFAQs
+        else noProfissionais
       "
     >
       <thead class="table-dark">
@@ -47,16 +47,20 @@
   </div>
 
   <app-pagination
-    *ngIf="totalDeProfissionais > 0 && && profissionaisDeRodeio && profissionaisDeRodeio.length > 0"
+    *ngIf="
+      totalDeProfissionais > 0 &&
+      profissionaisDeRodeio &&
+      profissionaisDeRodeio.length > 0
+    "
     [totalCollectionSize]="totalDeProfissionais"
     (pageChanged)="onPageChange($event)"
   ></app-pagination>
 </div>
 
-<ng-template #noFAQs>
+<ng-template #noProfissionais>
   <app-not-found-message
     [isLoading]="isLoading"
-    name="FAQs"
+    name="Profissionais de Rodeio"
   ></app-not-found-message>
 </ng-template>
 
