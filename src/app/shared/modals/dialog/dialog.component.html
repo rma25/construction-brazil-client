@@ -5,7 +5,7 @@
   ></app-modal-header>
   <ng-template #defaultHeader>
     <div class="modal-header">
-      <h5 class="modal-title text-capitalize fw-bold">Warning</h5>
+      <h5 class="modal-title text-capitalize fw-bold">Aviso</h5>
     </div>
   </ng-template>
   <div class="modal-body">
@@ -15,7 +15,7 @@
           {{
             message.length > 0
               ? message
-              : "You have unsaved changes. Would you like to save changes?"
+              : "Você tem alterações não salvas. Deseja salvar as alterações?"
           }}
         </span>
       </div>
@@ -30,7 +30,7 @@
         id="btn-dialog-template-yes"
       >
         <fa-icon icon="hand-pointer" class="me-2"></fa-icon>
-        Yes
+        Sim
       </button>
       <button
         type="button"
@@ -39,7 +39,7 @@
         id="btn-dialog-template-no"
       >
         <fa-icon icon="hand-pointer" class="me-2"></fa-icon>
-        No
+        Não
       </button>
     </div>
     <div *ngIf="!showYesOrNoButtons">
@@ -50,7 +50,7 @@
         id="btn-dialog-template-close"
       >
         <fa-icon icon="hand-pointer" class="me-2"></fa-icon>
-        Close
+        Fechar
       </button>
     </div>
   </div>

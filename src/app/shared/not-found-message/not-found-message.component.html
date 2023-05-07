@@ -1,9 +1,9 @@
 <div *ngIf="isLoading; else doneLoading">
   <div class="text-center text-primary h5 text-wrap">
-    Searching for {{ name }}...
+    Procurando por {{ name }}...
     <span class="btn-loading-inline"></span>
   </div>
 </div>
 <ng-template #doneLoading>
-  <div class="text-center text-primary h5">No {{ name }} available.</div>
+  <div class="text-center text-primary h5">Nenhum {{ name }} disponível.</div>
 </ng-template>
