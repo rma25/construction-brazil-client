@@ -3,7 +3,7 @@ import { IconName } from '@fortawesome/free-solid-svg-icons';
 import { map, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
-import { Toast } from './models/toast.model';
+import { Toast } from './interface/toast.interface';
 import { ToastService } from './services/toast.service';
 
 class ToastTimer {
@@ -24,12 +24,12 @@ class ToastTimer {
 export class ToastsComponent extends AbstractBaseComponent implements OnInit {
   public filteredToasts: { timer: ToastTimer; toast: Toast }[] = [];
 
-  constructor(public sharedService: ToastService) {
+  constructor(public toastService: ToastService) {
     super();
   }
 
   ngOnInit() {
-    this.sharedService.toasts
+    this.toastService.toasts
       .pipe(
         map((toast, i) => {
           const timer = new ToastTimer(

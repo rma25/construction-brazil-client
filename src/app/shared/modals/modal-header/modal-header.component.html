@@ -1,0 +1,9 @@
+<div class="modal-header">
+  <img *ngIf="logo | async as localLogo" [src]="localLogo" class="companyLogo" alt="" />
+  <h5 class="modal-title text-capitalize fw-bold ms-2">
+    {{ title }}
+  </h5>
+  <button type="button" class="close" aria-label="Close" (click)="closeModals()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

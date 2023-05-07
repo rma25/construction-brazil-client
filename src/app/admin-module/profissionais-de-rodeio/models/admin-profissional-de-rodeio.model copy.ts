@@ -1,12 +1,18 @@
+import { AdminContato } from './admin-contato.model';
 import { AdminEndereco } from './admin-endereco.model';
 
 export class AdminProfissionalDeRodeio {
-  public nome: string;
+  constructor() {
+    this.endereco = new AdminEndereco();
+    this.contato = new AdminContato();
+  }
+  public id: number;
   public observacoes: string;
   public pis: string;
-  public cpf: string;
   public rg: string;
   public pix: string;
-  public telefone: string;
   public endereco: AdminEndereco;
+  public contato: AdminContato;
+  public criado: Date;
+  public atualizado: Date;
 }

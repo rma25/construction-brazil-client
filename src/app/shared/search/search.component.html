@@ -43,7 +43,7 @@
         }}"
         aria-label="Search..."
         aria-describedby="search-bar"
-        (input)="searchText.next($event.target.value)"
+        (input)="onInput($event.target)"
         [(ngModel)]="searchFilter.searchText"
         id="btn-search-template2"
         [disabled]="searchDisplay.disabled"

@@ -1,0 +1,57 @@
+<div>
+  <app-modal-header
+    *ngIf="modalHeaderTitle; else defaultHeader"
+    [title]="modalHeaderTitle"
+  ></app-modal-header>
+  <ng-template #defaultHeader>
+    <div class="modal-header">
+      <h5 class="modal-title text-capitalize fw-bold">Warning</h5>
+    </div>
+  </ng-template>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <span>
+          {{
+            message.length > 0
+              ? message
+              : "You have unsaved changes. Would you like to save changes?"
+          }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div *ngIf="showYesOrNoButtons">
+      <button
+        type="button"
+        class="btn btn-success me-2"
+        (click)="activeModal.close(true)"
+        id="btn-dialog-template-yes"
+      >
+        <fa-icon icon="hand-pointer" class="me-2"></fa-icon>
+        Yes
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary ms-auto"
+        (click)="activeModal.close(false)"
+        id="btn-dialog-template-no"
+      >
+        <fa-icon icon="hand-pointer" class="me-2"></fa-icon>
+        No
+      </button>
+    </div>
+    <div *ngIf="!showYesOrNoButtons">
+      <button
+        type="button"
+        class="btn btn-secondary ms-auto"
+        (click)="activeModal.close(false)"
+        id="btn-dialog-template-close"
+      >
+        <fa-icon icon="hand-pointer" class="me-2"></fa-icon>
+        Close
+      </button>
+    </div>
+  </div>
+</div>

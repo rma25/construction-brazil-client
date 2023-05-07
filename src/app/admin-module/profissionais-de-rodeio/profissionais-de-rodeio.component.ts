@@ -4,62 +4,71 @@ import { concatMap, finalize, forkJoin, from, map, Observable, of, Subject, swit
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ISaveChanges } from 'src/app/shared/interfaces/iSave-changes.interface';
 import { RowInfo } from 'src/app/shared/interfaces/rowInfo.interface';
+import { DialogComponent } from 'src/app/shared/modals/dialog/dialog.component';
 import { PageInfo } from 'src/app/shared/pagination/interfaces/page-info.interface';
 import { IPagination } from 'src/app/shared/pagination/pagination.component';
-import { Toast } from 'src/app/shared/toasts/models/toast.model';
+import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
+import { ISearch } from 'src/app/shared/search/search.component';
+import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
+import { ProfissionaisDeRodeioAdminDataService } from './data/profissionais-de-rodeio-admin-data.service';
 import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model copy';
+import { ProfissionalAdminFilter } from './models/profissional-de-rodeio-admin-filter';
 
 @Component({
   selector: 'app-profissionais-de-rodeio',
   templateUrl: './profissionais-de-rodeio.component.html',
-  styleUrls: ['./profissionais-de-rodeio.component.css']
+  styleUrls: ['./profissionais-de-rodeio.component.css'],
 })
-export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implements OnInit, IPagination, ISaveChanges, ISearch {
+export class ProfissionaisDeRodeioComponent
+  extends AbstractBaseComponent
+  implements OnInit, IPagination, ISaveChanges, ISearch
+{
   private pageChanged = new Subject<PageInfo>();
 
-  public errorMessage = 'Please fill in the required fields.';
-  public profissionais: Array<FAQ>;
+  public profissionaisDeRodeio: Array<AdminProfissionalDeRodeio>;
   public searchFilter: SearchFilter;
   public totalPerPage = 10;
   public rowChanges = new Array<RowInfo>();
-  public totalFAQs = 0;
-  public newFAQ: AdminProfissionalDeRodeio = new AdminProfissionalDeRodeio();
+  public totalDeProfissionais = 0;
+  public newProfissional = new AdminProfissionalDeRodeio();
   public isLoading: boolean = true;
   public isUserPaging: boolean = false;
 
   constructor(
     private modalService: NgbModal,
-    private profissionalSettingsData: ProfissionaisDeRodeioSettingsDataService,
-    private faqData: FAQDataService,
-    private companyService: CompanyService
+    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService,
+    private toastService: ToastService
   ) {
     super();
   }
 
   ngOnInit() {
-    this.companyService.selectedCompany
+    const filter = new ProfissionalAdminFilter();
+
+    if (this.searchFilter) {
+      filter.currentPage = 1;
+    }
+
+    this.profissionalSettingsData
+      .getTotalAdmin(filter)
       .pipe(
-        tap(() => (this.isLoading = true)),
-        switchMap((currentCompany) =>
-          this.faqData.getTotalFAQs(currentCompany.id).pipe(map((totalFAQs) => ({ currentCompany, totalFAQs })))
-        ),
-        concatMap((x) => this.faqData.getFAQPage(this.totalPerPage, x.currentCompany.id, 1).pipe(map((faqs) => ({ ...x, faqs })))),
+        concatMap((totalDeProfissionais) => {
+          filter.totalPerPage = this.totalPerPage;
+
+          return this.profissionalSettingsData.getPageAdmin(filter).pipe(
+            map((profissionaisDeRodeio) => ({
+              totalDeProfissionais,
+              profissionaisDeRodeio,
+            }))
+          );
+        }),
         takeUntil(this.destroy),
         finalize(() => (this.isLoading = false))
       )
       .subscribe((x) => {
-        if (x.currentCompany) {
-          this.currentCompany = x.currentCompany;
-        }
-
-        if (x.totalFAQs) {
-          this.totalFAQs = x.totalFAQs;
-        }
-
-        if (x.faqs) {
-          this.faqs = x.faqs;
-        }
+        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
+        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
 
         this.isLoading = false;
       });
@@ -76,10 +85,17 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
           this.isUserPaging = true;
 
           if (this.areThereUnsavedChanges()) {
-            return from(this.modalService.open(DialogComponent, { centered: true }).result).pipe(
+            return from(
+              this.modalService.open(DialogComponent, { centered: true }).result
+            ).pipe(
               concatMap((isYes) => {
                 if (isYes === true) {
-                  return this.saveChanges().pipe(map((m) => ({ changesSaved: !m.includes(false), ...pageInfo })));
+                  return this.saveChanges().pipe(
+                    map((m) => ({
+                      changesSaved: !m.includes(false),
+                      ...pageInfo,
+                    }))
+                  );
                 } else {
                   return of({ changesSaved: true, ...pageInfo });
                 }
@@ -90,39 +106,37 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
           }
         }),
         concatMap((item) => {
-          if (item && this.currentCompany) {
-            const filter = new FAQSearch();
+          if (item) {
+            const filter = new ProfissionalAdminFilter();
 
             if (this.searchFilter) {
               filter.searchText = this.searchFilter.searchText;
-              filter.totalPerPage = item.totalPerPage;
-              filter.currentPage = item.pageNumber;
+              filter.startedOn = this.searchFilter.fromDate;
+              filter.endedOn = this.searchFilter.toDate;
             }
 
-            // If one of the filtereing parameters were set
-            if ((filter.searchText && filter.searchText.length > 0) || filter.startedOn || filter.endedOn) {
-              return this.faqData
-                .getTotalFAQsSearchResults(filter)
-                .pipe(
-                  concatMap((totalResults) =>
-                    this.faqData
-                      .searchFAQs(filter)
-                      .pipe(map((faqs) => ({ totalResults, faqs, totalPerPage: item.totalPerPage, changesSaved: item.changesSaved })))
-                  )
+            return this.profissionalSettingsData.getTotalAdmin(filter).pipe(
+              concatMap((totalResults) => {
+                filter.totalPerPage = item.totalPerPage;
+                filter.currentPage = item.pageNumber;
+
+                return this.profissionalSettingsData.getPageAdmin(filter).pipe(
+                  map((profissionaisDeRodeio) => ({
+                    totalResults,
+                    profissionaisDeRodeio,
+                    totalPerPage: item.totalPerPage,
+                    changesSaved: item.changesSaved,
+                  }))
                 );
-            } else {
-              return this.faqData
-                .getTotalFAQs(this.currentCompany.id)
-                .pipe(
-                  concatMap((totalResults) =>
-                    this.faqData
-                      .getFAQPage(item.totalPerPage, this.currentCompany.id, item.pageNumber, false)
-                      .pipe(map((faqs) => ({ totalResults, faqs, totalPerPage: item.totalPerPage, changesSaved: item.changesSaved })))
-                  )
-                );
-            }
+              })
+            );
           } else {
-            return of({ totalResults: 0, faqs: Array<FAQ>(), totalPerPage: this.totalPerPage, changesSaved: true });
+            return of({
+              totalResults: 0,
+              profissionaisDeRodeio: Array<AdminProfissionalDeRodeio>(),
+              totalPerPage: this.totalPerPage,
+              changesSaved: true,
+            });
           }
         }),
         takeUntil(this.destroy),
@@ -133,8 +147,8 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
       )
       .subscribe((items) => {
         if (items) {
-          this.totalFAQs = items.totalResults;
-          this.faqs = items.faqs;
+          this.totalDeProfissionais = items.totalResults;
+          this.profissionaisDeRodeio = items.profissionaisDeRodeio;
           this.totalPerPage = items.totalPerPage;
 
           if (items.changesSaved) {
@@ -149,37 +163,39 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
   }
 
   public isAddFormValid(): boolean {
-    return !!this.newFAQ.question && !!this.newFAQ.answer;
+    return (
+      !!this.newProfissional.contato.cpf &&
+      !!this.newProfissional.contato.nome &&
+      !!this.newProfissional.contato.sobrenome
+    );
   }
 
   public onAdd(): void {
-    if (!this.currentCompany) {
-      this.sharedService.toasts.next(
-        new Toast(500, 'Error', 'Ops...Something went wrong! Please contact the administrator.', 3000, true, false)
-      );
-      return;
-    }
-
-    this.newFAQ.isGlobal = this.currentCompany.hasGlobalContent;
-    this.newFAQ.companyId = this.currentCompany.id;
+    // Although isE2G is set to false, the only purpose is to notify the user
+    this.newProfissional.criado = new Date();
 
     this.profissionalSettingsData
-      .insertFAQ(this.newFAQ)
+      .insert(this.newProfissional)
       .pipe(takeUntil(this.destroy))
       .subscribe((newId) => {
         if (newId) {
-          // Set the new Id from the database to the existing faq
-          this.newFAQ.id = newId;
+          // Set the new Id from the database to the existing videos
+          this.newProfissional.id = newId;
 
-          this.totalFAQs++;
+          this.totalDeProfissionais++;
 
-          // Push to the top of the list of news
-          this.faqs.unshift(this.newFAQ);
+          // Push to the top of the list of videos
+          this.profissionaisDeRodeio.unshift(this.newProfissional);
 
-          this.newFAQ = new FAQ();
-
-          this.sharedService.toasts.next(new Toast(200, 'Success', 'FAQ Inserted.', 3000, false, false));
+          this.toastService.toasts.next({
+            httpStatusCode: 200,
+            header: 'Successo',
+            body: 'Profissional de Rodeio criado.',
+            delay: 3000,
+          });
         }
+
+        this.newProfissional = new AdminProfissionalDeRodeio();
       });
 
     // Close modal
@@ -209,7 +225,7 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
       this.rowChanges
         .filter((rowChange) => !rowChange.isSaved && rowChange.isValid)
         .map((rowChange) =>
-          this.profissionalSettingsData.updateFAQ(rowChange.row).pipe(
+          this.profissionalSettingsData.update(rowChange.row).pipe(
             tap((isSaved) => {
               if (isSaved === true) {
                 // Remove from the array
@@ -225,7 +241,9 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
   public onRowChanges(change: RowInfo) {
     if (change) {
       if (change.isSaved) {
-        this.rowChanges = this.rowChanges.filter((x) => x.row.id !== change.row.id);
+        this.rowChanges = this.rowChanges.filter(
+          (x) => x.row.id !== change.row.id
+        );
       } else {
         // If there are not unsaved Ids
         if (!this.rowChanges.some((x) => x.row.id === change.row.id)) {
@@ -236,12 +254,14 @@ export class ProfissionaisDeRodeioComponent extends AbstractBaseComponent implem
   }
 
   public onRowRemoved(id: number): void {
-    this.faqs = this.faqs.filter((x) => x.id !== id);
+    this.profissionaisDeRodeio = this.profissionaisDeRodeio.filter(
+      (x) => x.id !== id
+    );
     // Reduce the total number of items, until the new data is picked up again
-    this.totalFAQs--;
+    this.totalDeProfissionais--;
   }
 
   public openModal(template: TemplateRef<any>) {
-    this.sharedService.openModal(template, true, true);
+    this.modalService.open(template, { centered: true, size: 'xl' });
   }
 }

@@ -8,7 +8,7 @@ import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodei
 import { ProfissionalAdminFilter } from '../models/profissional-de-rodeio-admin-filter';
 
 @Injectable({ providedIn: 'root' })
-export class ProfissionaisDeRodeioSettingsDataService {
+export class ProfissionaisDeRodeioAdminDataService {
   constructor(private http: HttpClient) {}
   public getPageAdmin(
     filter: ProfissionalAdminFilter

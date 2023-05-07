@@ -62,7 +62,9 @@ export class SearchComponent
   ngOnInit(): void {
     this.setDateFilterOptions();
 
-    this.searchFilter = new SearchFilter(this.searchDisplay.defaultSearchTextFilter);
+    this.searchFilter = new SearchFilter(
+      this.searchDisplay.defaultSearchTextFilter
+    );
 
     this.searchText
       .pipe(
@@ -78,7 +80,7 @@ export class SearchComponent
   private setDateFilterOptions(): void {
     if (this.searchDisplay.dateFilterColumns) {
       this.dateFilterOptions = Object.keys(DateFilterOptions).map((x) => {
-        return DateFilterOptions[x];
+        return x;
       });
     }
   }
@@ -87,6 +89,14 @@ export class SearchComponent
     this.searchFilter.searchText = '';
 
     this.onSearch();
+  }
+
+  public onInput(target: EventTarget | null): void {
+    if (target) {
+      const element = target as HTMLInputElement;
+
+      this.searchText.next(element.value);
+    }
   }
 
   public onSearch(): void {
