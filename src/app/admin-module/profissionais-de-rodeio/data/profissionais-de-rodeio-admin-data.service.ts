@@ -10,6 +10,7 @@ import { ProfissionalAdminFilter } from '../models/profissional-de-rodeio-admin-
 @Injectable({ providedIn: 'root' })
 export class ProfissionaisDeRodeioAdminDataService {
   constructor(private http: HttpClient) {}
+
   public getPageAdmin(
     filter: ProfissionalAdminFilter
   ): Observable<AdminProfissionalDeRodeio[]> {

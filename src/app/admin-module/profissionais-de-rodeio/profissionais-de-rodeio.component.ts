@@ -32,7 +32,7 @@ export class ProfissionaisDeRodeioComponent
   public rowChanges = new Array<RowInfo>();
   public totalDeProfissionais = 0;
   public newProfissional = new AdminProfissionalDeRodeio();
-  public isLoading: boolean = true;
+  public isLoading: boolean = false;
   public isUserPaging: boolean = false;
 
   constructor(
@@ -50,28 +50,28 @@ export class ProfissionaisDeRodeioComponent
       filter.currentPage = 1;
     }
 
-    this.profissionalSettingsData
-      .getTotalAdmin(filter)
-      .pipe(
-        concatMap((totalDeProfissionais) => {
-          filter.totalPerPage = this.totalPerPage;
+    // this.profissionalSettingsData
+    //   .getTotalAdmin(filter)
+    //   .pipe(
+    //     concatMap((totalDeProfissionais) => {
+    //       filter.totalPerPage = this.totalPerPage;
 
-          return this.profissionalSettingsData.getPageAdmin(filter).pipe(
-            map((profissionaisDeRodeio) => ({
-              totalDeProfissionais,
-              profissionaisDeRodeio,
-            }))
-          );
-        }),
-        takeUntil(this.destroy),
-        finalize(() => (this.isLoading = false))
-      )
-      .subscribe((x) => {
-        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
-        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
+    //       return this.profissionalSettingsData.getPageAdmin(filter).pipe(
+    //         map((profissionaisDeRodeio) => ({
+    //           totalDeProfissionais,
+    //           profissionaisDeRodeio,
+    //         }))
+    //       );
+    //     }),
+    //     takeUntil(this.destroy),
+    //     finalize(() => (this.isLoading = false))
+    //   )
+    //   .subscribe((x) => {
+    //     this.profissionaisDeRodeio = x.profissionaisDeRodeio;
+    //     this.profissionaisDeRodeio = x.profissionaisDeRodeio;
 
-        this.isLoading = false;
-      });
+    //     this.isLoading = false;
+    //   });
 
     this.paging();
   }
@@ -162,7 +162,7 @@ export class ProfissionaisDeRodeioComponent
       });
   }
 
-  public isAddFormValid(): boolean {
+  public isAddValid(): boolean {
     return (
       !!this.newProfissional.contato.cpf &&
       !!this.newProfissional.contato.nome &&

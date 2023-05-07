@@ -73,13 +73,18 @@ import { UnderConstructionComponent } from './under-construction/under-construct
   exports: [
     ToastsComponent,
     CommonModule,
+    FormsModule,
     FontAwesomeModule,
     CardButtonComponent,
     GoBackComponent,
     UnderConstructionComponent,
     NotFoundMessageComponent,
     PaginationComponent,
+    ModalHeaderComponent,
   ],
+  entryComponents: [
+    DialogComponent
+  ]
 })
 export class SharedModule {
   constructor(public faLib: FaIconLibrary) {
