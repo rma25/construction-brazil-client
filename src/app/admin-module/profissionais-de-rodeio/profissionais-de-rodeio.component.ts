@@ -9,7 +9,6 @@ import { PageInfo } from 'src/app/shared/pagination/interfaces/page-info.interfa
 import { IPagination } from 'src/app/shared/pagination/pagination.component';
 import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
 import { ISearch } from 'src/app/shared/search/search.component';
-import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from './data/profissionais-de-rodeio-admin-data.service';
 import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model copy';
@@ -31,14 +30,12 @@ export class ProfissionaisDeRodeioComponent
   public totalPerPage = 10;
   public rowChanges = new Array<RowInfo>();
   public totalDeProfissionais = 0;
-  public newProfissional = new AdminProfissionalDeRodeio();
   public isLoading: boolean = false;
   public isUserPaging: boolean = false;
 
   constructor(
     private modalService: NgbModal,
-    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService,
-    private toastService: ToastService
+    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService
   ) {
     super();
   }
@@ -49,6 +46,21 @@ export class ProfissionaisDeRodeioComponent
     if (this.searchFilter) {
       filter.currentPage = 1;
     }
+
+    this.profissionaisDeRodeio = new Array<AdminProfissionalDeRodeio>();
+    const profissionalSample = new AdminProfissionalDeRodeio();
+    profissionalSample.id = 1;
+    profissionalSample.contato.nome = 'Rodo';
+    profissionalSample.contato.sobrenome = 'Andrade';
+    profissionalSample.contato.cpf = '123.456.7';
+    profissionalSample.contato.telefone = '12345678';
+    profissionalSample.endereco.rua = 'Joaquim Pinto';
+    profissionalSample.endereco.cep = '123456';
+    profissionalSample.endereco.cidade = 'Rio de Janeiro';
+    profissionalSample.endereco.complemento = '123';
+    profissionalSample.endereco.estado = 'RJ';
+    profissionalSample.observacoes = 'Testing Observacoes';
+    this.profissionaisDeRodeio.push();
 
     // this.profissionalSettingsData
     //   .getTotalAdmin(filter)
@@ -162,44 +174,11 @@ export class ProfissionaisDeRodeioComponent
       });
   }
 
-  public isAddValid(): boolean {
-    return (
-      !!this.newProfissional.contato.cpf &&
-      !!this.newProfissional.contato.nome &&
-      !!this.newProfissional.contato.sobrenome
-    );
-  }
+  public onProfissionalAdded(newProfissional: AdminProfissionalDeRodeio): void {
+    this.totalDeProfissionais++;
 
-  public onAdd(): void {
-    // Although isE2G is set to false, the only purpose is to notify the user
-    this.newProfissional.criado = new Date();
-
-    this.profissionalSettingsData
-      .insert(this.newProfissional)
-      .pipe(takeUntil(this.destroy))
-      .subscribe((newId) => {
-        if (newId) {
-          // Set the new Id from the database to the existing videos
-          this.newProfissional.id = newId;
-
-          this.totalDeProfissionais++;
-
-          // Push to the top of the list of videos
-          this.profissionaisDeRodeio.unshift(this.newProfissional);
-
-          this.toastService.toasts.next({
-            httpStatusCode: 200,
-            header: 'Successo',
-            body: 'Profissional de Rodeio criado.',
-            delay: 3000,
-          });
-        }
-
-        this.newProfissional = new AdminProfissionalDeRodeio();
-      });
-
-    // Close modal
-    this.modalService.dismissAll();
+    // Push to the top of the list of videos
+    this.profissionaisDeRodeio.unshift(newProfissional);
   }
 
   public onSearch(searchFilter: SearchFilter): void {

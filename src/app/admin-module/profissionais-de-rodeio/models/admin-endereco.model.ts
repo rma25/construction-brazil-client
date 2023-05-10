@@ -1,7 +1,7 @@
 export class AdminEndereco {
   public rua: string;
-  public comp: string;
+  public complemento: string;
   public cidade: string;
-  public uf: string;
+  public estado: string;
   public cep: string;
 }
