@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { StaticDataService } from 'src/app/shared/services/static-data.service';
@@ -47,27 +46,44 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
     // Although isE2G is set to false, the only purpose is to notify the user
     this.newProfissional.criado = new Date();
 
-    this.profissionalSettingsData
-      .insert(this.newProfissional)
-      .pipe(takeUntil(this.destroy))
-      .subscribe((newId) => {
-        if (newId) {
-          // Set the new Id from the database to the existing videos
-          this.newProfissional.id = newId;
+    this.TestingOnly();
 
-          this.newProfissionalAdded.emit(this.newProfissional);
+    // this.profissionalSettingsData
+    //   .insert(this.newProfissional)
+    //   .pipe(takeUntil(this.destroy))
+    //   .subscribe((newId) => {
+    //     if (newId) {
+    //       // Set the new Id from the database to the existing videos
+    //       this.newProfissional.id = newId;
 
-          this.toastService.toasts.next({
-            httpStatusCode: 200,
-            header: 'Successo',
-            body: 'Profissional de Rodeio criado.',
-            delay: 3000,
-          });
-        }
+    //       this.newProfissionalAdded.emit(this.newProfissional);
 
-        this.newProfissional = new AdminProfissionalDeRodeio();
-      });
+    //       this.toastService.toasts.next({
+    //         httpStatusCode: 200,
+    //         header: 'Successo',
+    //         body: 'Profissional de Rodeio criado.',
+    //         delay: 3000,
+    //       });
+    //     }
+
+    //     this.newProfissional = new AdminProfissionalDeRodeio();
+    //   });
 
     this.modalService.closeModal();
+  }
+
+  // TODO: This is only until I have the server working
+  public TestingOnly(): void {
+    // Set the new Id from the database to the existing videos
+    this.newProfissional.id = 2;
+
+    this.newProfissionalAdded.emit(this.newProfissional);
+
+    this.toastService.toasts.next({
+      httpStatusCode: 200,
+      header: 'Successo',
+      body: 'Profissional de Rodeio criado.',
+      delay: 3000,
+    });
   }
 }

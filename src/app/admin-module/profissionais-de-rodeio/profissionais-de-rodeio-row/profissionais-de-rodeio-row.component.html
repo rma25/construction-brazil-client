@@ -1,1 +1,56 @@
-<p>profissionais-de-rodeio-row works!</p>
+<th scope="row">
+  <app-save-button
+    [dataRequest]="onPreSave.bind(this)"
+    (dataRequestResult)="onSaved($event)"
+    *ngIf="isRowValid()"
+    #saveBtn
+  ></app-save-button>
+</th>
+<th scope="row">
+  <button type="button" class="btn btn-danger" (click)="onDelete()">
+    <fa-icon icon="trash-alt" class="me-2"></fa-icon>
+    Delete
+  </button>
+</th>
+<th scope="row">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="modalService.openModalXL(editContato)"
+  >
+    <fa-icon icon="edit" class="me-2"></fa-icon>
+    Editar
+  </button>
+</th>
+<th scope="row">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="modalService.openModalXL(editEndereco)"
+  >
+    <fa-icon icon="edit" class="me-2"></fa-icon>
+    Editar
+  </button>
+</th>
+<th scope="row">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="modalService.openModalXL(editInformacoesGerais)"
+  >
+    <fa-icon icon="edit" class="me-2"></fa-icon>
+    Editar
+  </button>
+</th>
+<td>
+  {{ getFormattedDate(profissionalDeRodeio.criado) }}
+</td>
+<td>
+  {{ getFormattedDate(profissionalDeRodeio.mudado) }}
+</td>
+
+<ng-template #editContato let-modal> </ng-template>
+
+<ng-template #editEndereco let-modal> </ng-template>
+
+<ng-template #editInformacoesGerais let-modal> </ng-template>

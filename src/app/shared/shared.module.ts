@@ -81,6 +81,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     NotFoundMessageComponent,
     PaginationComponent,
     ModalHeaderComponent,
+    SaveButtonComponent
   ],
   entryComponents: [
     DialogComponent

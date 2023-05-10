@@ -1,5 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
 import { concatMap, finalize, forkJoin, from, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ISaveChanges } from 'src/app/shared/interfaces/iSave-changes.interface';
@@ -9,6 +8,7 @@ import { PageInfo } from 'src/app/shared/pagination/interfaces/page-info.interfa
 import { IPagination } from 'src/app/shared/pagination/pagination.component';
 import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
 import { ISearch } from 'src/app/shared/search/search.component';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from './data/profissionais-de-rodeio-admin-data.service';
 import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model copy';
@@ -34,7 +34,7 @@ export class ProfissionaisDeRodeioComponent
   public isUserPaging: boolean = false;
 
   constructor(
-    private modalService: NgbModal,
+    public modalService: ModalService,
     private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService
   ) {
     super();
@@ -47,6 +47,7 @@ export class ProfissionaisDeRodeioComponent
       filter.currentPage = 1;
     }
 
+    // TODO: This is temporary until I have the server working
     this.profissionaisDeRodeio = new Array<AdminProfissionalDeRodeio>();
     const profissionalSample = new AdminProfissionalDeRodeio();
     profissionalSample.id = 1;
@@ -60,7 +61,7 @@ export class ProfissionaisDeRodeioComponent
     profissionalSample.endereco.complemento = '123';
     profissionalSample.endereco.estado = 'RJ';
     profissionalSample.observacoes = 'Testing Observacoes';
-    this.profissionaisDeRodeio.push();
+    this.profissionaisDeRodeio.push(profissionalSample);
 
     // this.profissionalSettingsData
     //   .getTotalAdmin(filter)
@@ -98,7 +99,7 @@ export class ProfissionaisDeRodeioComponent
 
           if (this.areThereUnsavedChanges()) {
             return from(
-              this.modalService.open(DialogComponent, { centered: true }).result
+              this.modalService.openModalComponent(DialogComponent, { centered: true })
             ).pipe(
               concatMap((isYes) => {
                 if (isYes === true) {
@@ -238,9 +239,5 @@ export class ProfissionaisDeRodeioComponent
     );
     // Reduce the total number of items, until the new data is picked up again
     this.totalDeProfissionais--;
-  }
-
-  public openModal(template: TemplateRef<any>) {
-    this.modalService.open(template, { centered: true, size: 'xl' });
   }
 }

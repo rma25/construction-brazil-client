@@ -9,7 +9,7 @@
     <div class="d-inline-flex mb-3">
       <button
         class="btn btn-success me-3"
-        (click)="openModal(cadastrarProfissional)"
+        (click)="modalService.openModalXL(cadastrarProfissional)"
       >
         <fa-icon icon="plus" class="me-2"></fa-icon>
         Cadastrar
@@ -33,8 +33,8 @@
           <th scope="col">{{ profissionaisDeRodeio.length }} Linhas</th>
           <th scope="col"></th>
           <th scope="col">Contato</th>
-          <th scope="col">Endereco</th>
-          <th scope="col">Informação Geral</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Informações Gerais</th>
           <th scope="col">Adicionado</th>
           <th scope="col">Mudado</th>
         </tr>
@@ -70,5 +70,7 @@
 </ng-template>
 
 <ng-template #cadastrarProfissional let-modal>
-  <app-cadastro (newProfissionalAdded)="onProfissionalAdded($event)"></app-cadastro>
+  <app-cadastro
+    (newProfissionalAdded)="onProfissionalAdded($event)"
+  ></app-cadastro>
 </ng-template>

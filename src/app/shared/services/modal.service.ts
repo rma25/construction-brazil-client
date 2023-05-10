@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Injectable, TemplateRef } from '@angular/core';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
@@ -8,4 +8,13 @@ export class ModalService {
   public closeModal(): void {
     this.ngbModal.dismissAll();
   }
+
+  public openModalXL(template: TemplateRef<any>) {
+    this.ngbModal.open(template, { centered: true, size: 'xl' });
+  }
+
+  public openModalComponent(component: any, options?: NgbModalOptions): Promise<any>{
+    return this.ngbModal.open(component, options).result
+  }
+
 }

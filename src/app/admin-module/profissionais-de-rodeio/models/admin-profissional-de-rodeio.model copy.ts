@@ -14,5 +14,5 @@ export class AdminProfissionalDeRodeio {
   public rg: string;
   public pix: string;
   public criado: Date;
-  public atualizado: Date;
+  public mudado: Date;
 }

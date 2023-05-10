@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { concatMap, Observable, of, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ISettingsRow } from 'src/app/shared/interfaces/ISettingsRow.interface';
@@ -9,6 +8,7 @@ import { DialogTitles } from 'src/app/shared/modals/dialog/enums/dialog-titles';
 import { DialogService } from 'src/app/shared/modals/dialog/services/dialog.service';
 import { SaveButtonComponent } from 'src/app/shared/save-button/save-button.component';
 import { DateService } from 'src/app/shared/services/date.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';
@@ -24,7 +24,7 @@ export class ProfissionaisDeRodeioRowComponent
   extends AbstractBaseComponent
   implements OnInit, ISettingsRow
 {
-  @Input() profissionalDeRodeio: AdminProfissionalDeRodeio;
+  @Input() profissionalDeRodeio!: AdminProfissionalDeRodeio;
 
   @Output() deletedId = new EventEmitter<number>();
   @Output() rowChange = new EventEmitter<RowInfo>();
@@ -32,7 +32,7 @@ export class ProfissionaisDeRodeioRowComponent
   @ViewChild('saveBtn') public saveBtn: SaveButtonComponent;
 
   constructor(
-    private modalService: NgbModal,
+    public modalService: ModalService,
     private toastService: ToastService,
     private profissionalAdminData: ProfissionaisDeRodeioAdminDataService,
     private dialogService: DialogService,
@@ -83,7 +83,7 @@ export class ProfissionaisDeRodeioRowComponent
           });
 
           // Close modal
-          this.modalService.dismissAll();
+          this.modalService.closeModal();
         }
       });
   }
@@ -118,10 +118,6 @@ export class ProfissionaisDeRodeioRowComponent
       isSaved,
       isValid: this.isRowValid(),
     });
-  }
-
-  public openModal(template: TemplateRef<any>) {
-    this.modalService.open(template, { centered: true, size: 'xl' });
   }
 
   public getFormattedDate(date: any): string {
