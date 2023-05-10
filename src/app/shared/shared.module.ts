@@ -5,11 +5,16 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import {
   faArrowLeft,
   faBug,
+  faCalendarAlt,
   faCheck,
+  faEdit,
   faExclamationTriangle,
   faIdCard,
   faPlus,
   faSave,
+  faSearch,
+  faTrashAlt,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   NgbDatepickerModule,
@@ -81,11 +86,10 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     NotFoundMessageComponent,
     PaginationComponent,
     ModalHeaderComponent,
-    SaveButtonComponent
+    SaveButtonComponent,
+    SearchComponent,
   ],
-  entryComponents: [
-    DialogComponent
-  ]
+  entryComponents: [DialogComponent],
 })
 export class SharedModule {
   constructor(public faLib: FaIconLibrary) {
@@ -96,7 +100,12 @@ export class SharedModule {
       faCheck,
       faIdCard,
       faArrowLeft,
-      faPlus
+      faPlus,
+      faTrashAlt,
+      faEdit,
+      faSearch,
+      faXmark,
+      faCalendarAlt
     );
   }
 

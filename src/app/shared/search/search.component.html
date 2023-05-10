@@ -17,7 +17,7 @@
         [disabled]="searchDisplay.disabled"
       >
         <fa-icon icon="search" class="me-2"></fa-icon>
-        Search
+        Procurar
       </button>
       <button
         class="btn btn-secondary"
@@ -46,7 +46,7 @@
         (input)="onInput($event.target)"
         [(ngModel)]="searchFilter.searchText"
         id="btn-search-template2"
-        [disabled]="searchDisplay.disabled"
+        [disabled]="!!searchDisplay.disabled"
       />
     </div>
   </div>
@@ -72,7 +72,7 @@
         id="select-search-dateFilter"
       >
         <option [ngValue]="''" [defaultSelected]="true">
-          Select Date Filter...
+          Selecionar filtro de data...
         </option>
         <option
           *ngFor="let dateFilterOption of dateFilterOptions"
@@ -100,7 +100,7 @@
     <app-date-picker-input
       [(datePicked)]="searchFilter.fromDate"
       (datePickedChange)="onSearch()"
-      calendarText="From"
+      calendarText="De"
       id="input-search-fromDate"
     ></app-date-picker-input>
   </div>
@@ -118,7 +118,7 @@
     <app-date-picker-input
       [(datePicked)]="searchFilter.toDate"
       (datePickedChange)="onSearch()"
-      calendarText="To"
+      calendarText="Para"
       id="input-search-toDate"
     ></app-date-picker-input>
   </div>

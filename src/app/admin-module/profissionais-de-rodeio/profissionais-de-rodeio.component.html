@@ -4,18 +4,25 @@
     pageTitle="Professionais de Rodeio Configurações"
   ></app-go-back>
 </div>
+<app-search
+  (searchFor)="onSearch($event)"
+  [searchDisplay]="{
+    searchTextColumns: 'col-sm-12 col-lg-4',
+    fromColumns: 'col-sm-12 col-lg-4',
+    toColumns: 'col-sm-12 col-lg-4',
+    searchTextPlaceholder: 'Pesquise profissionais de rodeio...'
+  }"
+></app-search>
 <div class="pt-1 h100p flex-col">
-  <div>
-    <div class="d-inline-flex mb-3">
-      <button
-        class="btn btn-success me-3"
-        (click)="modalService.openModalXL(cadastrarProfissional)"
-      >
-        <fa-icon icon="plus" class="me-2"></fa-icon>
-        Cadastrar
-      </button>
-      <div class="h5">{{ totalDeProfissionais }} Profissionais de Rodeio</div>
-    </div>
+  <div class="d-inline-flex mb-3">
+    <button
+      class="btn btn-success me-3"
+      (click)="modalService.openModalXL(cadastrarProfissional)"
+    >
+      <fa-icon icon="plus" class="me-2"></fa-icon>
+      Cadastrar
+    </button>
+    <div class="h5">{{ totalDeProfissionais }} Profissionais de Rodeio</div>
   </div>
   <div class="table-responsive scrollbarContent flex-111 tableHeaderFixed">
     <table

@@ -129,8 +129,8 @@ export class DateService {
     }
 
     const typeOf = typeof date;
-    let formattedDate = moment(date);
-    const momentDate = moment(date);
+    let formattedDate = moment(date).locale('pt-br');
+    const momentDate = moment(date).locale('pt-br');
 
     if (typeOf === 'string' && (date + '').includes('T')) {
       formattedDate = moment.utc(momentDate);
@@ -187,10 +187,10 @@ export class DateService {
   }
 
   public getFormattedDateNow(): string {
-    return moment().format('YYYY-MM-DD h:mm:ss a');
+    return moment().locale('pt-br').format('YYYY-MM-DD h:mm:ss a');
   }
 
   public getFormattedDateTime(date: any): string {
-    return this.isDateValid(date) ? moment(date).format('YYYY-MM-DD h:mm:ss a') : date;
+    return this.isDateValid(date) ? moment(date).locale('pt-br').format('YYYY-MM-DD h:mm:ss a') : date;
   }
 }

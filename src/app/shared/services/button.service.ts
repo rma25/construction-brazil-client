@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ButtonService {
@@ -33,7 +32,7 @@ export class ButtonService {
   }
 
   public getSaveButtonTextControl(): FormControl {
-    const saveButtonControl = new FormControl('Save');
+    const saveButtonControl = new FormControl('Salvar');
 
     return saveButtonControl;
   }

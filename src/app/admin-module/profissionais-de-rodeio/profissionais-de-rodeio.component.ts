@@ -30,7 +30,7 @@ export class ProfissionaisDeRodeioComponent
   public totalPerPage = 10;
   public rowChanges = new Array<RowInfo>();
   public totalDeProfissionais = 0;
-  public isLoading: boolean = false;
+  public isLoading: boolean = true;
   public isUserPaging: boolean = false;
 
   constructor(
@@ -61,7 +61,10 @@ export class ProfissionaisDeRodeioComponent
     profissionalSample.endereco.complemento = '123';
     profissionalSample.endereco.estado = 'RJ';
     profissionalSample.observacoes = 'Testing Observacoes';
+    profissionalSample.criado = new Date();
+    profissionalSample.mudado = new Date();
     this.profissionaisDeRodeio.push(profissionalSample);
+    this.isLoading = false;
 
     // this.profissionalSettingsData
     //   .getTotalAdmin(filter)

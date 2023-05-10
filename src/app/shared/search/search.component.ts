@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
@@ -15,9 +15,8 @@ export interface SearchDisplay {
   fromColumns?: string;
   toColumns?: string;
   dateFilterColumns?: string;
-  defaultSearchTextFilter?: string;
   searchTextPlaceholder: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 @Component({
@@ -25,10 +24,7 @@ export interface SearchDisplay {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent
-  extends AbstractBaseComponent
-  implements OnInit, OnChanges
-{
+export class SearchComponent extends AbstractBaseComponent implements OnInit {
   @Input() searchDisplay!: SearchDisplay;
 
   @Output() searchFor = new EventEmitter<SearchFilter>();
@@ -40,31 +36,16 @@ export class SearchComponent
   public dateFilterOptions: Array<string>;
   public dateFilterCustomRangeOption = DateFilterOptions.CUSTOM_RANGE;
 
-  public searchFilter: SearchFilter = new SearchFilter(
-    this.searchDisplay.defaultSearchTextFilter
-  );
+  public searchFilter: SearchFilter = new SearchFilter();
 
   constructor() {
     super();
   }
 
-  ngOnChanges(): void {
-    if (
-      this.searchDisplay.defaultSearchTextFilter &&
-      this.searchDisplay.defaultSearchTextFilter.length > 0 &&
-      (!this.searchFilter.searchText ||
-        this.searchFilter.searchText.length <= 0)
-    ) {
-      this.searchFilter.searchText = this.searchDisplay.defaultSearchTextFilter;
-    }
-  }
-
   ngOnInit(): void {
     this.setDateFilterOptions();
 
-    this.searchFilter = new SearchFilter(
-      this.searchDisplay.defaultSearchTextFilter
-    );
+    this.searchFilter = new SearchFilter();
 
     this.searchText
       .pipe(

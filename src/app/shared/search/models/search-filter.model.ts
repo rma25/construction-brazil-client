@@ -1,8 +1,7 @@
 import { DateFilterOptions } from '../enums/date-filter-options';
 
 export class SearchFilter {
-  constructor(defaultSearchTextFilter: string = '') {
-    this.searchText = defaultSearchTextFilter;
+  constructor() {
     this.dateFilterOption = DateFilterOptions.CUSTOM_RANGE;
   }
 

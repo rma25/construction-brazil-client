@@ -63,7 +63,7 @@ export class SaveButtonComponent
 
   public onUpdateSaveBtn(isSaved: boolean, isError: boolean = false): void {
     this.saveButtonTextControl.setValue(
-      isError ? 'Error' : isSaved ? 'Saved' : 'Save Changes'
+      isError ? 'Erro' : isSaved ? 'Salvo' : 'Salvar Alterações'
     );
     this.saveButtonClassControl.setValue(
       this.btnService.getSaveButtonClass(isSaved, isError)
