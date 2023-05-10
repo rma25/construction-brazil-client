@@ -1,5 +1,5 @@
 export enum DialogTitles {
-  CONFIRMATION = 'Confirmation',
-  WARNING = 'Warning',
-  ERROR = 'Error'
+  CONFIRMATION = 'Confirmação',
+  WARNING = 'Aviso',
+  ERROR = 'Erro'
 }
