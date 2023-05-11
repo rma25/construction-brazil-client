@@ -9,6 +9,7 @@ import {
   faCheck,
   faEdit,
   faExclamationTriangle,
+  faHandPointer,
   faIdCard,
   faPlus,
   faSave,
@@ -105,7 +106,8 @@ export class SharedModule {
       faEdit,
       faSearch,
       faXmark,
-      faCalendarAlt
+      faCalendarAlt,
+      faHandPointer
     );
   }
 
