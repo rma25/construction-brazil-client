@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="h5">Informações Gerais</div>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="mb-3">
+      <label for="adicionarRg" class="fw-bold">RG</label>
+      <input
+        type="text"
+        id="inp-add-rg"
+        class="form-control"
+        [(ngModel)]="adminProfissional.rg"
+        #rg="ngModel"
+        placeholder="Por favor digite o RG..."
+        maxlength="32"
+      />
+      <div class="form-text">32 caracteres máximos</div>
+      <div
+        class="text-danger font-italic"
+        *ngIf="rg.touched && !adminProfissional.rg"
+      >
+        Por favor digite o RF.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="adicionarPix" class="fw-bold">PIX</label>
+      <input
+        type="text"
+        id="inp-add-pix"
+        class="form-control"
+        [(ngModel)]="adminProfissional.pix"
+        #pix="ngModel"
+        placeholder="Por favor digite o PIX..."
+        maxlength="32"
+      />
+      <div class="form-text">32 caracteres máximos</div>
+      <div
+        class="text-danger font-italic"
+        *ngIf="pix.touched && !adminProfissional.pix"
+      >
+        Por favor digite o PIX.
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="mb-3">
+      <label for="adicionarPis" class="fw-bold">PIS</label>
+      <input
+        type="text"
+        id="inp-add-pis"
+        class="form-control"
+        [(ngModel)]="adminProfissional.pis"
+        #pis="ngModel"
+        placeholder="Por favor digite o PIS..."
+        maxlength="32"
+      />
+      <div class="form-text">32 caracteres máximos</div>
+      <div
+        class="text-danger font-italic"
+        *ngIf="pis.touched && !adminProfissional.pis"
+      >
+        Por favor digite o PIS.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="adicionarObservacoes" class="fw-bold">Observações</label>
+      <textarea
+        type="text"
+        id="inp-add-observacoes"
+        class="form-control"
+        [(ngModel)]="adminProfissional.observacoes"
+        #observacoes="ngModel"
+        placeholder="Por favor digite Observações..."
+        maxlength="500"
+      ></textarea>
+      <div class="form-text">500 caracteres máximos</div>
+      <div
+        class="text-danger font-italic"
+        *ngIf="observacoes.touched && !adminProfissional.observacoes"
+      >
+        Por favor digite Observações.
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div>
+  <div class="h5">Endereço</div>
+  <div class="mb-3">
+    <label for="adicionarRua" class="fw-bold">Rua</label>
+    <input
+      type="text"
+      id="inp-add-rua"
+      class="form-control"
+      [(ngModel)]="adminEndereco.rua"
+      #rua="ngModel"
+      placeholder="Por favor digite a rua..."
+      maxlength="64"
+    />
+    <div class="form-text">64 caracteres máximos</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="rua.touched && !adminEndereco.rua"
+    >
+      Por favor digite a rua.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="adicionarComplemento" class="fw-bold">Complemento</label>
+    <input
+      type="text"
+      id="inp-add-complemento"
+      class="form-control"
+      [(ngModel)]="adminEndereco.complemento"
+      #complemento="ngModel"
+      placeholder="Por favor digite a comp..."
+      maxlength="64"
+    />
+    <div class="form-text">64 caracteres máximos</div>
+  </div>
+  <!-- TODO: Find a way to auto fill information based on the CEP -->
+  <!-- This is like a ZIP code in the U.S.-->
+  <div class="mb-3">
+    <label for="adicionarCep" class="fw-bold">CEP</label>
+    <input
+      type="text"
+      id="inp-add-cep"
+      class="form-control"
+      [(ngModel)]="adminEndereco.cep"
+      #cep="ngModel"
+      placeholder="Por favor digite o CEP..."
+      maxlength="8"
+    />
+    <div class="form-text">8 caracteres máximos</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="cep.touched && !adminEndereco.cep"
+    >
+      Por favor digite o CEP.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="adicionarEstado" class="fw-bold">Estado</label>
+    <select
+      class="form-select"
+      name="unitOfMeasure"
+      id="select-add-estado"
+      [(ngModel)]="adminEndereco.estado"
+      #estado="ngModel"
+    >
+      <option [ngValue]="'' || null || undefined">
+        Por favor escolha um estado.
+      </option>
+      <option *ngFor="let estado of estados" [ngValue]="estado">
+        {{ estado }}
+      </option>
+    </select>
+    <div
+      class="text-danger font-italic"
+      *ngIf="estado.touched && !adminEndereco.estado"
+    >
+      Por favor escolha um estado.
+    </div>
+  </div>
+  <div class="mb-3">
+    <!-- Longest City name in the world has 85 chars-->
+    <label for="adicionarCidade" class="fw-bold">Cidade</label>
+    <input
+      type="text"
+      id="inp-add-comp"
+      class="form-control"
+      [(ngModel)]="adminEndereco.cidade"
+      #cidade="ngModel"
+      placeholder="Por favor digite a cidade..."
+      maxlength="85"
+    />
+    <div class="form-text">85 caracteres máximos</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="cidade.touched && !adminEndereco.cidade"
+    >
+      Por favor digite a cidade.
+    </div>
+  </div>
+</div>
