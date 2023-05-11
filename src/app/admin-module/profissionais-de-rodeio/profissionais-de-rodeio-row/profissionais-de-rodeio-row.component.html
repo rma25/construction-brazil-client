@@ -58,8 +58,17 @@
 
 <ng-template #editEndereco let-modal>
   <app-edit-admin-endereco
+    [profissionalNomeCompleto]="
+      profissionalDeRodeio.contato.nome +
+      ' ' +
+      profissionalDeRodeio.contato.sobrenome
+    "
     [(adminEndereco)]="profissionalDeRodeio.endereco"
   ></app-edit-admin-endereco>
 </ng-template>
 
-<ng-template #editInformacoesGerais let-modal> </ng-template>
+<ng-template #editInformacoesGerais let-modal>
+  <app-edit-admin-informacoes-gerais
+    [(adminProfissional)]="profissionalDeRodeio"
+  ></app-edit-admin-informacoes-gerais>
+</ng-template>
