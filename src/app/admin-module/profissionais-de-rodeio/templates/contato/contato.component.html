@@ -88,4 +88,23 @@
       Por favor digite o número de telefone do profissional.
     </div>
   </div>
+  <div class="mb-3">
+    <label for="adicionarProfissao" class="fw-bold">Profissão</label>
+    <input
+      type="text"
+      id="inp-add-profissao"
+      class="form-control"
+      [(ngModel)]="adminContato.profissao"
+      #profissao="ngModel"
+      placeholder="Por favor digite a profissão..."
+      maxlength="64"
+    />
+    <div class="form-text">64 caracteres máximos</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="profissao.touched && !adminContato.profissao"
+    >
+      Por favor digite a profissão.
+    </div>
+  </div>
 </div>

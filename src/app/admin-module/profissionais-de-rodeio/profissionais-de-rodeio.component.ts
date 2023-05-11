@@ -55,6 +55,7 @@ export class ProfissionaisDeRodeioComponent
     profissionalSample.contato.sobrenome = 'Andrade';
     profissionalSample.contato.cpf = '123.456.7';
     profissionalSample.contato.telefone = '12345678';
+    profissionalSample.contato.profissao = 'Faxineiro';
     profissionalSample.endereco.rua = 'Joaquim Pinto';
     profissionalSample.endereco.cep = '123456';
     profissionalSample.endereco.cidade = 'Rio de Janeiro';

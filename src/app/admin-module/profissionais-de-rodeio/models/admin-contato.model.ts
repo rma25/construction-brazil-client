@@ -3,4 +3,5 @@ export class AdminContato {
   public sobrenome: string;
   public cpf: string;
   public telefone: string;
+  public profissao: string;
 }
