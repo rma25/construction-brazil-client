@@ -1,0 +1,22 @@
+<app-modal-header
+  title="Editar Contato de {{ adminProfissional.contato.nome }} {{
+    adminProfissional.contato.sobrenome
+  }}"
+></app-modal-header>
+<div class="modal-body">
+  <app-informacoes-gerais
+    [(adminProfissional)]="adminProfissional"
+  ></app-informacoes-gerais>
+</div>
+<div class="modal-footer">
+  <span class="font-italic text-danger" [hidden]="isValid()">
+    Por favor, preencha os campos obrigatórios.
+  </span>
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="modalService.closeModal()"
+  >
+    Fechar
+  </button>
+</div>
