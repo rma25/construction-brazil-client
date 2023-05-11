@@ -70,17 +70,17 @@ export class DateService {
   }
 
   public getDateRangeForDateFilterOption(dateFilterOption: string, isUtc: boolean): { from: Date | undefined; to: Date | undefined } {
-    if (dateFilterOption !== DateFilterOptions.CUSTOM_RANGE) {
+    if (dateFilterOption !== DateFilterOptions.Intervalo_Personalizado) {
       if (!dateFilterOption || dateFilterOption.length === 0) {
         // Reset the date
         return { from: undefined, to: undefined };
-      } else if (dateFilterOption === DateFilterOptions.TODAY) {
+      } else if (dateFilterOption === DateFilterOptions.Hoje) {
         return { from: this.getDateNow(isUtc), to: this.getDatePlusDays(1, isUtc) };
-      } else if (dateFilterOption === DateFilterOptions.THIRTY_DAYS) {
+      } else if (dateFilterOption === DateFilterOptions.Trinta_Dias) {
         return { from: this.getDateMinusDays(30, true), to: this.getDatePlusDays(1, isUtc) };
-      } else if (dateFilterOption === DateFilterOptions.SIXTY_DAYS) {
+      } else if (dateFilterOption === DateFilterOptions.Sessenta_Dias) {
         return { from: this.getDateMinusDays(60, true), to: this.getDatePlusDays(1, isUtc) };
-      } else if (dateFilterOption === DateFilterOptions.NINTEY_DAYS) {
+      } else if (dateFilterOption === DateFilterOptions.Noventa_Dias) {
         return { from: this.getDateMinusDays(90, true), to: this.getDatePlusDays(1, isUtc) };
       } else {
         return { from: undefined, to: undefined };

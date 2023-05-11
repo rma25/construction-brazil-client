@@ -2,7 +2,7 @@ import { DateFilterOptions } from '../enums/date-filter-options';
 
 export class SearchFilter {
   constructor() {
-    this.dateFilterOption = DateFilterOptions.CUSTOM_RANGE;
+    this.dateFilterOption = DateFilterOptions.Intervalo_Personalizado;
   }
 
   public searchText: string;

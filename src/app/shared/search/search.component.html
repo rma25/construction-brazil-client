@@ -5,7 +5,7 @@
       'mb-3 ' +
         (searchDisplay.searchTextColumns
           ? searchDisplay.searchTextColumns
-          : 'col-sm-12 col-lg-6')
+          : 'col-sm-12 col-md-6')
     }}"
   >
     <div class="input-group">
@@ -55,13 +55,13 @@
     class="mb-3 {{
       searchDisplay.dateFilterColumns
         ? searchDisplay.dateFilterColumns
-        : 'col-sm-12 col-lg-6'
+        : 'col-sm-12 col-md-6'
     }}"
     *ngIf="searchDisplay?.dateFilterColumns"
   >
     <div class="input-group">
       <label class="input-group-text text-light bg-primary" for="dateFilter">
-        Date Filter:
+        Filtro de Data:
       </label>
       <select
         [ngStyle]="{ color: searchFilter.dateFilterOption ? '#28a745' : '' }"
@@ -89,12 +89,12 @@
       searchDisplay?.fromColumns &&
       (searchDisplay?.dateFilterColumns
         ? searchFilter.dateFilterOption === dateFilterCustomRangeOption
-        : true)
+        : !!searchDisplay?.fromColumns)
     "
     class="mb-3 {{
       searchDisplay.fromColumns
         ? searchDisplay.fromColumns
-        : 'col-sm-12 col-lg-6'
+        : 'col-sm-12 col-md-6'
     }}"
   >
     <app-date-picker-input
@@ -109,10 +109,10 @@
       searchDisplay?.toColumns &&
       (searchDisplay?.dateFilterColumns
         ? searchFilter.dateFilterOption === dateFilterCustomRangeOption
-        : true)
+        : !!searchDisplay?.toColumns)
     "
     class="mb-3 {{
-      searchDisplay.toColumns ? searchDisplay.toColumns : 'col-sm-12 col-lg-6'
+      searchDisplay.toColumns ? searchDisplay.toColumns : 'col-sm-12 col-md-6'
     }}"
   >
     <app-date-picker-input

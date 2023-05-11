@@ -34,7 +34,7 @@ export class SearchComponent extends AbstractBaseComponent implements OnInit {
   public searchText = new Subject<string>();
 
   public dateFilterOptions: Array<string>;
-  public dateFilterCustomRangeOption = DateFilterOptions.CUSTOM_RANGE;
+  public dateFilterCustomRangeOption = DateFilterOptions.Intervalo_Personalizado;
 
   public searchFilter: SearchFilter = new SearchFilter();
 

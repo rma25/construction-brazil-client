@@ -12,11 +12,14 @@ export class EditAdminContatoComponent {
   @Input() adminContato!: AdminContato;
   @Output() adminContatoChange = new EventEmitter<AdminContato>();
 
+  @Output() isFormValid = new EventEmitter<boolean>();
+
   constructor(public modalService: ModalService) {}
 
   public isValid(): boolean {
     return (
       !!this.adminContato.cpf &&
+      this.adminContato.cpf.length === 14 &&
       !!this.adminContato.nome &&
       !!this.adminContato.sobrenome
     );
