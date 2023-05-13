@@ -56,11 +56,12 @@ export class ProfissionaisDeRodeioComponent
     profissionalSample.contato.cpf = '123.456.7';
     profissionalSample.contato.telefone = '12345678';
     profissionalSample.contato.profissao = 'Faxineiro';
-    profissionalSample.endereco.rua = 'Joaquim Pinto';
-    profissionalSample.endereco.cep = '123456';
-    profissionalSample.endereco.cidade = 'Rio de Janeiro';
-    profissionalSample.endereco.complemento = '123';
-    profissionalSample.endereco.estado = 'RJ';
+    profissionalSample.endereco.bairro = 'Setor Sudoeste';
+    profissionalSample.endereco.rua = 'Rua C82';
+    profissionalSample.endereco.cep = '74303-160';
+    profissionalSample.endereco.cidade = 'Goiânia';
+    profissionalSample.endereco.complemento = '';
+    profissionalSample.endereco.estado = 'GO';
     profissionalSample.observacoes = 'Testing Observacoes';
     profissionalSample.criado = new Date();
     profissionalSample.mudado = new Date();
