@@ -8,6 +8,8 @@ export const environment = {
   toastColor: 'D4EDDA',
   toastError: 'F88070',
   constructionBrazilServerUri: 'http://localhost:58425',
+  preCepUri: 'https://viacep.com.br/ws/',
+  postCepUri: '/json'
 };
 
 /*
