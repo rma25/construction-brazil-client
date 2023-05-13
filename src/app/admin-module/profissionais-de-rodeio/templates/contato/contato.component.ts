@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
 import { AdminContato } from '../../models/admin-contato.model';
@@ -21,9 +21,14 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.cpfText
-      .pipe(distinctUntilChanged(), debounceTime(300), takeUntil(this.destroy))
+      .pipe(
+        distinctUntilChanged(),
+        debounceTime(300),
+        map((cpf) => this.formatCPF(cpf)),
+        takeUntil(this.destroy)
+      )
       .subscribe((cpf) => {
-        this.adminContato.cpf = this.formatCPF(cpf);
+        this.adminContato.cpf = cpf;
       });
   }
 

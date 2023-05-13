@@ -1,6 +1,39 @@
 <div>
   <div class="h5">Endereço</div>
+  <!-- This is like a ZIP code in the U.S.-->
   <div class="mb-3">
+    <label for="adicionarCep" class="fw-bold">CEP</label>
+    <input
+      type="text"
+      id="inp-add-cep"
+      class="form-control"
+      [(ngModel)]="adminEndereco.cep"
+      (input)="onCepInput($event.target)"
+      #cep="ngModel"
+      placeholder="Por favor digite o CEP..."
+      maxlength="9"
+    />
+    <div class="form-text">
+      <ul>
+        <li>
+          <span> Requirido </span>
+        </li>
+        <li>
+          <span> 8 caracteres</span>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="cep.touched && !adminEndereco.cep"
+    >
+      Por favor digite o CEP.
+    </div>
+  </div>
+  <div
+    class="mb-3"
+    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
+  >
     <label for="adicionarRua" class="fw-bold">Rua</label>
     <input
       type="text"
@@ -19,7 +52,10 @@
       Por favor digite a rua.
     </div>
   </div>
-  <div class="mb-3">
+  <div
+    class="mb-3"
+    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
+  >
     <label for="adicionarComplemento" class="fw-bold">Complemento</label>
     <input
       type="text"
@@ -27,33 +63,46 @@
       class="form-control"
       [(ngModel)]="adminEndereco.complemento"
       #complemento="ngModel"
-      placeholder="Por favor digite a comp..."
+      placeholder="Por favor digite o complemento..."
       maxlength="64"
     />
     <div class="form-text">64 caracteres máximos</div>
   </div>
-  <!-- TODO: Find a way to auto fill information based on the CEP -->
-  <!-- This is like a ZIP code in the U.S.-->
-  <div class="mb-3">
-    <label for="adicionarCep" class="fw-bold">CEP</label>
+  <div
+    class="mb-3"
+    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
+  >
+    <label for="adicionarBairro" class="fw-bold">Bairro</label>
     <input
       type="text"
-      id="inp-add-cep"
+      id="inp-add-bairro"
       class="form-control"
-      [(ngModel)]="adminEndereco.cep"
-      #cep="ngModel"
-      placeholder="Por favor digite o CEP..."
-      maxlength="8"
+      [(ngModel)]="adminEndereco.bairro"
+      #bairro="ngModel"
+      placeholder="Por favor digite o bairro..."
+      maxlength="120"
     />
-    <div class="form-text">8 caracteres máximos</div>
+    <div class="form-text">
+      <ul>
+        <li>
+          <span> Requirido </span>
+        </li>
+        <li>
+          <span> 120 caracteres máximos</span>
+        </li>
+      </ul>
+    </div>
     <div
       class="text-danger font-italic"
-      *ngIf="cep.touched && !adminEndereco.cep"
+      *ngIf="bairro.touched && !adminEndereco.bairro"
     >
-      Por favor digite o CEP.
+      Por favor digite o bairro.
     </div>
   </div>
-  <div class="mb-3">
+  <div
+    class="mb-3"
+    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
+  >
     <label for="adicionarEstado" class="fw-bold">Estado</label>
     <select
       class="form-select"
@@ -76,7 +125,10 @@
       Por favor escolha um estado.
     </div>
   </div>
-  <div class="mb-3">
+  <div
+    class="mb-3"
+    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
+  >
     <!-- Longest City name in the world has 85 chars-->
     <label for="adicionarCidade" class="fw-bold">Cidade</label>
     <input
