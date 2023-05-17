@@ -3,15 +3,16 @@
   <div class="mb-3">
     <!-- Required, Max 11, Must be Unique-->
     <!-- TODO: Add a Database Check to make sure this is unique -->
-    <label for="adicionarCpf" class="fw-bold">CPF</label>
+    <label for="input-cpf" class="fw-bold">CPF</label>
     <input
       type="text"
-      id="inp-add-cpf"
+      id="inp-cpf"
       class="form-control"
       [(ngModel)]="adminContato.cpf"
       (input)="onCpfInput($event.target)"
       #cpf="ngModel"
       placeholder="Por favor digite o CPF..."
+      aria-label="input-cpf"
       minlength="14"
       maxlength="14"
     />
@@ -39,14 +40,32 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="adicionarNome" class="fw-bold">Nome</label>
+    <label
+      [hidden]="!adminContato.dataDeNascimento"
+      for="date-picker-data-de-nascimento"
+      class="fw-bold"
+      >Data de Nascimento</label
+    >
+    <app-date-picker-input
+      [calendarText]="'Data de Nascimento'"
+      [(datePicked)]="adminContato.dataDeNascimento"
+      id="date-picker-data-de-nascimento"
+      aria-label="date-picker-data-de-nascimento"
+    ></app-date-picker-input>
+    <div class="text-danger font-italic" *ngIf="!adminContato.dataDeNascimento">
+      Por favor escolha a data de nascimento do profissional.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="input-nome" class="fw-bold">Nome</label>
     <input
       type="text"
-      id="inp-add-nome"
+      id="inp-nome"
       class="form-control"
       [(ngModel)]="adminContato.nome"
       #nome="ngModel"
       placeholder="Por favor digite o primeiro nome..."
+      aria-label="input-nome"
       maxlength="100"
     />
     <div class="form-text">100 caracteres máximos</div>
@@ -58,11 +77,12 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="adicionarSobrenome" class="fw-bold">Sobrenome</label>
+    <label for="input-sobrenome" class="fw-bold">Sobrenome</label>
     <input
       type="text"
-      id="inp-add-sobrenome"
+      id="inp-sobrenome"
       class="form-control"
+      aria-label="input-sobrenome"
       [(ngModel)]="adminContato.sobrenome"
       #sobrenome="ngModel"
       placeholder="Por favor digite o sobrenome..."
@@ -77,17 +97,34 @@
     </div>
   </div>
   <div class="mb-3">
-    <!-- Required, Max 11, Must be Unique-->
-    <label for="adicionarTelefone" class="fw-bold">Telefone</label>
-    <input
-      type="text"
-      id="inp-add-telefone"
-      class="form-control"
-      [(ngModel)]="adminContato.telefone"
-      #telefone="ngModel"
-      placeholder="Por favor digite o número de telefone..."
-      maxlength="32"
-    />
+    <label for="input-telefone" class="fw-bold">Telefone</label>
+    <div class="input-group">
+      <select
+        class="form-select"
+        name="ddd"
+        id="select-ddd"
+        aria-label="select-ddd"
+        [(ngModel)]="adminContato.ddd"
+        #estado="ngModel"
+      >
+        <option [ngValue]="'' || null || undefined">
+          Por favor escolha um DDD.
+        </option>
+        <option *ngFor="let ddd of ddds" [ngValue]="ddd">
+          {{ ddd }}
+        </option>
+      </select>
+      <input
+        type="text"
+        id="inp-telefone"
+        class="form-control"
+        aria-label="input-telefone"
+        [(ngModel)]="adminContato.telefone"
+        #telefone="ngModel"
+        placeholder="Por favor digite o número de telefone..."
+        maxlength="32"
+      />
+    </div>
     <div class="form-text">32 caracteres máximos</div>
     <div
       class="text-danger font-italic"
@@ -97,10 +134,11 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="adicionarProfissao" class="fw-bold">Profissão</label>
+    <label for="input-profissao" class="fw-bold">Profissão</label>
     <input
       type="text"
-      id="inp-add-profissao"
+      id="inp-profissao"
+      aria-label="input-profissao"
       class="form-control"
       [(ngModel)]="adminContato.profissao"
       #profissao="ngModel"

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, distinctUntilChanged, map, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
+import { StaticDataService } from 'src/app/shared/services/static-data.service';
 
 import { AdminContato } from '../../models/admin-contato.model';
 
@@ -14,9 +15,12 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   @Output() adminContatoChange = new EventEmitter<AdminContato>();
 
   public cpfText = new Subject<string>();
+  public ddds!: Array<string>;
 
-  constructor() {
+  constructor(private staticData: StaticDataService) {
     super();
+
+    this.ddds = this.staticData.getDdds();
   }
 
   ngOnInit(): void {

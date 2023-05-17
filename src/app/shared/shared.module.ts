@@ -89,6 +89,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     ModalHeaderComponent,
     SaveButtonComponent,
     SearchComponent,
+    DatePickerInputComponent
   ],
   entryComponents: [DialogComponent],
 })

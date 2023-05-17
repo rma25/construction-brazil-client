@@ -64,14 +64,14 @@
         Filtro de Data:
       </label>
       <select
-        [ngStyle]="{ color: searchFilter.dateFilterOption ? '#28a745' : '' }"
+        [ngStyle]="{ color: !!searchFilter.dateFilterOption && searchFilter.dateFilterOption.length > 0? '#28a745' : '' }"
         class="form-select"
         name="dateFilter"
         [(ngModel)]="searchFilter.dateFilterOption"
         (change)="onSearch()"
         id="select-search-dateFilter"
       >
-        <option [ngValue]="''" [defaultSelected]="true">
+        <option [ngValue]="'' || null || undefined" [defaultSelected]="true">
           Selecionar filtro de data...
         </option>
         <option

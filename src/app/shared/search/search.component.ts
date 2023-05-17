@@ -60,9 +60,9 @@ export class SearchComponent extends AbstractBaseComponent implements OnInit {
 
   private setDateFilterOptions(): void {
     if (this.searchDisplay.dateFilterColumns) {
-      this.dateFilterOptions = Object.keys(DateFilterOptions).map((x) => {
-        return x;
-      });
+      console.log(this.searchFilter);
+
+      this.dateFilterOptions = Object.keys(DateFilterOptions);
     }
   }
 

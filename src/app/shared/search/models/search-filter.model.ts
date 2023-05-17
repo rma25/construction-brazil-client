@@ -1,9 +1,7 @@
 import { DateFilterOptions } from '../enums/date-filter-options';
 
 export class SearchFilter {
-  constructor() {
-    this.dateFilterOption = DateFilterOptions.Intervalo_Personalizado;
-  }
+  constructor() {}
 
   public searchText: string;
   public fromDate?: Date | null;
