@@ -36,8 +36,6 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
       .pipe(takeUntil(this.destroy))
       .subscribe((isSindicalizado) => {
         this.isSindicalizado = isSindicalizado;
-
-        debugger;
       });
 
     this.cepText
