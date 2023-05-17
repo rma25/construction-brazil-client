@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Proxima';
-  src: url('assets/fonts/proxima_nova/regular/proxima-regular-webfont.ttf');
+  font-family: "Proxima";
+  src: url("assets/fonts/proxima_nova/regular/proxima-regular-webfont.ttf");
 }
 
 html {
@@ -10,11 +10,11 @@ html {
 body {
   height: 100%;
   padding-top: 10px;
-  font-family: 'Proxima';
+  font-family: "Proxima";
 }
 
 /* You can add global styles to this file, and also import other style files */
-.h100p{
+.h100p {
   height: 100%;
 }
 
@@ -47,8 +47,16 @@ body {
 /* Handle */
 .scrollbarContent::-webkit-scrollbar-thumb {
   background: #bdc3c7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c3e50,
+    #bdc3c7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c3e50,
+    #bdc3c7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-radius: 0.3rem !important;
 }
 
@@ -86,7 +94,7 @@ body {
   height: 35px;
   margin: 0 auto;
   z-index: 999;
-  background: url('./assets/images/loading.gif') no-repeat;
+  background: url("./assets/images/loading.gif") no-repeat;
 }
 
 /** Table Header Fixed **/
@@ -106,8 +114,16 @@ body {
   padding: 8px 16px;
 }
 
-.mw20{
+.mw20 {
   max-width: 20%;
+}
+
+/* Needed for Switchers */
+.toggleBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 15px;
 }
 
 /*  Yes / No Switcher */
@@ -139,12 +155,12 @@ body {
 }
 
 .toggleBody span.yesnoSwitcher input:before {
-  content: 'Yes';
-  left: 20px;
+  content: "Sim";
+  left: 18px;
 }
 .toggleBody span.yesnoSwitcher input:after {
-  content: 'No';
-  right: 20px;
+  content: "Não";
+  right: 15px;
 }
 
 .toggleBody span.yesnoSwitcher label {
@@ -178,12 +194,10 @@ body {
   transition: left 0.5s, right 0.4s 0.2s;
 }
 .toggleBody span.yesnoSwitcher.switcher-1 input:not(:checked) {
-  /* background: #dc3545; */
   background: #0c0d0c !important;
   transition: background 0.5s -0.1s;
 }
 .toggleBody span.yesnoSwitcher.switcher-1 input:not(:checked):before {
-  /* color: #dc3545; */
   color: #0c0d0c !important;
   transition: color 0.5s;
 }
