@@ -5,6 +5,7 @@ import { ExternalCepDataService } from 'src/app/shared/data/external-cep-data.se
 import { StaticDataService } from 'src/app/shared/services/static-data.service';
 
 import { AdminEndereco } from '../../models/admin-endereco.model';
+import { InformacoesGeraisService } from '../services/informacoes-gerais.service';
 
 @Component({
   selector: 'app-endereco',
@@ -18,9 +19,12 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   public estados = new Array<string>();
   public cepText = new Subject<string>();
 
+  public isSindicalizado: boolean;
+
   constructor(
     private staticDataService: StaticDataService,
-    private externalCepDataService: ExternalCepDataService
+    private externalCepDataService: ExternalCepDataService,
+    private informacoesGeraisService: InformacoesGeraisService
   ) {
     super();
 
@@ -28,6 +32,14 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.informacoesGeraisService.isSindicalizado
+      .pipe(takeUntil(this.destroy))
+      .subscribe((isSindicalizado) => {
+        this.isSindicalizado = isSindicalizado;
+
+        debugger;
+      });
+
     this.cepText
       .pipe(
         distinctUntilChanged(),
@@ -88,5 +100,9 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
     }
 
     this.cepText.next(cepText);
+  }
+
+  public hideAddressForm(): boolean {
+    return !this.adminEndereco.cep || this.adminEndereco.cep.length !== 9;
   }
 }

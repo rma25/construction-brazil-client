@@ -65,6 +65,8 @@ export class ProfissionaisDeRodeioComponent
     profissionalSample.observacoes = 'Testing Observacoes';
     profissionalSample.criado = new Date();
     profissionalSample.mudado = new Date();
+    profissionalSample.ativo = true;
+    profissionalSample.sindicalizado = true;
     this.profissionaisDeRodeio.push(profissionalSample);
     this.isLoading = false;
 

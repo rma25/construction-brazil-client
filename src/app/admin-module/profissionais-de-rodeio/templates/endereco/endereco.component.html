@@ -31,10 +31,7 @@
       Por favor digite o CEP.
     </div>
   </div>
-  <div
-    class="mb-3"
-    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
-  >
+  <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-rua" class="fw-bold">Rua</label>
     <input
       type="text"
@@ -54,10 +51,7 @@
       Por favor digite a rua.
     </div>
   </div>
-  <div
-    class="mb-3"
-    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
-  >
+  <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-cep" class="fw-bold">Complemento</label>
     <input
       type="text"
@@ -71,10 +65,7 @@
     />
     <div class="form-text">64 caracteres máximos</div>
   </div>
-  <div
-    class="mb-3"
-    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
-  >
+  <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-bairro" class="fw-bold">Bairro</label>
     <input
       type="text"
@@ -103,10 +94,7 @@
       Por favor digite o bairro.
     </div>
   </div>
-  <div
-    class="mb-3"
-    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
-  >
+  <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-estado" class="fw-bold">Estado</label>
     <select
       class="form-select"
@@ -130,10 +118,7 @@
       Por favor escolha um estado.
     </div>
   </div>
-  <div
-    class="mb-3"
-    [hidden]="!adminEndereco.cep || adminEndereco.cep.length !== 9"
-  >
+  <div class="mb-3" [hidden]="hideAddressForm()">
     <!-- Longest City name in the world has 85 chars-->
     <label for="inp-comp" class="fw-bold">Cidade</label>
     <input

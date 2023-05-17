@@ -54,7 +54,11 @@
     <div class="mb-3">
       <label for="inp-sindicalizado" class="fw-bold">Sindicalizado?</label>
       <app-yes-no-switcher
-        [(yesNo)]="adminProfissional.sindicalizado"
+        [yesNo]="adminProfissional.sindicalizado"
+        (yesNoChange)="
+          adminProfissional.sindicalizado = $event;
+          onSindicalizadoChange($event)
+        "
       ></app-yes-no-switcher>
     </div>
     <div class="mb-3">

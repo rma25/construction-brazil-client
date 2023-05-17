@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { AdminProfissionalDeRodeio } from '../../models/admin-profissional-de-rodeio.model';
+import { InformacoesGeraisService } from '../services/informacoes-gerais.service';
 
 @Component({
   selector: 'app-informacoes-gerais',
@@ -12,5 +13,9 @@ export class InformacoesGeraisComponent {
   @Output() adminProfissionalChange =
     new EventEmitter<AdminProfissionalDeRodeio>();
 
-  constructor() {}
+  constructor(private informacoesGeraisService: InformacoesGeraisService) {}
+
+  public onSindicalizadoChange(isSindicalizado: boolean): void {
+    this.informacoesGeraisService.updateContatoSindicalizado(isSindicalizado);
+  }
 }

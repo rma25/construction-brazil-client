@@ -15,32 +15,31 @@
 <th scope="row">
   <button
     type="button"
-    class="btn btn-primary"
+    [ngClass]="getEditBtnClass()"
     (click)="modalService.openModalXL(editContato)"
   >
     <fa-icon icon="edit" class="me-2"></fa-icon>
-    Editar {{ profissionalDeRodeio.contato.nome }}
-    {{ profissionalDeRodeio.contato.sobrenome }}
+    {{ getEditMessage(contatoEditType) }}
   </button>
 </th>
 <th scope="row">
   <button
     type="button"
-    class="btn btn-primary"
+    [ngClass]="getEditBtnClass()"
     (click)="modalService.openModalXL(editEndereco)"
   >
     <fa-icon icon="edit" class="me-2"></fa-icon>
-    Editar
+    {{ getEditMessage(enderecoEditType) }}
   </button>
 </th>
 <th scope="row">
   <button
     type="button"
-    class="btn btn-primary"
+    [ngClass]="getEditBtnClass()"
     (click)="modalService.openModalXL(editInformacoesGerais)"
   >
     <fa-icon icon="edit" class="me-2"></fa-icon>
-    Editar
+    {{ getEditMessage(informacoesGeraisEditType) }}
   </button>
 </th>
 <td>

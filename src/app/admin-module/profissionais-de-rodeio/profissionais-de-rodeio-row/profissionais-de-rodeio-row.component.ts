@@ -12,7 +12,9 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';
+import { EditType } from '../enums/edit-type.enum';
 import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
+import { InformacoesGeraisService } from '../templates/services/informacoes-gerais.service';
 
 @Component({
   selector:
@@ -31,17 +33,24 @@ export class ProfissionaisDeRodeioRowComponent
 
   @ViewChild('saveBtn') public saveBtn: SaveButtonComponent;
 
+  public contatoEditType = EditType.CONTATO;
+  public enderecoEditType = EditType.ENDERECO;
+  public informacoesGeraisEditType = EditType.INFORMACOES_GERAIS;
+  public editBtnClass: string;
+
   constructor(
     public modalService: ModalService,
     private toastService: ToastService,
     private profissionalAdminData: ProfissionaisDeRodeioAdminDataService,
     private dialogService: DialogService,
-    private dateService: DateService
+    private dateService: DateService,
+    private informacocesGeraisService: InformacoesGeraisService
   ) {
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+  }
 
   public isRowValid(): boolean {
     return (
@@ -122,5 +131,25 @@ export class ProfissionaisDeRodeioRowComponent
 
   public getFormattedDate(date: any): string {
     return this.dateService.getFormattedDate(date);
+  }
+
+  public getEditMessage(editType: EditType): string {
+    let message = 'Editar ';
+    if (editType === EditType.CONTATO) {
+      message += `${this.profissionalDeRodeio.contato.nome} ${this.profissionalDeRodeio.contato.sobrenome}`;
+    } else if (editType === EditType.ENDERECO) {
+      message += `${this.profissionalDeRodeio.endereco.cidade} ${this.profissionalDeRodeio.endereco.estado}`;
+    } else if (editType === EditType.INFORMACOES_GERAIS) {
+      message += `${this.informacocesGeraisService.getStatus(
+        this.profissionalDeRodeio.ativo
+      )} ${this.informacocesGeraisService.getClassificacao(
+        this.profissionalDeRodeio.sindicalizado
+      )}`;
+    }
+    return message;
+  }
+
+  public getEditBtnClass(): string{
+    return `btn ${this.profissionalDeRodeio.ativo ? 'btn-primary' : 'btn-secondary'}`;
   }
 }
