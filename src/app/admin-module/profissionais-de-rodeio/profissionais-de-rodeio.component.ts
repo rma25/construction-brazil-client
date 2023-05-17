@@ -11,7 +11,7 @@ import { ISearch } from 'src/app/shared/search/search.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from './data/profissionais-de-rodeio-admin-data.service';
-import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model copy';
+import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model';
 import { ProfissionalAdminFilter } from './models/profissional-de-rodeio-admin-filter';
 
 @Component({

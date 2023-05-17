@@ -106,6 +106,99 @@ body {
   padding: 8px 16px;
 }
 
+.mw20{
+  max-width: 20%;
+}
+
+/*  Yes / No Switcher */
+.toggleBody span.yesnoSwitcher {
+  position: relative;
+  width: 200px;
+  height: 30px;
+  border-radius: 25px;
+}
+.toggleBody span.yesnoSwitcher input {
+  appearance: none;
+  position: relative;
+  width: 120px;
+  height: 38px;
+  border-radius: 25px;
+  background-color: #343a40;
+  outline: none;
+  /* font-family: "Oswald", sans-serif; */
+  font-weight: lighter;
+  cursor: pointer;
+}
+.toggleBody span.yesnoSwitcher input:before,
+.toggleBody span.yesnoSwitcher input:after {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f8f9fa;
+}
+
+.toggleBody span.yesnoSwitcher input:before {
+  content: 'Yes';
+  left: 20px;
+}
+.toggleBody span.yesnoSwitcher input:after {
+  content: 'No';
+  right: 20px;
+}
+
+.toggleBody span.yesnoSwitcher label {
+  z-index: 1;
+  position: absolute;
+  top: 4px;
+  bottom: -4px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.toggleBody span.yesnoSwitcher.switcher-1 input {
+  transition: 0.25s -0.1s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:checked {
+  background-color: #ffffff !important;
+  border: 1px solid #7a7a7a;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:checked:before {
+  color: #f8f9fa;
+  transition: color 0.5s 0.2s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:checked:after {
+  color: #ffffff;
+  transition: color 0.5s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:checked + label {
+  left: 5px;
+  right: 140px;
+  background: #0c0d0c;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:not(:checked) {
+  /* background: #dc3545; */
+  background: #0c0d0c !important;
+  transition: background 0.5s -0.1s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:not(:checked):before {
+  /* color: #dc3545; */
+  color: #0c0d0c !important;
+  transition: color 0.5s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:not(:checked):after {
+  color: #343a40;
+  transition: color 0.5s 0.2s;
+}
+.toggleBody span.yesnoSwitcher.switcher-1 input:not(:checked) + label {
+  left: 65px;
+  right: 85px;
+  background: #f8f9fa;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
+/* *************** */
+
 app-home,
 app-admin-menu {
   height: 100%;

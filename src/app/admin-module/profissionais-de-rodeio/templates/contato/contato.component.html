@@ -100,7 +100,7 @@
     <label for="input-telefone" class="fw-bold">Telefone</label>
     <div class="input-group">
       <select
-        class="form-select"
+        class="form-select mw20"
         name="ddd"
         id="select-ddd"
         aria-label="select-ddd"
@@ -108,7 +108,7 @@
         #estado="ngModel"
       >
         <option [ngValue]="'' || null || undefined">
-          Por favor escolha um DDD.
+          DDD
         </option>
         <option *ngFor="let ddd of ddds" [ngValue]="ddd">
           {{ ddd }}

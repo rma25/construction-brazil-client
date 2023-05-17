@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalService } from 'src/app/shared/services/modal.service';
 
-import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model copy';
+import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
 
 @Component({
   selector: 'app-edit-admin-informacoes-gerais',

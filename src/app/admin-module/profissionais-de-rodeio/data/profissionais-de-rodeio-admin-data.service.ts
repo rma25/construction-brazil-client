@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model copy';
+import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
 import { ProfissionalAdminFilter } from '../models/profissional-de-rodeio-admin-filter';
 
 @Injectable({ providedIn: 'root' })

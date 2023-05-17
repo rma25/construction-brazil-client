@@ -44,6 +44,7 @@ import { SaveButtonComponent } from './save-button/save-button.component';
 import { SearchComponent } from './search/search.component';
 import { ToastsComponent } from './toasts/toasts.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
+import { YesNoSwitcherComponent } from './yes-no-switcher/yes-no-switcher.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     ModalHeaderComponent,
     SaveButtonComponent,
     InlineLoadingIconComponent,
+    YesNoSwitcherComponent,
   ],
   imports: [
     CommonModule,
@@ -89,7 +91,8 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     ModalHeaderComponent,
     SaveButtonComponent,
     SearchComponent,
-    DatePickerInputComponent
+    DatePickerInputComponent,
+    YesNoSwitcherComponent
   ],
   entryComponents: [DialogComponent],
 })

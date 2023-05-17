@@ -4,6 +4,12 @@
   </div>
   <div class="col-sm-12 col-md-6">
     <div class="mb-3">
+      <label for="inp-ativo" class="fw-bold">Ativo?</label>
+      <app-yes-no-switcher
+        [(yesNo)]="adminProfissional.ativo"
+      ></app-yes-no-switcher>
+    </div>
+    <div class="mb-3">
       <label for="inp-comp" class="fw-bold">RG</label>
       <input
         type="text"
@@ -45,6 +51,12 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-6">
+    <div class="mb-3">
+      <label for="inp-sindicalizado" class="fw-bold">Sindicalizado?</label>
+      <app-yes-no-switcher
+        [(yesNo)]="adminProfissional.sindicalizado"
+      ></app-yes-no-switcher>
+    </div>
     <div class="mb-3">
       <label for="inp-pis" class="fw-bold">PIS</label>
       <input

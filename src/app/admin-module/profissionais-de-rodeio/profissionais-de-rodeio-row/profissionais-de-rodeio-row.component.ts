@@ -12,7 +12,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';
-import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model copy';
+import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
 
 @Component({
   selector:
