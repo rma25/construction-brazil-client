@@ -1,44 +1,6 @@
 <div>
   <div class="h5">Contato</div>
   <div class="mb-3">
-    <label for="adicionarNome" class="fw-bold">Nome</label>
-    <input
-      type="text"
-      id="inp-add-nome"
-      class="form-control"
-      [(ngModel)]="adminContato.nome"
-      #nome="ngModel"
-      placeholder="Por favor digite o primeiro nome..."
-      maxlength="747"
-    />
-    <div class="form-text">747 caracteres máximos</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="nome.touched && !adminContato.nome"
-    >
-      Por favor digite o primeiro nome do profissional.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="adicionarSobrenome" class="fw-bold">Sobrenome</label>
-    <input
-      type="text"
-      id="inp-add-sobrenome"
-      class="form-control"
-      [(ngModel)]="adminContato.sobrenome"
-      #sobrenome="ngModel"
-      placeholder="Por favor digite o sobrenome..."
-      maxlength="747"
-    />
-    <div class="form-text">747 caracteres máximos</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="sobrenome.touched && !adminContato.sobrenome"
-    >
-      Por favor digite o primeiro sobrenome do profissional.
-    </div>
-  </div>
-  <div class="mb-3">
     <!-- Required, Max 11, Must be Unique-->
     <!-- TODO: Add a Database Check to make sure this is unique -->
     <label for="adicionarCpf" class="fw-bold">CPF</label>
@@ -74,6 +36,44 @@
       *ngIf="cpf.touched && !!adminContato.cpf && adminContato.cpf.length < 14"
     >
       Por favor digite CPF completo. Tem que ser 11 caracteres.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="adicionarNome" class="fw-bold">Nome</label>
+    <input
+      type="text"
+      id="inp-add-nome"
+      class="form-control"
+      [(ngModel)]="adminContato.nome"
+      #nome="ngModel"
+      placeholder="Por favor digite o primeiro nome..."
+      maxlength="100"
+    />
+    <div class="form-text">100 caracteres máximos</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="nome.touched && !adminContato.nome"
+    >
+      Por favor digite o primeiro nome do profissional.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="adicionarSobrenome" class="fw-bold">Sobrenome</label>
+    <input
+      type="text"
+      id="inp-add-sobrenome"
+      class="form-control"
+      [(ngModel)]="adminContato.sobrenome"
+      #sobrenome="ngModel"
+      placeholder="Por favor digite o sobrenome..."
+      maxlength="100"
+    />
+    <div class="form-text">100 caracteres máximos</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="sobrenome.touched && !adminContato.sobrenome"
+    >
+      Por favor digite o primeiro sobrenome do profissional.
     </div>
   </div>
   <div class="mb-3">
