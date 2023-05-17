@@ -34,7 +34,8 @@ export class SearchComponent extends AbstractBaseComponent implements OnInit {
   public searchText = new Subject<string>();
 
   public dateFilterOptions: Array<string>;
-  public dateFilterCustomRangeOption = DateFilterOptions.Intervalo_Personalizado;
+  public dateFilterCustomRangeOption =
+    DateFilterOptions.Intervalo_Personalizado;
 
   public searchFilter: SearchFilter = new SearchFilter();
 
@@ -60,8 +61,6 @@ export class SearchComponent extends AbstractBaseComponent implements OnInit {
 
   private setDateFilterOptions(): void {
     if (this.searchDisplay.dateFilterColumns) {
-      console.log(this.searchFilter);
-
       this.dateFilterOptions = Object.keys(DateFilterOptions);
     }
   }
