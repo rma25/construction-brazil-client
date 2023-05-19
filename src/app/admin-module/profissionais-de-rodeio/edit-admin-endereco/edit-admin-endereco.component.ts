@@ -6,18 +6,15 @@ import { AdminEndereco } from '../models/admin-endereco.model';
 @Component({
   selector: 'app-edit-admin-endereco',
   templateUrl: './edit-admin-endereco.component.html',
-  styleUrls: ['./edit-admin-endereco.component.css']
+  styleUrls: ['./edit-admin-endereco.component.css'],
 })
 export class EditAdminEnderecoComponent {
   @Input() profissionalNomeCompleto!: string;
 
   @Input() adminEndereco!: AdminEndereco;
-  @Output() adminEnderecoChange =
-  new EventEmitter<AdminEndereco>();
+  @Output() adminEnderecoChange = new EventEmitter<AdminEndereco>();
 
-  constructor(public modalService: ModalService) { }
+  public isValid: boolean;
 
-  public isValid(): boolean{
-    return !!this.adminEndereco.cep && !!this.adminEndereco.estado && !!this.adminEndereco.cidade;
-  }
+  constructor(public modalService: ModalService) {}
 }

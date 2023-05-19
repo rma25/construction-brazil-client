@@ -10,11 +10,13 @@ import { ExternalCepInfo } from '../interfaces/external-cep-info.interface';
 export class ExternalCepDataService {
   constructor(private http: HttpClient) {}
 
-  public getCepInfo(cep: string): Observable<ExternalCepInfo | undefined> {
+  public getCepInfo(
+    cep: string
+  ): Observable<ExternalCepInfo> {
     return this.http
       .get<ExternalCepInfo>(
         `${environment.preCepUri}${cep}${environment.postCepUri}`
       )
-      .pipe(catchError(() => of(undefined)));
+      .pipe(catchError(() => of({ erro: true } as ExternalCepInfo)));
   }
 }

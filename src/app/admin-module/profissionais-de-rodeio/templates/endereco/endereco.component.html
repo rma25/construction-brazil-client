@@ -44,12 +44,6 @@
       aria-label="inp-rua"
     />
     <div class="form-text">64 caracteres máximos</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="rua.touched && !adminEndereco.rua"
-    >
-      Por favor digite a rua.
-    </div>
   </div>
   <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-cep" class="fw-bold">Complemento</label>
@@ -77,22 +71,22 @@
       maxlength="120"
       aria-label="inp-bairro"
     />
-    <div class="form-text">
-      <ul>
-        <li>
-          <span> Requirido </span>
-        </li>
-        <li>
-          <span> 120 caracteres máximos</span>
-        </li>
-      </ul>
-    </div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="bairro.touched && !adminEndereco.bairro"
-    >
-      Por favor digite o bairro.
-    </div>
+    <div class="form-text">120 caracteres máximos</div>
+  </div>
+  <div class="mb-3" [hidden]="hideAddressForm()">
+    <!-- Longest City name in the world has 85 chars-->
+    <label for="inp-comp" class="fw-bold">Cidade</label>
+    <input
+      type="text"
+      id="inp-comp"
+      class="form-control"
+      [(ngModel)]="adminEndereco.cidade"
+      #cidade="ngModel"
+      placeholder="Por favor digite a cidade..."
+      maxlength="85"
+      aria-label="inp-comp"
+    />
+    <div class="form-text">85 caracteres máximos</div>
   </div>
   <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-estado" class="fw-bold">Estado</label>
@@ -111,32 +105,5 @@
         {{ estado }}
       </option>
     </select>
-    <div
-      class="text-danger font-italic"
-      *ngIf="estado.touched && !adminEndereco.estado"
-    >
-      Por favor escolha um estado.
-    </div>
-  </div>
-  <div class="mb-3" [hidden]="hideAddressForm()">
-    <!-- Longest City name in the world has 85 chars-->
-    <label for="inp-comp" class="fw-bold">Cidade</label>
-    <input
-      type="text"
-      id="inp-comp"
-      class="form-control"
-      [(ngModel)]="adminEndereco.cidade"
-      #cidade="ngModel"
-      placeholder="Por favor digite a cidade..."
-      maxlength="85"
-      aria-label="inp-comp"
-    />
-    <div class="form-text">85 caracteres máximos</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="cidade.touched && !adminEndereco.cidade"
-    >
-      Por favor digite a cidade.
-    </div>
   </div>
 </div>

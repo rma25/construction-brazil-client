@@ -12,4 +12,6 @@ export interface ExternalCepInfo {
   gia: string,
   ddd: string,
   siafi: string
+  // If the API returns an error it will only return this property;
+  erro: boolean;
 }

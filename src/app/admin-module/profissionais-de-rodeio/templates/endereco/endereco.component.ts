@@ -16,6 +16,8 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   @Input() adminEndereco!: AdminEndereco;
   @Output() adminEnderecoChange = new EventEmitter<AdminEndereco>();
 
+  @Output() isValid = new EventEmitter<boolean>(false);
+
   public estados = new Array<string>();
   public cepText = new Subject<string>();
 
@@ -55,7 +57,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
         takeUntil(this.destroy)
       )
       .subscribe((x) => {
-        if (x.cepInfo) {
+        if (x.cepInfo && !x.cepInfo.erro) {
           this.adminEndereco.cep = x.cepInfo.cep;
           this.adminEndereco.cidade = x.cepInfo.localidade;
           this.adminEndereco.complemento = x.cepInfo.complemento;
@@ -102,5 +104,11 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
 
   public hideAddressForm(): boolean {
     return !this.adminEndereco.cep || this.adminEndereco.cep.length !== 9;
+  }
+
+  public onChange(): void {
+    this.isValid.emit(
+      !!this.adminEndereco.cep && this.adminEndereco.cep.length === 9
+    );
   }
 }

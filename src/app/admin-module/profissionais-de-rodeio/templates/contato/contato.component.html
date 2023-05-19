@@ -52,9 +52,6 @@
       id="date-picker-data-de-nascimento"
       aria-label="date-picker-data-de-nascimento"
     ></app-date-picker-input>
-    <div class="text-danger font-italic" *ngIf="!adminContato.dataDeNascimento">
-      Por favor escolha a data de nascimento do profissional.
-    </div>
   </div>
   <div class="mb-3">
     <label for="input-nome" class="fw-bold">Nome</label>
@@ -107,9 +104,7 @@
         [(ngModel)]="adminContato.ddd"
         #estado="ngModel"
       >
-        <option [ngValue]="'' || null || undefined">
-          DDD
-        </option>
+        <option [ngValue]="'' || null || undefined">DDD</option>
         <option *ngFor="let ddd of ddds" [ngValue]="ddd">
           {{ ddd }}
         </option>
