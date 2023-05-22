@@ -23,6 +23,22 @@
     </div>
   </div>
 </div>
+<!-- This must be unique -->
+<div class="mb-3">
+  <label for="inp-pis" class="fw-bold">PIS</label>
+  <input
+    type="text"
+    id="inp-pis"
+    class="form-control"
+    [(ngModel)]="adminProfissional.pis"
+    (ngModelChange)="onChange()"
+    #pis="ngModel"
+    placeholder="Por favor digite o PIS..."
+    maxlength="11"
+    aria-label="inp-pis"
+  />
+  <div class="form-text">11 caracteres máximos</div>
+</div>
 <div class="mb-3">
   <label for="inp-comp" class="fw-bold">RG</label>
   <input
@@ -33,10 +49,10 @@
     (ngModelChange)="onChange()"
     #rg="ngModel"
     placeholder="Por favor digite o RG..."
-    maxlength="32"
+    maxlength="7"
     aria-label="inp-comp"
   />
-  <div class="form-text">32 caracteres máximos</div>
+  <div class="form-text">7 caracteres máximos</div>
 </div>
 <div class="mb-3">
   <label for="inp-pix" class="fw-bold">PIX</label>
@@ -50,21 +66,6 @@
     placeholder="Por favor digite o PIX..."
     maxlength="32"
     aria-label="inp-pix"
-  />
-  <div class="form-text">32 caracteres máximos</div>
-</div>
-<div class="mb-3">
-  <label for="inp-pis" class="fw-bold">PIS</label>
-  <input
-    type="text"
-    id="inp-pis"
-    class="form-control"
-    [(ngModel)]="adminProfissional.pis"
-    (ngModelChange)="onChange()"
-    #pis="ngModel"
-    placeholder="Por favor digite o PIS..."
-    maxlength="32"
-    aria-label="inp-pis"
   />
   <div class="form-text">32 caracteres máximos</div>
 </div>

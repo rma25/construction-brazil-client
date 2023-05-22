@@ -126,7 +126,7 @@
         aria-label="select-ddd"
         [(ngModel)]="adminContato.ddd"
         (ngModelChange)="onChange()"
-        #estado="ngModel"
+        #ddd="ngModel"
       >
         <option [ngValue]="'' || null || undefined">DDD</option>
         <option *ngFor="let ddd of ddds" [ngValue]="ddd">
@@ -142,10 +142,10 @@
         (ngModelChange)="onChange()"
         #telefone="ngModel"
         placeholder="Por favor digite o número de telefone..."
-        maxlength="32"
+        maxlength="9"
       />
     </div>
-    <div class="form-text">32 caracteres máximos</div>
+    <div class="form-text">9 caracteres máximos</div>
   </div>
   <div class="mb-3">
     <label for="input-profissao" class="fw-bold">Profissão</label>
