@@ -13,9 +13,15 @@ export class EditAdminInformacoesGeraisComponent {
   @Output() adminProfissionalChange =
     new EventEmitter<AdminProfissionalDeRodeio>();
 
+  @Output() isFormValid = new EventEmitter<boolean>();
+
+  public valid: boolean = true;
+
   constructor(public modalService: ModalService) {}
 
-  public isValid(): boolean{
-    return !!this.adminProfissional.contato && !!this.adminProfissional.endereco;
+  public isValid(isValid: boolean): void {
+    this.valid = isValid;
+
+    this.isFormValid.emit(isValid);
   }
 }

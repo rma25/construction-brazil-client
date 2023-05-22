@@ -76,7 +76,7 @@
 
 <ng-template #editInformacoesGerais let-modal>
   <app-edit-admin-informacoes-gerais
-    [adminProfissional]="profissionalDeRodeio"
-    (adminProfissionalChange)="profissionalDeRodeio = $event; onUpdateSaveBtn(changedState)"
+    [(adminProfissional)]="profissionalDeRodeio"
+    (isFormValid)="isInformacoesGeraisValid = $event; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-informacoes-gerais>
 </ng-template>

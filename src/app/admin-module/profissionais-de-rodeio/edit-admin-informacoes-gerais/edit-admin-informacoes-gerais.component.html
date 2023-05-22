@@ -6,10 +6,11 @@
 <div class="modal-body">
   <app-informacoes-gerais
     [(adminProfissional)]="adminProfissional"
+    (isValid)="isValid($event)"
   ></app-informacoes-gerais>
 </div>
 <div class="modal-footer">
-  <span class="font-italic text-danger" [hidden]="isValid()">
+  <span class="font-italic text-danger" [hidden]="valid">
     Por favor, preencha os campos obrigatórios.
   </span>
   <button

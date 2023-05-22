@@ -40,6 +40,7 @@ export class ProfissionaisDeRodeioRowComponent
   public editBtnClass: string;
   public isContatoValid: boolean = true;
   public isEnderecoValid: boolean = true;
+  public isInformacoesGeraisValid: boolean = true;
 
   public changedState = SaveBtnState.CHANGED;
   public initialProfissionalDeRodeio = new AdminProfissionalDeRodeio();
@@ -77,7 +78,7 @@ export class ProfissionaisDeRodeioRowComponent
   }
 
   public isRowValid(): boolean {
-    return this.isContatoValid && this.isEnderecoValid;
+    return this.isContatoValid && this.isEnderecoValid && this.isInformacoesGeraisValid;
   }
 
   public onDelete(): void {
