@@ -2,7 +2,7 @@
   <div class="h5">Contato</div>
   <div class="mb-3">
     <!-- Required, Max 11, Must be Unique-->
-    <!-- In Order to call the Government's API, the Birthdate is also required along with the CPF-->
+    <!-- In Order to call the Government's API, the Birthdate is also required along with the CPF -->
     <label for="input-cpf" class="fw-bold">CPF</label>
     <input
       type="text"
@@ -40,6 +40,7 @@
       Por favor digite CPF completo. Tem que ser 11 caracteres.
     </div>
   </div>
+  <!-- Requirido -->
   <div class="mb-3">
     <label
       [hidden]="!adminContato.dataDeNascimento"
@@ -51,10 +52,17 @@
     <app-date-picker-input
       [calendarText]="'Data de Nascimento'"
       [(datePicked)]="adminContato.dataDeNascimento"
-      (datePickedChange)="onChange()"
+      (datePickedChange)="dataDeNascimentoTouched = true; onChange()"
       id="date-picker-data-de-nascimento"
       aria-label="date-picker-data-de-nascimento"
     ></app-date-picker-input>
+    <div class="form-text">Requirido</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="dataDeNascimentoTouched && !adminContato.dataDeNascimento"
+    >
+      Por favor escolha a data de nascimento do profissional.
+    </div>
   </div>
   <div class="mb-3">
     <label for="input-nome" class="fw-bold">Nome</label>

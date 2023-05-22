@@ -18,6 +18,7 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
 
   public cpfText = new Subject<string>();
   public ddds!: Array<string>;
+  public dataDeNascimentoTouched: boolean;
 
   constructor(private staticData: StaticDataService) {
     super();

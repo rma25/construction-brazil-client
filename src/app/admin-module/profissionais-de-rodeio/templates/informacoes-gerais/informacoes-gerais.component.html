@@ -39,6 +39,7 @@
   />
   <div class="form-text">11 caracteres máximos</div>
 </div>
+<!-- Max Chars depends on the state-->
 <div class="mb-3">
   <label for="inp-comp" class="fw-bold">RG</label>
   <input
@@ -49,11 +50,12 @@
     (ngModelChange)="onChange()"
     #rg="ngModel"
     placeholder="Por favor digite o RG..."
-    maxlength="7"
+    maxlength="32"
     aria-label="inp-comp"
   />
-  <div class="form-text">7 caracteres máximos</div>
+  <div class="form-text">32 caracteres máximos</div>
 </div>
+<!-- This will be unique -->
 <div class="mb-3">
   <label for="inp-pix" class="fw-bold">PIX</label>
   <input
