@@ -2,10 +2,13 @@
   title="Editar Contato de {{ adminContato.nome }} {{ adminContato.sobrenome }}"
 ></app-modal-header>
 <div class="modal-body">
-  <app-contato [(adminContato)]="adminContato"></app-contato>
+  <app-contato
+    [(adminContato)]="adminContato"
+    (isValid)="isValid($event)"
+  ></app-contato>
 </div>
 <div class="modal-footer">
-  <span class="font-italic text-danger" [hidden]="isValid()">
+  <span class="font-italic text-danger" [hidden]="valid">
     Por favor, preencha os campos obrigatórios.
   </span>
   <button

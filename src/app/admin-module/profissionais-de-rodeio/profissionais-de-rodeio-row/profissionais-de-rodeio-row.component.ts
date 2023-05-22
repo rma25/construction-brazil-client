@@ -6,6 +6,7 @@ import { RowInfo } from 'src/app/shared/interfaces/rowInfo.interface';
 import { DialogMessages } from 'src/app/shared/modals/dialog/enums/dialog-messages';
 import { DialogTitles } from 'src/app/shared/modals/dialog/enums/dialog-titles';
 import { DialogService } from 'src/app/shared/modals/dialog/services/dialog.service';
+import { SaveBtnState } from 'src/app/shared/save-button/enums/save-btn-state.enum';
 import { SaveButtonComponent } from 'src/app/shared/save-button/save-button.component';
 import { DateService } from 'src/app/shared/services/date.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
@@ -37,6 +38,12 @@ export class ProfissionaisDeRodeioRowComponent
   public enderecoEditType = EditType.ENDERECO;
   public informacoesGeraisEditType = EditType.INFORMACOES_GERAIS;
   public editBtnClass: string;
+  public isContatoValid: boolean = true;
+  public isEnderecoValid: boolean = true;
+
+  public changedState = SaveBtnState.CHANGED;
+  public initialProfissionalDeRodeio = new AdminProfissionalDeRodeio();
+  public dirty: boolean = false;
 
   constructor(
     public modalService: ModalService,
@@ -50,14 +57,27 @@ export class ProfissionaisDeRodeioRowComponent
   }
 
   ngOnInit(): void {
+    this.initialProfissionalDeRodeio = JSON.parse(
+      JSON.stringify(this.profissionalDeRodeio)
+    );
+  }
+
+  public onRevertChanges(): void {
+    this.profissionalDeRodeio = JSON.parse(
+      JSON.stringify(this.initialProfissionalDeRodeio)
+    );
+
+    this.onUpdateSaveBtn(SaveBtnState.DEFAULT);
+
+    this.dirty = false;
+  }
+
+  public showRevertChanges(): boolean {
+    return this.dirty;
   }
 
   public isRowValid(): boolean {
-    return (
-      !!this.profissionalDeRodeio.contato.cpf &&
-      !!this.profissionalDeRodeio.contato.nome &&
-      !!this.profissionalDeRodeio.contato.sobrenome
-    );
+    return this.isContatoValid && this.isEnderecoValid;
   }
 
   public onDelete(): void {
@@ -113,20 +133,32 @@ export class ProfissionaisDeRodeioRowComponent
       });
 
       // Update save button
-      this.onUpdateSaveBtn(true);
+      this.onUpdateSaveBtn(SaveBtnState.SAVED);
     }
   }
 
-  public onUpdateSaveBtn(isSaved: boolean): void {
-    if (!isSaved && this.profissionalDeRodeio && this.saveBtn) {
-      this.saveBtn.changeSaveBtnState();
-    }
-
+  private updateParent(isSaved: boolean): void {
     this.rowChange.emit({
       row: this.profissionalDeRodeio,
       isSaved,
       isValid: this.isRowValid(),
     });
+  }
+
+  public onUpdateSaveBtn(state: SaveBtnState): void {
+    if (state === SaveBtnState.SAVED) {
+      this.dirty = false;
+      this.initialProfissionalDeRodeio = this.profissionalDeRodeio;
+
+      this.updateParent(true);
+    } else if (state === SaveBtnState.CHANGED) {
+      this.dirty =
+        this.profissionalDeRodeio !== this.initialProfissionalDeRodeio;
+
+      this.updateParent(false);
+    }
+
+    this.saveBtn.changeSaveBtnState(state);
   }
 
   public getFormattedDate(date: any): string {
@@ -149,7 +181,9 @@ export class ProfissionaisDeRodeioRowComponent
     return message;
   }
 
-  public getEditBtnClass(): string{
-    return `btn ${this.profissionalDeRodeio.ativo ? 'btn-primary' : 'btn-secondary'}`;
+  public getEditBtnClass(): string {
+    return `btn ${
+      this.profissionalDeRodeio.ativo ? 'btn-primary' : 'btn-secondary'
+    }`;
   }
 }

@@ -14,7 +14,15 @@ export class EditAdminEnderecoComponent {
   @Input() adminEndereco!: AdminEndereco;
   @Output() adminEnderecoChange = new EventEmitter<AdminEndereco>();
 
-  public isValid: boolean;
+  @Output() isFormValid = new EventEmitter<boolean>();
+
+  public valid: boolean = true;
 
   constructor(public modalService: ModalService) {}
+
+  public isValid(isValid: boolean): void {
+    this.valid = isValid;
+
+    this.isFormValid.emit(isValid);
+  }
 }

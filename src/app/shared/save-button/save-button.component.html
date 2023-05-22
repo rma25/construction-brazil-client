@@ -1,12 +1,12 @@
 <button
   type="button"
-  [ngClass]="saveButtonClassControl.value"
+  [ngClass]="saveButtonClass"
   (click)="onSave()"
   *ngIf="!isSaving; else loading"
   id="btn-save-template"
 >
-  <fa-icon [icon]="saveButtonIconControl.value" class="me-2"></fa-icon>
-  {{ saveButtonTextControl.value }}
+  <fa-icon [icon]="getSaveBtnIcon()" class="me-2"></fa-icon>
+  {{ saveButtonText }}
 </button>
 <ng-template #loading>
   <app-inline-loading-icon></app-inline-loading-icon>

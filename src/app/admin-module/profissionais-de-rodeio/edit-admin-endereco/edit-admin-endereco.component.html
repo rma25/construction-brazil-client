@@ -1,9 +1,14 @@
-<app-modal-header title="Editar Endereco de {{profissionalNomeCompleto}}"></app-modal-header>
+<app-modal-header
+  title="Editar Endereco de {{ profissionalNomeCompleto }}"
+></app-modal-header>
 <div class="modal-body">
-  <app-endereco [(adminEndereco)]="adminEndereco" (isValid)="isValid = $event"></app-endereco>
+  <app-endereco
+    [(adminEndereco)]="adminEndereco"
+    (isValid)="isValid($event)"
+  ></app-endereco>
 </div>
 <div class="modal-footer">
-  <span class="font-italic text-danger" [hidden]="isValid">
+  <span class="font-italic text-danger" [hidden]="valid">
     Por favor, preencha os campos obrigatórios.
   </span>
   <button

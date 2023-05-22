@@ -12,6 +12,7 @@ import {
   faHandPointer,
   faIdCard,
   faPlus,
+  faRotateLeft,
   faSave,
   faSearch,
   faTrashAlt,
@@ -111,7 +112,8 @@ export class SharedModule {
       faSearch,
       faXmark,
       faCalendarAlt,
-      faHandPointer
+      faHandPointer,
+      faRotateLeft
     );
   }
 

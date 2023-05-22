@@ -14,14 +14,13 @@ export class EditAdminContatoComponent {
 
   @Output() isFormValid = new EventEmitter<boolean>();
 
+  public valid: boolean = true;
+
   constructor(public modalService: ModalService) {}
 
-  public isValid(): boolean {
-    return (
-      !!this.adminContato.cpf &&
-      this.adminContato.cpf.length === 14 &&
-      !!this.adminContato.nome &&
-      !!this.adminContato.sobrenome
-    );
+  public isValid(isFormValid: boolean): void {
+    this.valid = isFormValid;
+
+    this.isFormValid.emit(isFormValid);
   }
 }

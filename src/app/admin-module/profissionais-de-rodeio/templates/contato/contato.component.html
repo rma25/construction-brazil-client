@@ -2,13 +2,14 @@
   <div class="h5">Contato</div>
   <div class="mb-3">
     <!-- Required, Max 11, Must be Unique-->
-    <!-- TODO: Add a Database Check to make sure this is unique -->
+    <!-- In Order to call the Government's API, the Birthdate is also required along with the CPF-->
     <label for="input-cpf" class="fw-bold">CPF</label>
     <input
       type="text"
       id="inp-cpf"
       class="form-control"
       [(ngModel)]="adminContato.cpf"
+      (ngModelChange)="onChange()"
       (input)="onCpfInput($event.target)"
       #cpf="ngModel"
       placeholder="Por favor digite o CPF..."
@@ -44,11 +45,13 @@
       [hidden]="!adminContato.dataDeNascimento"
       for="date-picker-data-de-nascimento"
       class="fw-bold"
-      >Data de Nascimento</label
     >
+      Data de Nascimento
+    </label>
     <app-date-picker-input
       [calendarText]="'Data de Nascimento'"
       [(datePicked)]="adminContato.dataDeNascimento"
+      (datePickedChange)="onChange()"
       id="date-picker-data-de-nascimento"
       aria-label="date-picker-data-de-nascimento"
     ></app-date-picker-input>
@@ -60,12 +63,22 @@
       id="inp-nome"
       class="form-control"
       [(ngModel)]="adminContato.nome"
+      (ngModelChange)="onChange()"
       #nome="ngModel"
       placeholder="Por favor digite o primeiro nome..."
       aria-label="input-nome"
       maxlength="100"
     />
-    <div class="form-text">100 caracteres máximos</div>
+    <div class="form-text">
+      <ul>
+        <li>
+          <span> Requirido </span>
+        </li>
+        <li>
+          <span> 100 caracteres máximos</span>
+        </li>
+      </ul>
+    </div>
     <div
       class="text-danger font-italic"
       *ngIf="nome.touched && !adminContato.nome"
@@ -81,11 +94,21 @@
       class="form-control"
       aria-label="input-sobrenome"
       [(ngModel)]="adminContato.sobrenome"
+      (ngModelChange)="onChange()"
       #sobrenome="ngModel"
       placeholder="Por favor digite o sobrenome..."
       maxlength="100"
     />
-    <div class="form-text">100 caracteres máximos</div>
+    <div class="form-text">
+      <ul>
+        <li>
+          <span> Requirido </span>
+        </li>
+        <li>
+          <span> 100 caracteres máximos</span>
+        </li>
+      </ul>
+    </div>
     <div
       class="text-danger font-italic"
       *ngIf="sobrenome.touched && !adminContato.sobrenome"
@@ -102,6 +125,7 @@
         id="select-ddd"
         aria-label="select-ddd"
         [(ngModel)]="adminContato.ddd"
+        (ngModelChange)="onChange()"
         #estado="ngModel"
       >
         <option [ngValue]="'' || null || undefined">DDD</option>
@@ -115,18 +139,13 @@
         class="form-control"
         aria-label="input-telefone"
         [(ngModel)]="adminContato.telefone"
+        (ngModelChange)="onChange()"
         #telefone="ngModel"
         placeholder="Por favor digite o número de telefone..."
         maxlength="32"
       />
     </div>
     <div class="form-text">32 caracteres máximos</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="telefone.touched && !adminContato.telefone"
-    >
-      Por favor digite o número de telefone do profissional.
-    </div>
   </div>
   <div class="mb-3">
     <label for="input-profissao" class="fw-bold">Profissão</label>
@@ -136,16 +155,11 @@
       aria-label="input-profissao"
       class="form-control"
       [(ngModel)]="adminContato.profissao"
+      (ngModelChange)="onChange()"
       #profissao="ngModel"
       placeholder="Por favor digite a profissão..."
       maxlength="64"
     />
     <div class="form-text">64 caracteres máximos</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="profissao.touched && !adminContato.profissao"
-    >
-      Por favor digite a profissão.
-    </div>
   </div>
 </div>

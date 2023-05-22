@@ -14,6 +14,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   @Input() adminContato!: AdminContato;
   @Output() adminContatoChange = new EventEmitter<AdminContato>();
 
+  @Output() isValid = new EventEmitter<boolean>();
+
   public cpfText = new Subject<string>();
   public ddds!: Array<string>;
 
@@ -68,5 +70,16 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
     }
 
     this.cpfText.next(cpfText);
+  }
+
+  public onChange(): void {
+    this.isValid.emit(
+      !!this.adminContato.cpf &&
+        this.adminContato.cpf.length === 14 &&
+        !!this.adminContato.nome &&
+        this.adminContato.nome.length > 0 &&
+        !!this.adminContato.sobrenome &&
+        this.adminContato.sobrenome.length > 0
+    );
   }
 }

@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 
+import { SaveBtnState } from '../save-button/enums/save-btn-state.enum';
 import { RowInfo } from './rowInfo.interface';
 
 export interface ISettingsRow {
@@ -8,6 +9,5 @@ export interface ISettingsRow {
 
   isRowValid(): boolean;
   onDelete?(): void;
-  onUpdateSaveBtn(isSaved: boolean, isValid: boolean): void;
-  onUpdateSaveBtn(isSaved: boolean): void;
+  onUpdateSaveBtn(state: SaveBtnState): void;
 }

@@ -18,6 +18,8 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
 
   public newProfissional = new AdminProfissionalDeRodeio();
   public estados = new Array<string>();
+  public isContatoValid: boolean = false;
+  public isEnderecoValid: boolean = false;
 
   constructor(
     public modalService: ModalService,
@@ -35,11 +37,7 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
   }
 
   public isAddValid(): boolean {
-    return (
-      !!this.newProfissional.contato.cpf &&
-      !!this.newProfissional.contato.nome &&
-      !!this.newProfissional.contato.sobrenome
-    );
+    return this.isContatoValid && this.isEnderecoValid;
   }
 
   public onAdd(): void {

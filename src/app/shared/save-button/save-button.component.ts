@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { finalize, Observable, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
-import { ButtonService } from '../services/button.service';
 import { ToastService } from '../toasts/services/toast.service';
+import { SaveBtnClass } from './enums/save-btn-class.enum';
+import { SaveBtnIcon } from './enums/save-btn-icon.enum';
+import { SaveBtnState } from './enums/save-btn-state.enum';
+import { SaveBtnText } from './enums/save-btn-text.enum';
 import { SaveButtonService } from './services/save-button.service';
 
 @Component({
@@ -24,16 +27,15 @@ export class SaveButtonComponent
 
   public isSaving = false;
 
-  public saveButtonClassControl: FormControl;
-  public saveButtonIconControl: FormControl;
-  public saveButtonTextControl: FormControl;
+  public saveButtonClass: string = SaveBtnClass.DEFAULT;
+  public saveButtonIcon: string = SaveBtnIcon.DEFAULT;
+  public saveButtonText: string = SaveBtnText.DEFAULT;
 
-  private dataChangedId = new Subject<void>();
+  private dataChanged = new Subject<SaveBtnState>();
 
   constructor(
     private toastService: ToastService,
-    private saveButtonService: SaveButtonService,
-    private btnService: ButtonService
+    private saveButtonService: SaveButtonService
   ) {
     super();
   }
@@ -42,35 +44,35 @@ export class SaveButtonComponent
     this.setControls();
 
     // Update the save button status to changed
-    this.dataChangedId.pipe(takeUntil(this.destroy)).subscribe(() => {
-      this.onUpdateSaveBtn(false);
-    });
-
-    this.saveButtonService.reset.pipe(takeUntil(this.destroy)).subscribe(() => {
-      this.setControls();
-    });
+    this.dataChanged
+      .pipe(takeUntil(this.destroy))
+      .subscribe((state) => this.onUpdateSaveBtn(state));
   }
 
   private setControls(): void {
-    this.saveButtonClassControl = this.btnService.getSaveButtonClassControl();
-    this.saveButtonIconControl = this.btnService.getSaveButtonIconControl();
-    this.saveButtonTextControl = this.btnService.getSaveButtonTextControl();
+    this.defaultSaveBtnState();
+  }
+
+  private defaultSaveBtnState(): void {
+    this.saveButtonClass = this.saveButtonService.getSaveButtonClass(
+      SaveBtnState.DEFAULT
+    );
+    this.saveButtonIcon = this.saveButtonService.getSaveButtonIcon(
+      SaveBtnState.DEFAULT
+    );
+    this.saveButtonText = this.saveButtonService.getSaveButtonText(
+      SaveBtnState.DEFAULT
+    );
 
     if (this.initialSaveBtnText && this.initialSaveBtnText.length > 0) {
-      this.saveButtonTextControl.setValue(this.initialSaveBtnText);
+      this.saveButtonText = this.initialSaveBtnText;
     }
   }
 
-  public onUpdateSaveBtn(isSaved: boolean, isError: boolean = false): void {
-    this.saveButtonTextControl.setValue(
-      isError ? 'Erro' : isSaved ? 'Salvo' : 'Salvar Alterações'
-    );
-    this.saveButtonClassControl.setValue(
-      this.btnService.getSaveButtonClass(isSaved, isError)
-    );
-    this.saveButtonIconControl.setValue(
-      this.btnService.getSaveButtonIcon(isSaved, isError)
-    );
+  public onUpdateSaveBtn(state: SaveBtnState): void {
+    this.saveButtonClass = this.saveButtonService.getSaveButtonClass(state);
+    this.saveButtonIcon = this.saveButtonService.getSaveButtonIcon(state);
+    this.saveButtonText = this.saveButtonService.getSaveButtonText(state);
   }
 
   public onSave(): void {
@@ -95,7 +97,7 @@ export class SaveButtonComponent
         this.dataRequestResult.emit(x);
 
         this.isSaving = false;
-        this.onUpdateSaveBtn(true);
+        this.onUpdateSaveBtn(SaveBtnState.SAVED);
 
         this.toastService.toasts.next({
           httpStatusCode: 200,
@@ -106,7 +108,11 @@ export class SaveButtonComponent
       });
   }
 
-  public changeSaveBtnState(): void {
-    this.dataChangedId.next();
+  public changeSaveBtnState(state: SaveBtnState): void {
+    this.dataChanged.next(state);
+  }
+
+  public getSaveBtnIcon(): IconName {
+    return this.saveButtonIcon as IconName;
   }
 }

@@ -7,6 +7,12 @@
   ></app-save-button>
 </th>
 <th scope="row">
+  <button type="button" class="btn btn-secondary" (click)="onRevertChanges()" *ngIf="showRevertChanges()">
+    <fa-icon icon="rotate-left" class="me-2"></fa-icon>
+    Reverter mudanças
+  </button>
+</th>
+<th scope="row">
   <button type="button" class="btn btn-danger" (click)="onDelete()">
     <fa-icon icon="trash-alt" class="me-2"></fa-icon>
     Excluir
@@ -52,6 +58,7 @@
 <ng-template #editContato let-modal>
   <app-edit-admin-contato
     [(adminContato)]="profissionalDeRodeio.contato"
+    (isFormValid)="isContatoValid = $event; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-contato>
 </ng-template>
 
@@ -63,11 +70,13 @@
       profissionalDeRodeio.contato.sobrenome
     "
     [(adminEndereco)]="profissionalDeRodeio.endereco"
+    (isFormValid)="isEnderecoValid = $event; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-endereco>
 </ng-template>
 
 <ng-template #editInformacoesGerais let-modal>
   <app-edit-admin-informacoes-gerais
-    [(adminProfissional)]="profissionalDeRodeio"
+    [adminProfissional]="profissionalDeRodeio"
+    (adminProfissionalChange)="profissionalDeRodeio = $event; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-informacoes-gerais>
 </ng-template>
