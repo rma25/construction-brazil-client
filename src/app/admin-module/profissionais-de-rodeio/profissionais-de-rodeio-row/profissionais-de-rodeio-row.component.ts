@@ -75,6 +75,9 @@ export class ProfissionaisDeRodeioRowComponent
     this.onUpdateSaveBtn(SaveBtnState.DEFAULT);
 
     this.dirty = false;
+    this.isContatoChanged = false;
+    this.isEnderecoChanged = false;
+    this.isInformacoesGeraisChanged = false;
   }
 
   public showRevertChanges(): boolean {
