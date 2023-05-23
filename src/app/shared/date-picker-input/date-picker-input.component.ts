@@ -12,7 +12,7 @@ export class DatePickerInputComponent implements OnChanges {
   @Input() calendarText: string | undefined | null;
   @Input() datePicked: Date | undefined | null;
 
-  @Output() datePickedChange = new EventEmitter<Date | undefined | null>();
+  @Output() datePickedChange = new EventEmitter<Date>();
 
   public model: NgbDateStruct | undefined;
   public today = this.calendar.getToday();

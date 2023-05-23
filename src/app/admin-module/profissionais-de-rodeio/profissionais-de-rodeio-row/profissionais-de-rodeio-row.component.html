@@ -7,7 +7,12 @@
   ></app-save-button>
 </th>
 <th scope="row">
-  <button type="button" class="btn btn-secondary" (click)="onRevertChanges()" *ngIf="showRevertChanges()">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="onRevertChanges()"
+    *ngIf="showRevertChanges()"
+  >
     <fa-icon icon="rotate-left" class="me-2"></fa-icon>
     Reverter mudanças
   </button>
@@ -58,25 +63,33 @@
 <ng-template #editContato let-modal>
   <app-edit-admin-contato
     [(adminContato)]="profissionalDeRodeio.contato"
-    (isFormValid)="isContatoValid = $event; isContatoChanged = true; onUpdateSaveBtn(changedState)"
+    (isFormValid)="
+      isContatoValid = $event;
+      isContatoChanged = true;
+      onUpdateSaveBtn(changedState)
+    "
   ></app-edit-admin-contato>
 </ng-template>
 
 <ng-template #editEndereco let-modal>
   <app-edit-admin-endereco
-    [profissionalNomeCompleto]="
-      profissionalDeRodeio.contato.nome +
-      ' ' +
-      profissionalDeRodeio.contato.sobrenome
-    "
+    [profissionalNomeCompleto]="getProfissionalFullname()"
     [(adminEndereco)]="profissionalDeRodeio.endereco"
-    (isFormValid)="isEnderecoValid = $event; isEnderecoChanged = true; onUpdateSaveBtn(changedState)"
+    (isFormValid)="
+      isEnderecoValid = $event;
+      isEnderecoChanged = true;
+      onUpdateSaveBtn(changedState)
+    "
   ></app-edit-admin-endereco>
 </ng-template>
 
 <ng-template #editInformacoesGerais let-modal>
   <app-edit-admin-informacoes-gerais
     [(adminProfissional)]="profissionalDeRodeio"
-    (isFormValid)="isInformacoesGeraisValid = $event; isInformacoesGeraisChanged = true; onUpdateSaveBtn(changedState)"
+    (isFormValid)="
+      isInformacoesGeraisValid = $event;
+      isInformacoesGeraisChanged = true;
+      onUpdateSaveBtn(changedState)
+    "
   ></app-edit-admin-informacoes-gerais>
 </ng-template>

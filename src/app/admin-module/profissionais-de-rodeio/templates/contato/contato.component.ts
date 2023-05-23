@@ -80,7 +80,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         !!this.adminContato.nome &&
         this.adminContato.nome.length > 0 &&
         !!this.adminContato.sobrenome &&
-        this.adminContato.sobrenome.length > 0
+        this.adminContato.sobrenome.length > 0 &&
+        !!this.adminContato.dataDeNascimento
     );
   }
 }

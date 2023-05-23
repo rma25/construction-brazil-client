@@ -170,7 +170,7 @@ export class ProfissionaisDeRodeioRowComponent
       this.updateParent(false);
     }
 
-    this.saveBtn.changeSaveBtnState(state);
+    if (this.saveBtn) this.saveBtn.changeSaveBtnState(state);
   }
 
   public getFormattedDate(date: any): string {
@@ -179,10 +179,17 @@ export class ProfissionaisDeRodeioRowComponent
 
   public getEditMessage(editType: EditType): string {
     let message = 'Editar ';
+
     if (editType === EditType.CONTATO) {
-      message += `${this.profissionalDeRodeio.contato.nome} ${this.profissionalDeRodeio.contato.sobrenome}`;
+      message += this.getProfissionalFullname();
     } else if (editType === EditType.ENDERECO) {
-      message += `${this.profissionalDeRodeio.endereco.cidade} ${this.profissionalDeRodeio.endereco.estado}`;
+      if (this.profissionalDeRodeio.endereco.cidade) {
+        message += `${this.profissionalDeRodeio.endereco.cidade} `;
+      }
+
+      if (this.profissionalDeRodeio.endereco.estado) {
+        message += `${this.profissionalDeRodeio.endereco.cidade} `;
+      }
     } else if (editType === EditType.INFORMACOES_GERAIS) {
       message += `${this.informacocesGeraisService.getStatus(
         this.profissionalDeRodeio.ativo
@@ -204,9 +211,7 @@ export class ProfissionaisDeRodeioRowComponent
         }`;
       } else {
         btnClass += `${
-          this.profissionalDeRodeio.ativo
-            ? BtnClass.DEFAULT
-            : BtnClass.INACTIVE
+          this.profissionalDeRodeio.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
         }`;
       }
     } else if (editType === EditType.ENDERECO) {
@@ -218,9 +223,7 @@ export class ProfissionaisDeRodeioRowComponent
         }`;
       } else {
         btnClass += `${
-          this.profissionalDeRodeio.ativo
-            ? BtnClass.DEFAULT
-            : BtnClass.INACTIVE
+          this.profissionalDeRodeio.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
         }`;
       }
     } else if (editType === EditType.INFORMACOES_GERAIS) {
@@ -232,13 +235,25 @@ export class ProfissionaisDeRodeioRowComponent
         }`;
       } else {
         btnClass += `${
-          this.profissionalDeRodeio.ativo
-            ? BtnClass.DEFAULT
-            : BtnClass.INACTIVE
+          this.profissionalDeRodeio.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
         }`;
       }
     }
 
     return btnClass;
+  }
+
+  public getProfissionalFullname(): string {
+    let fullname = '';
+
+    if (this.profissionalDeRodeio.contato.nome) {
+      fullname += `${this.profissionalDeRodeio.contato.nome} `;
+    }
+
+    if (this.profissionalDeRodeio.contato.sobrenome) {
+      fullname += `${this.profissionalDeRodeio.contato.sobrenome} `;
+    }
+
+    return fullname;
   }
 }
