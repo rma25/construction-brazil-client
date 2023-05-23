@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { concatMap, Observable, of, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
+import { BtnClass } from 'src/app/shared/enums/btn-class.enum';
 import { ISettingsRow } from 'src/app/shared/interfaces/ISettingsRow.interface';
 import { RowInfo } from 'src/app/shared/interfaces/rowInfo.interface';
 import { DialogMessages } from 'src/app/shared/modals/dialog/enums/dialog-messages';
@@ -41,6 +42,9 @@ export class ProfissionaisDeRodeioRowComponent
   public isContatoValid: boolean = true;
   public isEnderecoValid: boolean = true;
   public isInformacoesGeraisValid: boolean = true;
+  public isContatoChanged: boolean = false;
+  public isEnderecoChanged: boolean = false;
+  public isInformacoesGeraisChanged: boolean = false;
 
   public changedState = SaveBtnState.CHANGED;
   public initialProfissionalDeRodeio = new AdminProfissionalDeRodeio();
@@ -78,7 +82,11 @@ export class ProfissionaisDeRodeioRowComponent
   }
 
   public isRowValid(): boolean {
-    return this.isContatoValid && this.isEnderecoValid && this.isInformacoesGeraisValid;
+    return (
+      this.isContatoValid &&
+      this.isEnderecoValid &&
+      this.isInformacoesGeraisValid
+    );
   }
 
   public onDelete(): void {
@@ -182,9 +190,52 @@ export class ProfissionaisDeRodeioRowComponent
     return message;
   }
 
-  public getEditBtnClass(): string {
-    return `btn ${
-      this.profissionalDeRodeio.ativo ? 'btn-primary' : 'btn-secondary'
-    }`;
+  public getEditBtnClass(editType: EditType): string {
+    let btnClass = 'btn ';
+    if (editType === EditType.CONTATO) {
+      if (this.isContatoChanged && this.dirty) {
+        btnClass += `${
+          this.profissionalDeRodeio.ativo
+            ? BtnClass.CHANGED_ACTIVE
+            : BtnClass.CHANGED_INACTIVE
+        }`;
+      } else {
+        btnClass += `${
+          this.profissionalDeRodeio.ativo
+            ? BtnClass.DEFAULT
+            : BtnClass.INACTIVE
+        }`;
+      }
+    } else if (editType === EditType.ENDERECO) {
+      if (this.isEnderecoChanged && this.dirty) {
+        btnClass += `${
+          this.profissionalDeRodeio.ativo
+            ? BtnClass.CHANGED_ACTIVE
+            : BtnClass.CHANGED_INACTIVE
+        }`;
+      } else {
+        btnClass += `${
+          this.profissionalDeRodeio.ativo
+            ? BtnClass.DEFAULT
+            : BtnClass.INACTIVE
+        }`;
+      }
+    } else if (editType === EditType.INFORMACOES_GERAIS) {
+      if (this.isInformacoesGeraisChanged && this.dirty) {
+        btnClass += `${
+          this.profissionalDeRodeio.ativo
+            ? BtnClass.CHANGED_ACTIVE
+            : BtnClass.CHANGED_INACTIVE
+        }`;
+      } else {
+        btnClass += `${
+          this.profissionalDeRodeio.ativo
+            ? BtnClass.DEFAULT
+            : BtnClass.INACTIVE
+        }`;
+      }
+    }
+
+    return btnClass;
   }
 }

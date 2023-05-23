@@ -213,6 +213,28 @@ body {
 }
 /* *************** */
 
+/* Gradiente Backgrounds */
+.bg-primary-secondary {
+  color: #fff;
+  background-color: #0155d2; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #0d6efd, #6c757d);
+  border-color: linear-gradient(to right, #0d6efd, #6c757d);
+}
+
+.bg-warning-secondary {
+  color: #fff;
+  background-color: #0155d2; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #ffc107, #6c757d);
+  border-color: linear-gradient(to right, #ffc107, #6c757d);
+}
+
+.bg-warning-primary {
+  color: #fff;
+  background-color: #0155d2; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #ffc107, #0d6efd);
+  border-color: linear-gradient(to right,  #ffc107, #0d6efd);
+}
+
 app-home,
 app-admin-menu {
   height: 100%;

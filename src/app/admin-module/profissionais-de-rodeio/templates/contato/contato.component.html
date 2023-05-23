@@ -3,7 +3,7 @@
   <div class="mb-3">
     <!-- Required, Max 11, Must be Unique-->
     <!-- In Order to call the Government's API, the Birthdate is also required along with the CPF -->
-    <label for="input-cpf" class="fw-bold">CPF</label>
+    <label for="inp-cpf" class="fw-bold">CPF</label>
     <input
       type="text"
       id="inp-cpf"
@@ -13,7 +13,7 @@
       (input)="onCpfInput($event.target)"
       #cpf="ngModel"
       placeholder="Por favor digite o CPF..."
-      aria-label="input-cpf"
+      aria-label="inp-cpf"
       minlength="14"
       maxlength="14"
     />
@@ -65,7 +65,7 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="input-nome" class="fw-bold">Nome</label>
+    <label for="inp-nome" class="fw-bold">Nome</label>
     <input
       type="text"
       id="inp-nome"
@@ -74,7 +74,7 @@
       (ngModelChange)="onChange()"
       #nome="ngModel"
       placeholder="Por favor digite o primeiro nome..."
-      aria-label="input-nome"
+      aria-label="inp-nome"
       maxlength="100"
     />
     <div class="form-text">
@@ -95,12 +95,12 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="input-sobrenome" class="fw-bold">Sobrenome</label>
+    <label for="inp-sobrenome" class="fw-bold">Sobrenome</label>
     <input
       type="text"
       id="inp-sobrenome"
       class="form-control"
-      aria-label="input-sobrenome"
+      aria-label="inp-sobrenome"
       [(ngModel)]="adminContato.sobrenome"
       (ngModelChange)="onChange()"
       #sobrenome="ngModel"
@@ -125,7 +125,7 @@
     </div>
   </div>
   <div class="mb-3">
-    <label for="input-telefone" class="fw-bold">Telefone</label>
+    <label for="inp-telefone" class="fw-bold">Telefone</label>
     <div class="input-group">
       <select
         class="form-select mw20"
@@ -145,7 +145,7 @@
         type="text"
         id="inp-telefone"
         class="form-control"
-        aria-label="input-telefone"
+        aria-label="inp-telefone"
         [(ngModel)]="adminContato.telefone"
         (ngModelChange)="onChange()"
         #telefone="ngModel"
@@ -156,11 +156,11 @@
     <div class="form-text">9 caracteres máximos</div>
   </div>
   <div class="mb-3">
-    <label for="input-profissao" class="fw-bold">Profissão</label>
+    <label for="inp-profissao" class="fw-bold">Profissão</label>
     <input
       type="text"
       id="inp-profissao"
-      aria-label="input-profissao"
+      aria-label="inp-profissao"
       class="form-control"
       [(ngModel)]="adminContato.profissao"
       (ngModelChange)="onChange()"

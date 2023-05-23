@@ -21,7 +21,7 @@
 <th scope="row">
   <button
     type="button"
-    [ngClass]="getEditBtnClass()"
+    [ngClass]="getEditBtnClass(contatoEditType)"
     (click)="modalService.openModalXL(editContato)"
   >
     <fa-icon icon="edit" class="me-2"></fa-icon>
@@ -31,7 +31,7 @@
 <th scope="row">
   <button
     type="button"
-    [ngClass]="getEditBtnClass()"
+    [ngClass]="getEditBtnClass(enderecoEditType)"
     (click)="modalService.openModalXL(editEndereco)"
   >
     <fa-icon icon="edit" class="me-2"></fa-icon>
@@ -41,7 +41,7 @@
 <th scope="row">
   <button
     type="button"
-    [ngClass]="getEditBtnClass()"
+    [ngClass]="getEditBtnClass(informacoesGeraisEditType)"
     (click)="modalService.openModalXL(editInformacoesGerais)"
   >
     <fa-icon icon="edit" class="me-2"></fa-icon>
@@ -58,7 +58,7 @@
 <ng-template #editContato let-modal>
   <app-edit-admin-contato
     [(adminContato)]="profissionalDeRodeio.contato"
-    (isFormValid)="isContatoValid = $event; onUpdateSaveBtn(changedState)"
+    (isFormValid)="isContatoValid = $event; isContatoChanged = true; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-contato>
 </ng-template>
 
@@ -70,13 +70,13 @@
       profissionalDeRodeio.contato.sobrenome
     "
     [(adminEndereco)]="profissionalDeRodeio.endereco"
-    (isFormValid)="isEnderecoValid = $event; onUpdateSaveBtn(changedState)"
+    (isFormValid)="isEnderecoValid = $event; isEnderecoChanged = true; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-endereco>
 </ng-template>
 
 <ng-template #editInformacoesGerais let-modal>
   <app-edit-admin-informacoes-gerais
     [(adminProfissional)]="profissionalDeRodeio"
-    (isFormValid)="isInformacoesGeraisValid = $event; onUpdateSaveBtn(changedState)"
+    (isFormValid)="isInformacoesGeraisValid = $event; isInformacoesGeraisChanged = true; onUpdateSaveBtn(changedState)"
   ></app-edit-admin-informacoes-gerais>
 </ng-template>

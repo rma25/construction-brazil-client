@@ -48,7 +48,7 @@
     <div class="form-text">64 caracteres máximos</div>
   </div>
   <div class="mb-3" [hidden]="hideAddressForm()">
-    <label for="inp-cep" class="fw-bold">Complemento</label>
+    <label for="inp-complemento" class="fw-bold">Complemento</label>
     <input
       type="text"
       id="inp-complemento"
@@ -58,7 +58,7 @@
       #complemento="ngModel"
       placeholder="Por favor digite o complemento..."
       maxlength="64"
-      aria-label="inp-cep"
+      aria-label="inp-complemento"
     />
     <div class="form-text">64 caracteres máximos</div>
   </div>
@@ -94,7 +94,7 @@
     <div class="form-text">85 caracteres máximos</div>
   </div>
   <div class="mb-3" [hidden]="hideAddressForm()">
-    <label for="inp-estado" class="fw-bold">Estado</label>
+    <label for="select-estado" class="fw-bold">Estado</label>
     <select
       class="form-select"
       name="estado"
@@ -102,7 +102,7 @@
       [(ngModel)]="adminEndereco.estado"
       (ngModelChange)="onChange()"
       #estado="ngModel"
-      aria-label="inp-estado"
+      aria-label="select-estado"
     >
       <option [ngValue]="'' || null || undefined">
         Por favor escolha um estado.
