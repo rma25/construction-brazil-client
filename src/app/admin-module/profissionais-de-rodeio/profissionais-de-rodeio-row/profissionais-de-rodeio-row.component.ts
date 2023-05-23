@@ -188,7 +188,7 @@ export class ProfissionaisDeRodeioRowComponent
       }
 
       if (this.profissionalDeRodeio.endereco.estado) {
-        message += `${this.profissionalDeRodeio.endereco.cidade} `;
+        message += `${this.profissionalDeRodeio.endereco.estado} `;
       }
     } else if (editType === EditType.INFORMACOES_GERAIS) {
       message += `${this.informacocesGeraisService.getStatus(
