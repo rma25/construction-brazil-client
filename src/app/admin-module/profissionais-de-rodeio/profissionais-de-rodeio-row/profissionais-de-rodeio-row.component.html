@@ -54,16 +54,16 @@
   </button>
 </th>
 <td>
-  <ul>
-    <li>
-      <span class="fw-bold">Adicionado: </span>
-      <span> {{ getFormattedDate(profissionalDeRodeio.criado) }}</span>
-    </li>
-    <li>
-      <span class="fw-bold">Mudado: </span>
-      <span> {{ getFormattedDate(profissionalDeRodeio.mudado) }}</span>
-    </li>
-  </ul>
+  <div>
+    <fa-icon icon="calendar-alt" class="me-2"></fa-icon>
+    <span class="fw-bold">Adicionado: </span>
+    <span> {{ getFormattedDate(profissionalDeRodeio.criado) }}</span>
+  </div>
+  <div>
+    <fa-icon icon="calendar-alt" class="me-2"></fa-icon>
+    <span class="fw-bold">Mudado: </span>
+    <span> {{ getFormattedDate(profissionalDeRodeio.mudado) }}</span>
+  </div>
 </td>
 
 <ng-template #editContato let-modal>
