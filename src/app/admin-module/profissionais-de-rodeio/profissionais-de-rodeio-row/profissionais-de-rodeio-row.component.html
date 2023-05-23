@@ -54,10 +54,16 @@
   </button>
 </th>
 <td>
-  {{ getFormattedDate(profissionalDeRodeio.criado) }}
-</td>
-<td>
-  {{ getFormattedDate(profissionalDeRodeio.mudado) }}
+  <ul>
+    <li>
+      <span class="fw-bold">Adicionado: </span>
+      <span> {{ getFormattedDate(profissionalDeRodeio.criado) }}</span>
+    </li>
+    <li>
+      <span class="fw-bold">Mudado: </span>
+      <span> {{ getFormattedDate(profissionalDeRodeio.mudado) }}</span>
+    </li>
+  </ul>
 </td>
 
 <ng-template #editContato let-modal>
