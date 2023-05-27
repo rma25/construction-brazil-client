@@ -3,8 +3,8 @@ export class AdminEndereco {
   public complemento: string;
   public bairro: string;
   public cidade: string;
-  // UF
-  public estado: string;
+  // Name & UF
+  public estadoId: number;
   // Required (format example: 74303-160)
   public cep: string;
 }

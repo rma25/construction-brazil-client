@@ -4,6 +4,7 @@ import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.compo
 import { ExternalCepDataService } from 'src/app/shared/data/external-cep-data.service';
 import { StaticDataService } from 'src/app/shared/services/static-data.service';
 
+import { Estado } from '../../interfaces/estado.interface';
 import { AdminEndereco } from '../../models/admin-endereco.model';
 import { InformacoesGeraisService } from '../services/informacoes-gerais.service';
 
@@ -18,7 +19,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
 
   @Output() isValid = new EventEmitter<boolean>(false);
 
-  public estados = new Array<string>();
+  public estados!: Array<Estado>;
   public cepText = new Subject<string>();
 
   public isSindicalizado: boolean;
@@ -29,11 +30,11 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
     private informacoesGeraisService: InformacoesGeraisService
   ) {
     super();
-
-    this.estados = this.staticDataService.getEstados();
   }
 
   ngOnInit(): void {
+    // TODO: Implement call to get Estados
+
     this.informacoesGeraisService.isSindicalizado
       .pipe(takeUntil(this.destroy))
       .subscribe((isSindicalizado) => {
@@ -61,13 +62,26 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
           this.adminEndereco.cep = x.cepInfo.cep;
           this.adminEndereco.cidade = x.cepInfo.localidade;
           this.adminEndereco.complemento = x.cepInfo.complemento;
-          this.adminEndereco.estado = x.cepInfo.uf;
+          this.adminEndereco.estadoId = this.getEstadoIdFor(x.cepInfo.uf)
           this.adminEndereco.rua = x.cepInfo.logradouro;
           this.adminEndereco.bairro = x.cepInfo.bairro;
         } else {
           this.adminEndereco.cep = x.formattedCep;
         }
       });
+  }
+
+  private getEstadoIdFor(uf: string): number {
+    if (!this.estados || this.estados.length === 0 || !uf || uf.length === 0)
+      return 0;
+
+    const estadoFound = this.estados.find(
+      (x) => x.uf.toLocaleLowerCase() === uf.toLocaleLowerCase()
+    );
+
+    if (!estadoFound) return 0;
+
+    return estadoFound.id;
   }
 
   public formatCEP(cpf?: string): string {

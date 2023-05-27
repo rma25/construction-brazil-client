@@ -132,13 +132,13 @@
         name="ddd"
         id="select-ddd"
         aria-label="select-ddd"
-        [(ngModel)]="adminContato.ddd"
+        [(ngModel)]="adminContato.dddId"
         (ngModelChange)="onChange()"
         #ddd="ngModel"
       >
-        <option [ngValue]="'' || null || undefined">DDD</option>
-        <option *ngFor="let ddd of ddds" [ngValue]="ddd">
-          {{ ddd }}
+        <option [ngValue]="0">DDD</option>
+        <option *ngFor="let ddd of ddds" [ngValue]="ddd.id">
+          {{ ddd.numeroDeDdd }}
         </option>
       </select>
       <input
@@ -169,5 +169,31 @@
       maxlength="64"
     />
     <div class="form-text">64 caracteres máximos</div>
+  </div>
+  <div class="mb-3">
+    <label for="inp-sexo" class="fw-bold">Sexo</label>
+    <div class="input-group">
+      <select
+        class="form-select mw20"
+        name="sexo"
+        id="select-sexo"
+        aria-label="select-sexo"
+        [(ngModel)]="adminContato.sexoId"
+        (ngModelChange)="onChange()"
+        #sexo="ngModel"
+      >
+        <option [ngValue]="0">Sexo</option>
+        <option *ngFor="let sexo of sexos" [ngValue]="sexo.id">
+          {{ sexo.tipo }}
+        </option>
+      </select>
+    </div>
+    <div class="form-text">Requirido</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="sexo.touched && adminContato.sexoId === 0"
+    >
+      Por favor digite o sexo do profissional.
+    </div>
   </div>
 </div>

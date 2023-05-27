@@ -3,6 +3,8 @@ import { debounceTime, distinctUntilChanged, map, Subject, takeUntil } from 'rxj
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { StaticDataService } from 'src/app/shared/services/static-data.service';
 
+import { Ddd } from '../../interfaces/ddd.interface';
+import { Sexo } from '../../interfaces/sexo.interface';
 import { AdminContato } from '../../models/admin-contato.model';
 
 @Component({
@@ -17,16 +19,17 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   @Output() isValid = new EventEmitter<boolean>();
 
   public cpfText = new Subject<string>();
-  public ddds!: Array<string>;
+  public ddds!: Array<Ddd>;
+  public sexos!: Array<Sexo>;
   public dataDeNascimentoTouched: boolean;
 
   constructor(private staticData: StaticDataService) {
     super();
-
-    this.ddds = this.staticData.getDdds();
   }
 
   ngOnInit(): void {
+    // TODO: Implement Call for DDDs and Sexos
+
     this.cpfText
       .pipe(
         distinctUntilChanged(),
@@ -81,7 +84,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         this.adminContato.nome.length > 0 &&
         !!this.adminContato.sobrenome &&
         this.adminContato.sobrenome.length > 0 &&
-        !!this.adminContato.dataDeNascimento
+        !!this.adminContato.dataDeNascimento &&
+        this.adminContato.sexoId > 0
     );
   }
 }

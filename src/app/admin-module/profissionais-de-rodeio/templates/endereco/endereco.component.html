@@ -99,16 +99,14 @@
       class="form-select"
       name="estado"
       id="select-estado"
-      [(ngModel)]="adminEndereco.estado"
+      [(ngModel)]="adminEndereco.estadoId"
       (ngModelChange)="onChange()"
       #estado="ngModel"
       aria-label="select-estado"
     >
-      <option [ngValue]="'' || null || undefined">
-        Por favor escolha um estado.
-      </option>
-      <option *ngFor="let estado of estados" [ngValue]="estado">
-        {{ estado }}
+      <option [ngValue]="0">Por favor escolha um estado.</option>
+      <option *ngFor="let estado of estados" [ngValue]="estado.id">
+        {{ estado.uf }} - {{ estado.nome }}
       </option>
     </select>
   </div>
