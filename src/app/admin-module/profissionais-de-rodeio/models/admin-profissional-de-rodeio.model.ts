@@ -7,14 +7,14 @@ export class AdminProfissionalDeRodeio {
     this.contato = new AdminContato();
   }
   public id: number;
-  public contato: AdminContato;
-  public endereco: AdminEndereco;
+  public contato!: AdminContato;
+  public endereco!: AdminEndereco;
   public observacoes: string;
   public pis: string;
   public rg: string;
   public pix: string;
   public criado: Date;
-  public mudado: Date;
+  public modificado: Date;
   public ativo: boolean;
   public sindicalizado: boolean;
 }

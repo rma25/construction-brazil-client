@@ -10,6 +10,7 @@ import { DialogService } from 'src/app/shared/modals/dialog/services/dialog.serv
 import { SaveBtnState } from 'src/app/shared/save-button/enums/save-btn-state.enum';
 import { SaveButtonComponent } from 'src/app/shared/save-button/save-button.component';
 import { DateService } from 'src/app/shared/services/date.service';
+import { EstadoService } from 'src/app/shared/services/estado.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
@@ -56,7 +57,8 @@ export class ProfissionaisDeRodeioRowComponent
     private profissionalAdminData: ProfissionaisDeRodeioAdminDataService,
     private dialogService: DialogService,
     private dateService: DateService,
-    private informacocesGeraisService: InformacoesGeraisService
+    private informacocesGeraisService: InformacoesGeraisService,
+    private estadoService: EstadoService
   ) {
     super();
   }
@@ -187,8 +189,10 @@ export class ProfissionaisDeRodeioRowComponent
         message += `${this.profissionalDeRodeio.endereco.cidade} `;
       }
 
-      if (this.profissionalDeRodeio.endereco.estado) {
-        message += `${this.profissionalDeRodeio.endereco.estado} `;
+      const estadoFound = this.estadoService.find(this.profissionalDeRodeio.endereco.estadoId);
+
+      if (estadoFound) {
+        message += `${estadoFound.uf} `;
       }
     } else if (editType === EditType.INFORMACOES_GERAIS) {
       message += `${this.informacocesGeraisService.getStatus(

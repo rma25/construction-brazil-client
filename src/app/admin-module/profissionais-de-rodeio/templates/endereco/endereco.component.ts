@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { concatMap, debounceTime, distinctUntilChanged, map, of, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
-import { ExternalCepDataService } from 'src/app/shared/data/external-cep-data.service';
-import { StaticDataService } from 'src/app/shared/services/static-data.service';
+import { ExternalCepDataService } from 'src/app/shared/data/external/external-cep-data.service';
+import { EstadoService } from 'src/app/shared/services/estado.service';
 
 import { Estado } from '../../interfaces/estado.interface';
 import { AdminEndereco } from '../../models/admin-endereco.model';
@@ -25,16 +25,16 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   public isSindicalizado: boolean;
 
   constructor(
-    private staticDataService: StaticDataService,
+    private estadoService: EstadoService,
     private externalCepDataService: ExternalCepDataService,
     private informacoesGeraisService: InformacoesGeraisService
   ) {
     super();
+
+    this.estados = this.estadoService.getEstados();
   }
 
   ngOnInit(): void {
-    // TODO: Implement call to get Estados
-
     this.informacoesGeraisService.isSindicalizado
       .pipe(takeUntil(this.destroy))
       .subscribe((isSindicalizado) => {
@@ -62,26 +62,15 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
           this.adminEndereco.cep = x.cepInfo.cep;
           this.adminEndereco.cidade = x.cepInfo.localidade;
           this.adminEndereco.complemento = x.cepInfo.complemento;
-          this.adminEndereco.estadoId = this.getEstadoIdFor(x.cepInfo.uf)
+          this.adminEndereco.estadoId = this.estadoService.findEstadoIdFor(
+            x.cepInfo.uf
+          );
           this.adminEndereco.rua = x.cepInfo.logradouro;
           this.adminEndereco.bairro = x.cepInfo.bairro;
         } else {
           this.adminEndereco.cep = x.formattedCep;
         }
       });
-  }
-
-  private getEstadoIdFor(uf: string): number {
-    if (!this.estados || this.estados.length === 0 || !uf || uf.length === 0)
-      return 0;
-
-    const estadoFound = this.estados.find(
-      (x) => x.uf.toLocaleLowerCase() === uf.toLocaleLowerCase()
-    );
-
-    if (!estadoFound) return 0;
-
-    return estadoFound.id;
   }
 
   public formatCEP(cpf?: string): string {

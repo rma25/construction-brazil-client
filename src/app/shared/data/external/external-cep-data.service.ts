@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { ExternalCepInfo } from '../interfaces/external-cep-info.interface';
+import { ExternalCepInfo } from '../../interfaces/external-cep-info.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ExternalCepDataService {

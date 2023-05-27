@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, distinctUntilChanged, map, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
-import { StaticDataService } from 'src/app/shared/services/static-data.service';
+import { DddService } from 'src/app/shared/services/ddd.service';
+import { SexoService } from 'src/app/shared/services/sexo.service';
 
 import { Ddd } from '../../interfaces/ddd.interface';
 import { Sexo } from '../../interfaces/sexo.interface';
@@ -23,13 +24,17 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   public sexos!: Array<Sexo>;
   public dataDeNascimentoTouched: boolean;
 
-  constructor(private staticData: StaticDataService) {
+  constructor(
+    private sexoService: SexoService,
+    private dddService: DddService
+  ) {
     super();
+
+    this.sexos = this.sexoService.getSexos();
+    this.ddds = this.dddService.getDdds();
   }
 
   ngOnInit(): void {
-    // TODO: Implement Call for DDDs and Sexos
-
     this.cpfText
       .pipe(
         distinctUntilChanged(),

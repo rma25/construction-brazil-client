@@ -62,10 +62,10 @@ export class ProfissionaisDeRodeioComponent
     profissionalSample.endereco.cep = '74303-160';
     profissionalSample.endereco.cidade = 'Goiânia';
     profissionalSample.endereco.complemento = '';
-    profissionalSample.endereco.estado = 'GO';
+    profissionalSample.endereco.estadoId = 0;
     profissionalSample.observacoes = 'Testing Observacoes';
     profissionalSample.criado = new Date();
-    profissionalSample.mudado = new Date();
+    profissionalSample.modificado = new Date();
     profissionalSample.ativo = true;
     profissionalSample.sindicalizado = true;
     this.profissionaisDeRodeio.push(profissionalSample);
