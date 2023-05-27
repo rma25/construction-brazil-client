@@ -7,11 +7,13 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SexoDataService {
+  private readonly controller: string = 'Sexo';
+
   constructor(private http: HttpClient) {}
 
   public get(): Observable<Array<Sexo>> {
     return this.http
-      .get<Array<Sexo>>(`${environment.constructionBrazilServerUri}`)
+      .get<Array<Sexo>>(`${environment.constructionBrazilServerUri}/${this.controller}`)
       .pipe(catchError(() => of(new Array<Sexo>())));
   }
 }

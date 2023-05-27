@@ -8,8 +8,8 @@ import { SexoDataService } from '../data/static/sexo-data.service';
 export class SexoService {
   private sexos: Array<Sexo> = new Array<Sexo>();
 
-  constructor(private sexoDataService: SexoDataService) {
-    this.sexoDataService
+  constructor(private sexoData: SexoDataService) {
+    this.sexoData
       .get()
       .pipe(take(1))
       .subscribe((sexos) => (this.sexos = sexos));

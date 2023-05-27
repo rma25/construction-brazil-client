@@ -8,8 +8,8 @@ import { DddDataService } from '../data/static/ddd-data.service';
 export class DddService {
   private ddds: Array<Ddd> = new Array<Ddd>();
 
-  constructor(private dddDataService: DddDataService) {
-    this.dddDataService
+  constructor(private dddData: DddDataService) {
+    this.dddData
       .get()
       .pipe(take(1))
       .subscribe((ddds) => (this.ddds = ddds));

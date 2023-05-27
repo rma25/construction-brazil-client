@@ -9,8 +9,8 @@ import { EstadoDataService } from '../data/static/estado-data.service';
 export class EstadoService {
   private estados: Array<Estado> = new Array<Estado>();
 
-  constructor(private estadoDataService: EstadoDataService) {
-    this.estadoDataService
+  constructor(private estadoData: EstadoDataService) {
+    this.estadoData
       .get()
       .pipe(take(1))
       .subscribe((estados) => (this.estados = estados));
