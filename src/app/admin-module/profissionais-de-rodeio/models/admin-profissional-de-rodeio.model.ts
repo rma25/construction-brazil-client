@@ -17,4 +17,5 @@ export class AdminProfissionalDeRodeio {
   public modificado: Date;
   public ativo: boolean = false;
   public sindicalizado: boolean = false;
+  public profissionalTypeId: number = 0;
 }

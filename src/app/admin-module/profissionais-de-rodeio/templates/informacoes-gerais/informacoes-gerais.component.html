@@ -25,6 +25,35 @@
 </div>
 <!-- This must be unique -->
 <div class="mb-3">
+  <div class="mb-3">
+    <label for="select-profissionalType" class="fw-bold">Tipo de Profissional</label>
+    <div class="input-group">
+      <select
+        class="form-select"
+        name="select-profissionalType"
+        id="select-profissionalType"
+        aria-label="select-profissionalType"
+        [(ngModel)]="adminProfissional.profissionalTypeId"
+        (ngModelChange)="onChange()"
+        #profissionalType="ngModel"
+      >
+        <option [ngValue]="0">Tipo</option>
+        <option
+          *ngFor="let profissionalType of profissionalTypes"
+          [ngValue]="profissionalType.id"
+        >
+          {{ profissionalType.tipo }}
+        </option>
+      </select>
+    </div>
+    <div class="form-text">Requirido</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="profissionalType.touched && adminProfissional.profissionalTypeId === 0"
+    >
+      Por favor escolha o tipo do profissional.
+    </div>
+  </div>
   <label for="inp-pis" class="fw-bold">PIS</label>
   <input
     type="text"

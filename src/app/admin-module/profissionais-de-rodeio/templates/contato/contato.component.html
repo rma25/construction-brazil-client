@@ -171,11 +171,11 @@
     <div class="form-text">64 caracteres máximos</div>
   </div>
   <div class="mb-3">
-    <label for="inp-sexo" class="fw-bold">Sexo</label>
+    <label for="select-sexo" class="fw-bold">Sexo</label>
     <div class="input-group">
       <select
-        class="form-select mw20"
-        name="sexo"
+        class="form-select"
+        name="select-sexo"
         id="select-sexo"
         aria-label="select-sexo"
         [(ngModel)]="adminContato.sexoId"
@@ -193,7 +193,7 @@
       class="text-danger font-italic"
       *ngIf="sexo.touched && adminContato.sexoId === 0"
     >
-      Por favor digite o sexo do profissional.
+      Por favor escolha o sexo do profissional.
     </div>
   </div>
 </div>

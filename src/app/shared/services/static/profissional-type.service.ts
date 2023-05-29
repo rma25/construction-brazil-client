@@ -18,7 +18,7 @@ export class ProfissionalTypeService {
       );
   }
 
-  public getDdds(): Array<ProfissionalType> {
+  public getProfissionalTypes(): Array<ProfissionalType> {
     return this.profissionalTypes.slice();
   }
 }
