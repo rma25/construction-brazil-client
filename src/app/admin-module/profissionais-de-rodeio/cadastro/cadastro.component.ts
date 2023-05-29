@@ -3,8 +3,8 @@ import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.compo
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
-import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';
-import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
+import { ProfissionalAdminDataService } from '../data/profissional-admin-data.service';
+import { AdminProfissional } from '../models/admin-profissional.model';
 
 @Component({
   selector: 'app-cadastro',
@@ -13,22 +13,22 @@ import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodei
 })
 export class CadastroComponent extends AbstractBaseComponent implements OnInit {
   @Output() newProfissionalAdded =
-    new EventEmitter<AdminProfissionalDeRodeio>();
+    new EventEmitter<AdminProfissional>();
 
-  public newProfissional = new AdminProfissionalDeRodeio();
+  public newProfissional = new AdminProfissional();
   public isContatoValid: boolean = false;
   public isEnderecoValid: boolean = false;
 
   constructor(
     public modalService: ModalService,
-    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService,
+    private profissionalSettingsData: ProfissionalAdminDataService,
     private toastService: ToastService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.newProfissional = new AdminProfissionalDeRodeio();
+    this.newProfissional = new AdminProfissional();
   }
 
   public isAddValid(): boolean {

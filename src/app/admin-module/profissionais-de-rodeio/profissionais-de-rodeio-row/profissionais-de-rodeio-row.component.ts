@@ -14,10 +14,10 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 import { EstadoService } from 'src/app/shared/services/static/estado.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
-import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';
+import { ProfissionalAdminDataService } from '../data/profissional-admin-data.service';
 import { EditType } from '../enums/edit-type.enum';
-import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
-import { InformacoesGeraisService } from '../templates/services/informacoes-gerais.service';
+import { AdminProfissional } from '../models/admin-profissional.model';
+import { InformacoesGeraisService } from '../templates/informacoes-gerais/services/informacoes-gerais.service';
 
 @Component({
   selector:
@@ -29,7 +29,7 @@ export class ProfissionaisDeRodeioRowComponent
   extends AbstractBaseComponent
   implements OnInit, ISettingsRow
 {
-  @Input() profissionalDeRodeio!: AdminProfissionalDeRodeio;
+  @Input() profissionalDeRodeio!: AdminProfissional;
 
   @Output() deletedId = new EventEmitter<number>();
   @Output() rowChange = new EventEmitter<RowInfo>();
@@ -48,13 +48,13 @@ export class ProfissionaisDeRodeioRowComponent
   public isInformacoesGeraisChanged: boolean = false;
 
   public changedState = SaveBtnState.CHANGED;
-  public initialProfissionalDeRodeio = new AdminProfissionalDeRodeio();
+  public initialProfissionalDeRodeio = new AdminProfissional();
   public dirty: boolean = false;
 
   constructor(
     public modalService: ModalService,
     private toastService: ToastService,
-    private profissionalAdminData: ProfissionaisDeRodeioAdminDataService,
+    private profissionalAdminData: ProfissionalAdminDataService,
     private dialogService: DialogService,
     private dateService: DateService,
     private informacocesGeraisService: InformacoesGeraisService,

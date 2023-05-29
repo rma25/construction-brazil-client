@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { Classificacao } from '../enums/classificacao.enum';
-import { Status } from '../enums/status.enum';
+import { Classificacao } from '../../enums/classificacao.enum';
+import { Status } from '../../enums/status.enum';
 
 @Injectable({ providedIn: 'root' })
 export class InformacoesGeraisService {

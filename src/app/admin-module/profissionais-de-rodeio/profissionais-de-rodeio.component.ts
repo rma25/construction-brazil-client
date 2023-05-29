@@ -10,8 +10,8 @@ import { SearchFilter } from 'src/app/shared/search/models/search-filter.model';
 import { ISearch } from 'src/app/shared/search/search.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 
-import { ProfissionaisDeRodeioAdminDataService } from './data/profissionais-de-rodeio-admin-data.service';
-import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model';
+import { ProfissionalAdminDataService } from './data/profissional-admin-data.service';
+import { AdminProfissional } from './models/admin-profissional.model';
 import { ProfissionalAdminFilter } from './models/profissional-de-rodeio-admin-filter';
 import { CachedService } from './services/cached.service';
 
@@ -26,7 +26,7 @@ export class ProfissionaisDeRodeioComponent
 {
   private pageChanged = new Subject<PageInfo>();
 
-  public profissionaisDeRodeio: Array<AdminProfissionalDeRodeio>;
+  public profissionaisDeRodeio: Array<AdminProfissional>;
   public searchFilter: SearchFilter;
   public totalPerPage = 10;
   public rowChanges = new Array<RowInfo>();
@@ -36,7 +36,7 @@ export class ProfissionaisDeRodeioComponent
 
   constructor(
     public modalService: ModalService,
-    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService,
+    private profissionalSettingsData: ProfissionalAdminDataService,
     private cachedData: CachedService
   ) {
     super();
@@ -45,56 +45,28 @@ export class ProfissionaisDeRodeioComponent
   ngOnInit() {
     const filter = new ProfissionalAdminFilter();
 
-    if (this.searchFilter) {
-      filter.currentPage = 1;
-    }
+    this.profissionalSettingsData
+      .getAdminTotal(filter)
+      .pipe(
+        concatMap((totalDeProfissionais) => {
+          filter.totalPerPage = this.totalPerPage;
 
-    // TODO: This is temporary until I have the server working
-    this.profissionaisDeRodeio = new Array<AdminProfissionalDeRodeio>();
-    const profissionalSample = new AdminProfissionalDeRodeio();
-    profissionalSample.id = 1;
-    profissionalSample.contato.nome = 'Rodo';
-    profissionalSample.contato.sobrenome = 'Andrade';
-    profissionalSample.contato.cpf = '123.456.731-23';
-    profissionalSample.contato.dataDeNascimento = new Date();
-    profissionalSample.contato.telefone = '12345678';
-    profissionalSample.contato.profissao = 'Faxineiro';
-    profissionalSample.endereco.bairro = 'Setor Sudoeste';
-    profissionalSample.endereco.rua = 'Rua C82';
-    profissionalSample.endereco.cep = '74303-160';
-    profissionalSample.endereco.cidade = 'Goiânia';
-    profissionalSample.endereco.complemento = '';
-    profissionalSample.endereco.estadoId = 0;
-    profissionalSample.observacoes = 'Testing Observacoes';
-    profissionalSample.criado = new Date();
-    profissionalSample.modificado = new Date();
-    profissionalSample.ativo = true;
-    profissionalSample.sindicalizado = true;
-    this.profissionaisDeRodeio.push(profissionalSample);
-    this.isLoading = false;
+          return this.profissionalSettingsData.getAdminPage(filter).pipe(
+            map((profissionaisDeRodeio) => ({
+              totalDeProfissionais,
+              profissionaisDeRodeio,
+            }))
+          );
+        }),
+        takeUntil(this.destroy),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe((x) => {
+        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
+        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
 
-    // this.profissionalSettingsData
-    //   .getTotalAdmin(filter)
-    //   .pipe(
-    //     concatMap((totalDeProfissionais) => {
-    //       filter.totalPerPage = this.totalPerPage;
-
-    //       return this.profissionalSettingsData.getPageAdmin(filter).pipe(
-    //         map((profissionaisDeRodeio) => ({
-    //           totalDeProfissionais,
-    //           profissionaisDeRodeio,
-    //         }))
-    //       );
-    //     }),
-    //     takeUntil(this.destroy),
-    //     finalize(() => (this.isLoading = false))
-    //   )
-    //   .subscribe((x) => {
-    //     this.profissionaisDeRodeio = x.profissionaisDeRodeio;
-    //     this.profissionaisDeRodeio = x.profissionaisDeRodeio;
-
-    //     this.isLoading = false;
-    //   });
+        this.isLoading = false;
+      });
 
     this.paging();
   }
@@ -140,12 +112,12 @@ export class ProfissionaisDeRodeioComponent
               filter.endedOn = this.searchFilter.toDate;
             }
 
-            return this.profissionalSettingsData.getTotalAdmin(filter).pipe(
+            return this.profissionalSettingsData.getAdminTotal(filter).pipe(
               concatMap((totalResults) => {
                 filter.totalPerPage = item.totalPerPage;
                 filter.currentPage = item.pageNumber;
 
-                return this.profissionalSettingsData.getPageAdmin(filter).pipe(
+                return this.profissionalSettingsData.getAdminPage(filter).pipe(
                   map((profissionaisDeRodeio) => ({
                     totalResults,
                     profissionaisDeRodeio,
@@ -158,7 +130,7 @@ export class ProfissionaisDeRodeioComponent
           } else {
             return of({
               totalResults: 0,
-              profissionaisDeRodeio: Array<AdminProfissionalDeRodeio>(),
+              profissionaisDeRodeio: Array<AdminProfissional>(),
               totalPerPage: this.totalPerPage,
               changesSaved: true,
             });
@@ -187,7 +159,7 @@ export class ProfissionaisDeRodeioComponent
       });
   }
 
-  public onProfissionalAdded(newProfissional: AdminProfissionalDeRodeio): void {
+  public onProfissionalAdded(newProfissional: AdminProfissional): void {
     this.totalDeProfissionais++;
 
     // Push to the top of the list of videos

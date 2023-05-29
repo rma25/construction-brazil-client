@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalService } from 'src/app/shared/services/modal.service';
 
-import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodeio.model';
+import { AdminProfissional } from '../models/admin-profissional.model';
 
 @Component({
   selector: 'app-edit-admin-informacoes-gerais',
@@ -9,9 +9,9 @@ import { AdminProfissionalDeRodeio } from '../models/admin-profissional-de-rodei
   styleUrls: ['./edit-admin-informacoes-gerais.component.css'],
 })
 export class EditAdminInformacoesGeraisComponent {
-  @Input() adminProfissional!: AdminProfissionalDeRodeio;
+  @Input() adminProfissional!: AdminProfissional;
   @Output() adminProfissionalChange =
-    new EventEmitter<AdminProfissionalDeRodeio>();
+    new EventEmitter<AdminProfissional>();
 
   @Output() isFormValid = new EventEmitter<boolean>();
 

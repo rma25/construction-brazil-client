@@ -6,7 +6,7 @@ import { EstadoService } from 'src/app/shared/services/static/estado.service';
 
 import { Estado } from '../../interfaces/estado.interface';
 import { AdminEndereco } from '../../models/admin-endereco.model';
-import { InformacoesGeraisService } from '../services/informacoes-gerais.service';
+import { InformacoesGeraisService } from '../informacoes-gerais/services/informacoes-gerais.service';
 
 @Component({
   selector: 'app-endereco',

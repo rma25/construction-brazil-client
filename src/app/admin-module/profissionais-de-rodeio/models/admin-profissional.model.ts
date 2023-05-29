@@ -1,7 +1,7 @@
 import { AdminContato } from './admin-contato.model';
 import { AdminEndereco } from './admin-endereco.model';
 
-export class AdminProfissionalDeRodeio {
+export class AdminProfissional {
   constructor() {
     this.endereco = new AdminEndereco();
     this.contato = new AdminContato();

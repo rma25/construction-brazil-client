@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProfissionalTypeService } from 'src/app/shared/services/static/profissional-type.service';
 
 import { ProfissionalType } from '../../interfaces/profissional-type.interface';
-import { AdminProfissionalDeRodeio } from '../../models/admin-profissional-de-rodeio.model';
-import { InformacoesGeraisService } from '../services/informacoes-gerais.service';
+import { AdminProfissional } from '../../models/admin-profissional.model';
+import { InformacoesGeraisService } from './services/informacoes-gerais.service';
 
 @Component({
   selector: 'app-informacoes-gerais',
@@ -11,9 +11,9 @@ import { InformacoesGeraisService } from '../services/informacoes-gerais.service
   styleUrls: ['./informacoes-gerais.component.css'],
 })
 export class InformacoesGeraisComponent {
-  @Input() adminProfissional!: AdminProfissionalDeRodeio;
+  @Input() adminProfissional!: AdminProfissional;
   @Output() adminProfissionalChange =
-    new EventEmitter<AdminProfissionalDeRodeio>();
+    new EventEmitter<AdminProfissional>();
 
   @Output() isValid = new EventEmitter<boolean>(false);
 
