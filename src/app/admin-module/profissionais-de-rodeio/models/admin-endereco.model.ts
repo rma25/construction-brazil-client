@@ -1,4 +1,5 @@
 export class AdminEndereco {
+  public id: number;
   public rua: string;
   public complemento: string;
   public bairro: string;
