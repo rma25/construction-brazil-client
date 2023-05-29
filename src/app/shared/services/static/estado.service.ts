@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
 import { Estado } from 'src/app/admin-module/profissionais-de-rodeio/interfaces/estado.interface';
 
-import { EstadoDataService } from '../data/static/estado-data.service';
+import { EstadoDataService } from '../../data/static/estado-data.service';
 
 
 @Injectable({ providedIn: 'root' })

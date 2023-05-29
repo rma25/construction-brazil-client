@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { concatMap, debounceTime, distinctUntilChanged, map, of, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ExternalCepDataService } from 'src/app/shared/data/external/external-cep-data.service';
-import { EstadoService } from 'src/app/shared/services/estado.service';
+import { EstadoService } from 'src/app/shared/services/static/estado.service';
 
 import { Estado } from '../../interfaces/estado.interface';
 import { AdminEndereco } from '../../models/admin-endereco.model';

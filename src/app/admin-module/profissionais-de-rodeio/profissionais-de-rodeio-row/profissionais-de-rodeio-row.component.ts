@@ -10,8 +10,8 @@ import { DialogService } from 'src/app/shared/modals/dialog/services/dialog.serv
 import { SaveBtnState } from 'src/app/shared/save-button/enums/save-btn-state.enum';
 import { SaveButtonComponent } from 'src/app/shared/save-button/save-button.component';
 import { DateService } from 'src/app/shared/services/date.service';
-import { EstadoService } from 'src/app/shared/services/estado.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { EstadoService } from 'src/app/shared/services/static/estado.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';

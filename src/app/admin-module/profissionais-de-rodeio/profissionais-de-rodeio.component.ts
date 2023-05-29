@@ -13,6 +13,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 import { ProfissionaisDeRodeioAdminDataService } from './data/profissionais-de-rodeio-admin-data.service';
 import { AdminProfissionalDeRodeio } from './models/admin-profissional-de-rodeio.model';
 import { ProfissionalAdminFilter } from './models/profissional-de-rodeio-admin-filter';
+import { CachedService } from './services/cached.service';
 
 @Component({
   selector: 'app-profissionais-de-rodeio',
@@ -35,7 +36,8 @@ export class ProfissionaisDeRodeioComponent
 
   constructor(
     public modalService: ModalService,
-    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService
+    private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService,
+    private cachedData: CachedService
   ) {
     super();
   }
@@ -107,7 +109,9 @@ export class ProfissionaisDeRodeioComponent
 
           if (this.areThereUnsavedChanges()) {
             return from(
-              this.modalService.openModalComponent(DialogComponent, { centered: true })
+              this.modalService.openModalComponent(DialogComponent, {
+                centered: true,
+              })
             ).pipe(
               concatMap((isYes) => {
                 if (isYes === true) {

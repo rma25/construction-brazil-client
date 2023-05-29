@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { StaticDataService } from 'src/app/shared/services/static-data.service';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionaisDeRodeioAdminDataService } from '../data/profissionais-de-rodeio-admin-data.service';
@@ -17,19 +16,15 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
     new EventEmitter<AdminProfissionalDeRodeio>();
 
   public newProfissional = new AdminProfissionalDeRodeio();
-  public estados = new Array<string>();
   public isContatoValid: boolean = false;
   public isEnderecoValid: boolean = false;
 
   constructor(
     public modalService: ModalService,
     private profissionalSettingsData: ProfissionaisDeRodeioAdminDataService,
-    private toastService: ToastService,
-    private staticDataService: StaticDataService
+    private toastService: ToastService
   ) {
     super();
-
-    this.estados = this.staticDataService.getEstados();
   }
 
   ngOnInit(): void {

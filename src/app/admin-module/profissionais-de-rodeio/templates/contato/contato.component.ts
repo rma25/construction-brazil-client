@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, distinctUntilChanged, map, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
-import { DddService } from 'src/app/shared/services/ddd.service';
-import { SexoService } from 'src/app/shared/services/sexo.service';
+import { DddService } from 'src/app/shared/services/static/ddd.service';
+import { SexoService } from 'src/app/shared/services/static/sexo.service';
 
 import { Ddd } from '../../interfaces/ddd.interface';
 import { Sexo } from '../../interfaces/sexo.interface';

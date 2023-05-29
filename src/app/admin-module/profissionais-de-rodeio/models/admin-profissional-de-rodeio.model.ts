@@ -15,6 +15,6 @@ export class AdminProfissionalDeRodeio {
   public pix: string;
   public criado: Date;
   public modificado: Date;
-  public ativo: boolean;
-  public sindicalizado: boolean;
+  public ativo: boolean = false;
+  public sindicalizado: boolean = false;
 }

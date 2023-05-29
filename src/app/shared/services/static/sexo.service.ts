@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { take } from 'rxjs';
 import { Sexo } from 'src/app/admin-module/profissionais-de-rodeio/interfaces/sexo.interface';
 
-import { SexoDataService } from '../data/static/sexo-data.service';
+import { SexoDataService } from '../../data/static/sexo-data.service';
 
 @Injectable({ providedIn: 'root' })
 export class SexoService {
