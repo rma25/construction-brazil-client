@@ -7,7 +7,7 @@ export const environment = {
   version: '1.0',
   toastColor: 'D4EDDA',
   toastError: 'F88070',
-  constructionBrazilServerUri: 'http://localhost:58425',
+  constructionBrazilServerUri: 'http://localhost:1216',
   preCepUri: 'https://viacep.com.br/ws/',
   postCepUri: '/json'
 };

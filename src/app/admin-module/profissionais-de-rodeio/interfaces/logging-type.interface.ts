@@ -1,4 +1,4 @@
 export interface LoggingType {
   id: number;
-  name: string;
+  nome: string;
 }
