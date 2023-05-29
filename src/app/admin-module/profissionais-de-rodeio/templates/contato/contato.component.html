@@ -125,6 +125,21 @@
     </div>
   </div>
   <div class="mb-3">
+    <label for="inp-email" class="fw-bold">Email</label>
+    <input
+      type="text"
+      id="inp-email"
+      class="form-control"
+      [(ngModel)]="adminContato.email"
+      (ngModelChange)="onChange()"
+      #nome="ngModel"
+      placeholder="Por favor digite o email..."
+      aria-label="inp-email"
+      maxlength="100"
+    />
+    <div class="form-text">256 caracteres máximos</div>
+  </div>
+  <div class="mb-3">
     <label for="inp-telefone" class="fw-bold">Telefone</label>
     <div class="input-group">
       <select
