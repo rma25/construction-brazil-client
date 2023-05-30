@@ -6,7 +6,7 @@ import { ProfissionaisDeRodeioComponent } from './profissionais-de-rodeio/profis
 
 const routes: Routes = [
   { path: '', component: AdminMenuComponent},
-  { path: 'profissionais-de-rodeio', component: ProfissionaisDeRodeioComponent },
+  { path: 'profissionais', component: ProfissionaisDeRodeioComponent },
 ];
 
 @NgModule({

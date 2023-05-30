@@ -1,7 +1,7 @@
 <div class="go-back">
   <app-go-back
     [routePath]="'/admin'"
-    pageTitle="Profissionais de Rodeio Configurações"
+    pageTitle="Profissionais Configurações"
   ></app-go-back>
 </div>
 <app-search
@@ -9,7 +9,7 @@
   [searchDisplay]="{
     searchTextColumns: 'col-sm-12 col-md-8',
     dateFilterColumns: 'col-sm-12 col-md-4',
-    searchTextPlaceholder: 'Pesquise profissionais de rodeio...'
+    searchTextPlaceholder: 'Pesquise por profissionais...'
   }"
 ></app-search>
 <div class="pt-1 h100p flex-col">
@@ -21,7 +21,7 @@
       <fa-icon icon="plus" class="me-2"></fa-icon>
       Cadastrar
     </button>
-    <div class="h5">{{ totalDeProfissionais }} Profissionais de Rodeio</div>
+    <div class="h5">{{ totalDeProfissionais }} Profissionais</div>
   </div>
   <div class="table-responsive scrollbarContent flex-111 tableHeaderFixed">
     <table
@@ -71,7 +71,7 @@
 <ng-template #noProfissionais>
   <app-not-found-message
     [isLoading]="isLoading"
-    name="Profissionais de Rodeio"
+    name="Profissionais"
   ></app-not-found-message>
 </ng-template>
 
