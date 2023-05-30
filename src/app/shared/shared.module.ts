@@ -15,6 +15,7 @@ import {
   faRotateLeft,
   faSave,
   faSearch,
+  faStar,
   faTrashAlt,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
@@ -41,6 +42,7 @@ import { ModalHeaderComponent } from './modals/modal-header/modal-header.compone
 import { NotFoundMessageComponent } from './not-found-message/not-found-message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { RequiredIconComponent } from './required-icon/required-icon.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { SearchComponent } from './search/search.component';
 import { ToastsComponent } from './toasts/toasts.component';
@@ -63,6 +65,7 @@ import { YesNoSwitcherComponent } from './yes-no-switcher/yes-no-switcher.compon
     SaveButtonComponent,
     InlineLoadingIconComponent,
     YesNoSwitcherComponent,
+    RequiredIconComponent,
   ],
   imports: [
     CommonModule,
@@ -93,7 +96,8 @@ import { YesNoSwitcherComponent } from './yes-no-switcher/yes-no-switcher.compon
     SaveButtonComponent,
     SearchComponent,
     DatePickerInputComponent,
-    YesNoSwitcherComponent
+    YesNoSwitcherComponent,
+    RequiredIconComponent
   ],
   entryComponents: [DialogComponent],
 })
@@ -113,7 +117,8 @@ export class SharedModule {
       faXmark,
       faCalendarAlt,
       faHandPointer,
-      faRotateLeft
+      faRotateLeft,
+      faStar
     );
   }
 

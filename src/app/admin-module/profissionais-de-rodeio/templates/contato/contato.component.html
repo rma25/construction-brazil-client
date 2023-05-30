@@ -3,6 +3,7 @@
   <div class="mb-3">
     <!-- Required, Max 11, Must be Unique-->
     <!-- In Order to call the Government's API, the Birthdate is also required along with the CPF -->
+    <app-required-icon></app-required-icon>
     <label for="inp-cpf" class="fw-bold">CPF</label>
     <span
       *ngIf="
@@ -61,15 +62,14 @@
   </div>
   <!-- Required -->
   <div class="mb-3">
+    <app-required-icon></app-required-icon>
     <label
-      [hidden]="!adminContato.dataDeNascimento"
       for="date-picker-data-de-nascimento"
       class="fw-bold"
     >
       Data de Nascimento
     </label>
     <app-date-picker-input
-      [calendarText]="'Data de Nascimento'"
       [(datePicked)]="adminContato.dataDeNascimento"
       (datePickedChange)="dataDeNascimentoTouched = true; onChange()"
       id="date-picker-data-de-nascimento"
@@ -84,6 +84,7 @@
     </div>
   </div>
   <div class="mb-3">
+    <app-required-icon></app-required-icon>
     <label for="inp-nome" class="fw-bold">Nome</label>
     <input
       type="text"
@@ -114,6 +115,7 @@
     </div>
   </div>
   <div class="mb-3">
+    <app-required-icon></app-required-icon>
     <label for="inp-sobrenome" class="fw-bold">Sobrenome</label>
     <input
       type="text"
@@ -141,6 +143,33 @@
       *ngIf="sobrenome.touched && !adminContato.sobrenome"
     >
       Por favor digite o primeiro sobrenome do profissional.
+    </div>
+  </div>
+  <div class="mb-3">
+    <app-required-icon></app-required-icon>
+    <label for="select-sexo" class="fw-bold">Sexo</label>
+    <div class="input-group">
+      <select
+        class="form-select"
+        name="select-sexo"
+        id="select-sexo"
+        aria-label="select-sexo"
+        [(ngModel)]="adminContato.sexoId"
+        (ngModelChange)="onChange()"
+        #sexo="ngModel"
+      >
+        <option [ngValue]="0">Por favor escolha um sexo...</option>
+        <option *ngFor="let sexo of sexos" [ngValue]="sexo.id">
+          {{ sexo.tipo }}
+        </option>
+      </select>
+    </div>
+    <div class="form-text">Requirido</div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="sexo.touched && adminContato.sexoId === 0"
+    >
+      Por favor escolha o sexo do profissional.
     </div>
   </div>
   <div class="mb-3">
@@ -203,31 +232,5 @@
       maxlength="64"
     />
     <div class="form-text">64 caracteres máximos</div>
-  </div>
-  <div class="mb-3">
-    <label for="select-sexo" class="fw-bold">Sexo</label>
-    <div class="input-group">
-      <select
-        class="form-select"
-        name="select-sexo"
-        id="select-sexo"
-        aria-label="select-sexo"
-        [(ngModel)]="adminContato.sexoId"
-        (ngModelChange)="onChange()"
-        #sexo="ngModel"
-      >
-        <option [ngValue]="0">Sexo</option>
-        <option *ngFor="let sexo of sexos" [ngValue]="sexo.id">
-          {{ sexo.tipo }}
-        </option>
-      </select>
-    </div>
-    <div class="form-text">Requirido</div>
-    <div
-      class="text-danger font-italic"
-      *ngIf="sexo.touched && adminContato.sexoId === 0"
-    >
-      Por favor escolha o sexo do profissional.
-    </div>
   </div>
 </div>

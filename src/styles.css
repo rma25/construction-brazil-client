@@ -232,7 +232,11 @@ body {
   color: #fff;
   background-color: #0155d2; /* For browsers that do not support gradients */
   background-image: linear-gradient(to right, #ffc107, #0d6efd);
-  border-color: linear-gradient(to right,  #ffc107, #0d6efd);
+  border-color: linear-gradient(to right, #ffc107, #0d6efd);
+}
+
+.fs-small {
+  font-size: 0.75rem;
 }
 
 app-home,

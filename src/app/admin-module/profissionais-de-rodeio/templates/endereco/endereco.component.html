@@ -2,6 +2,7 @@
   <div class="h5">Endereço</div>
   <!-- This is like a ZIP code in the U.S.-->
   <div class="mb-3">
+    <app-required-icon></app-required-icon>
     <label for="inp-cep" class="fw-bold">CEP</label>
     <input
       type="text"
@@ -104,7 +105,7 @@
       #estado="ngModel"
       aria-label="select-estado"
     >
-      <option [ngValue]="0">Por favor escolha um estado.</option>
+      <option [ngValue]="0">Por favor escolha um estado...</option>
       <option *ngFor="let estado of estados" [ngValue]="estado.id">
         {{ estado.uf }} - {{ estado.nome }}
       </option>
