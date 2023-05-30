@@ -10,10 +10,10 @@ export class ContatoAdminDataService {
 
   constructor(private http: HttpClient) {}
 
-  public isCpfUnique(cpf: string): Observable<boolean> {
+  public isCpfUnique(cpf: string, id: number = 0): Observable<boolean> {
     return this.http
       .get<boolean>(
-        `${environment.constructionBrazilServerUri}/${this.controller}/cpf/${cpf}/IsCpfUnique`
+        `${environment.constructionBrazilServerUri}/${this.controller}/cpf/${cpf}/contato/${id}/IsCpfUnique`
       )
       .pipe(catchError(() => of(false)));
   }

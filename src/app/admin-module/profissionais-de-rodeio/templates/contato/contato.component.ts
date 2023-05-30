@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { debounceTime, distinctUntilChanged, map, Subject, takeUntil } from 'rxjs';
+import { concatMap, debounceTime, distinctUntilChanged, map, of, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { DddService } from 'src/app/shared/services/static/ddd.service';
 import { SexoService } from 'src/app/shared/services/static/sexo.service';
@@ -7,6 +7,7 @@ import { SexoService } from 'src/app/shared/services/static/sexo.service';
 import { Ddd } from '../../interfaces/ddd.interface';
 import { Sexo } from '../../interfaces/sexo.interface';
 import { AdminContato } from '../../models/admin-contato.model';
+import { ContatoAdminDataService } from './data/contato-admin-data.service';
 
 @Component({
   selector: 'app-contato',
@@ -23,10 +24,12 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   public ddds!: Array<Ddd>;
   public sexos!: Array<Sexo>;
   public dataDeNascimentoTouched: boolean;
+  public isCpfUnique: boolean = false;
 
   constructor(
     private sexoService: SexoService,
-    private dddService: DddService
+    private dddService: DddService,
+    private contatoAdminData: ContatoAdminDataService
   ) {
     super();
 
@@ -40,10 +43,20 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         distinctUntilChanged(),
         debounceTime(300),
         map((cpf) => this.formatCPF(cpf)),
+        concatMap((cpf) => {
+          if (!!cpf && cpf.length > 0) {
+            return this.contatoAdminData
+              .isCpfUnique(cpf, this.adminContato.id > 0 ? this.adminContato.id : 0)
+              .pipe(map((isCpfUnique) => ({ isCpfUnique, cpf })));
+          } else {
+            return of({ isCpfUnique: false, cpf });
+          }
+        }),
         takeUntil(this.destroy)
       )
-      .subscribe((cpf) => {
-        this.adminContato.cpf = cpf;
+      .subscribe((x) => {
+        this.adminContato.cpf = x.cpf;
+        this.isCpfUnique = x.isCpfUnique;
       });
   }
 
@@ -90,7 +103,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         !!this.adminContato.sobrenome &&
         this.adminContato.sobrenome.length > 0 &&
         !!this.adminContato.dataDeNascimento &&
-        this.adminContato.sexoId > 0
+        this.adminContato.sexoId > 0 &&
+        this.isCpfUnique
     );
   }
 }

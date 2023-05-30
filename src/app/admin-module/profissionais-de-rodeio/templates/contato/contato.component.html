@@ -4,6 +4,25 @@
     <!-- Required, Max 11, Must be Unique-->
     <!-- In Order to call the Government's API, the Birthdate is also required along with the CPF -->
     <label for="inp-cpf" class="fw-bold">CPF</label>
+    <span
+      *ngIf="
+        !!adminContato.cpf && adminContato.cpf.length > 0 && isCpfUnique;
+        else unavailable
+      "
+      class="text-success ms-2"
+    >
+      <fa-icon icon="check"></fa-icon>
+      Disponível
+    </span>
+    <ng-template #unavailable>
+      <span
+        class="text-danger ms-2"
+        *ngIf="!!adminContato.cpf && adminContato.cpf.length > 0"
+      >
+        <fa-icon icon="times"></fa-icon>
+        Indisponível
+      </span>
+    </ng-template>
     <input
       type="text"
       id="inp-cpf"
