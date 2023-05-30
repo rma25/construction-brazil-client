@@ -9,13 +9,13 @@ export class AdminProfissional {
   public id: number;
   public contato!: AdminContato;
   public endereco!: AdminEndereco;
-  public observacoes: string;
-  public pis: string;
-  public rg: string;
-  public pix: string;
-  public criado: Date;
-  public modificado: Date;
+  public observacoes?: string;
+  public pis?: string;
+  public rg?: string;
+  public pix?: string;
   public ativo: boolean = false;
   public sindicalizado: boolean = false;
   public profissionalTypeId: number = 0;
+  public criado: Date;
+  public modificado?: Date;
 }

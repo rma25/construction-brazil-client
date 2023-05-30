@@ -38,6 +38,9 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Set the initial to true if it's being edited.
+    this.isCpfUnique = this.adminContato.id > 0;
+
     this.cpfText
       .pipe(
         distinctUntilChanged(),

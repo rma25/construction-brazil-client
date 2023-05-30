@@ -4,7 +4,6 @@ import { Estado } from 'src/app/admin-module/profissionais-de-rodeio/interfaces/
 
 import { EstadoDataService } from '../../data/static/estado-data.service';
 
-
 @Injectable({ providedIn: 'root' })
 export class EstadoService {
   private estados: Array<Estado> = new Array<Estado>();
@@ -33,7 +32,7 @@ export class EstadoService {
     return estadoFound.id;
   }
 
-  public find(id: number): Estado | undefined {
-    return this.estados.find((x) => x.id === id);
+  public find(id: number | null): Estado | undefined {
+    return id ? this.estados.find((x) => x.id === id) : undefined;
   }
 }
