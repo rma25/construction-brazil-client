@@ -50,6 +50,7 @@ export class ProfissionaisDeRodeioComponent
       .pipe(
         concatMap((totalDeProfissionais) => {
           filter.totalPerPage = this.totalPerPage;
+          filter.currentPage = 1;
 
           return this.profissionalSettingsData.getAdminPage(filter).pipe(
             map((profissionaisDeRodeio) => ({

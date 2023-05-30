@@ -6,14 +6,14 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ContatoAdminDataService {
-  private readonly controller = 'contato';
+  private readonly controller = 'Contato';
 
   constructor(private http: HttpClient) {}
 
   public isCpfUnique(cpf: string, id: number = 0): Observable<boolean> {
     return this.http
       .get<boolean>(
-        `${environment.constructionBrazilServerUri}/${this.controller}/cpf/${cpf}/contato/${id}/IsCpfUnique`
+        `${environment.constructionBrazilServerUri}/${this.controller}/cpf/${cpf}/id/${id}/IsCpfUnique`
       )
       .pipe(catchError(() => of(false)));
   }

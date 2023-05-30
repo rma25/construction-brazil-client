@@ -9,7 +9,7 @@ import { ProfissionalAdminFilter } from '../models/profissional-de-rodeio-admin-
 
 @Injectable({ providedIn: 'root' })
 export class ProfissionalAdminDataService {
-  private readonly controller = 'profissional';
+  private readonly controller = 'Profissional';
 
   constructor(private http: HttpClient) {}
 
