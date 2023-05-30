@@ -27,8 +27,8 @@
     <table
       class="table table-striped"
       *ngIf="
-        profissionaisDeRodeio &&
-          profissionaisDeRodeio.length > 0 &&
+        adminProfissionals &&
+          adminProfissionals.length > 0 &&
           !isLoading &&
           !isUserPaging;
         else noProfissionais
@@ -36,7 +36,7 @@
     >
       <thead class="table-dark">
         <tr>
-          <th scope="col">{{ profissionaisDeRodeio.length }} Linhas</th>
+          <th scope="col">{{ adminProfissionals.length }} Linhas</th>
           <th scope="col"></th>
           <th scope="col"></th>
           <th scope="col">Contato</th>
@@ -47,9 +47,9 @@
       </thead>
       <tbody>
         <tr
-          *ngFor="let profissionalDeRodeio of profissionaisDeRodeio"
+          *ngFor="let adminProfissional of adminProfissionals"
           app-profissionais-de-rodeio-row
-          [profissionalDeRodeio]="profissionalDeRodeio"
+          [adminProfissional]="adminProfissional"
           (deletedId)="onRowRemoved($event)"
           (rowChange)="onRowChanges($event)"
         ></tr>
@@ -60,8 +60,8 @@
   <app-pagination
     *ngIf="
       totalDeProfissionais > 0 &&
-      profissionaisDeRodeio &&
-      profissionaisDeRodeio.length > 0
+      adminProfissionals &&
+      adminProfissionals.length > 0
     "
     [totalCollectionSize]="totalDeProfissionais"
     (pageChanged)="onPageChange($event)"

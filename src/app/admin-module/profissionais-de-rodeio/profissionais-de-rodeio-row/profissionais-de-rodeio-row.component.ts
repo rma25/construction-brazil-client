@@ -29,7 +29,7 @@ export class ProfissionaisDeRodeioRowComponent
   extends AbstractBaseComponent
   implements OnInit, ISettingsRow
 {
-  @Input() profissionalDeRodeio!: AdminProfissional;
+  @Input() adminProfissional!: AdminProfissional;
 
   @Output() deletedId = new EventEmitter<number>();
   @Output() rowChange = new EventEmitter<RowInfo>();
@@ -65,12 +65,12 @@ export class ProfissionaisDeRodeioRowComponent
 
   ngOnInit(): void {
     this.initialProfissionalDeRodeio = JSON.parse(
-      JSON.stringify(this.profissionalDeRodeio)
+      JSON.stringify(this.adminProfissional)
     );
   }
 
   public onRevertChanges(): void {
-    this.profissionalDeRodeio = JSON.parse(
+    this.adminProfissional = JSON.parse(
       JSON.stringify(this.initialProfissionalDeRodeio)
     );
 
@@ -105,7 +105,7 @@ export class ProfissionaisDeRodeioRowComponent
         concatMap((isYes) => {
           if (isYes === true) {
             return this.profissionalAdminData.delete(
-              this.profissionalDeRodeio.id
+              this.adminProfissional.id
             );
           } else {
             return of(false);
@@ -116,7 +116,7 @@ export class ProfissionaisDeRodeioRowComponent
       .subscribe((wasDeleted) => {
         if (wasDeleted === true) {
           // Let the parent component what id has been deleted
-          this.deletedId.emit(this.profissionalDeRodeio.id);
+          this.deletedId.emit(this.adminProfissional.id);
 
           this.toastService.toasts.next({
             httpStatusCode: 200,
@@ -133,7 +133,7 @@ export class ProfissionaisDeRodeioRowComponent
 
   public onPreSave(): Observable<boolean> {
     return this.profissionalAdminData
-      .update(this.profissionalDeRodeio)
+      .update(this.adminProfissional)
       .pipe(takeUntil(this.destroy));
   }
 
@@ -153,7 +153,7 @@ export class ProfissionaisDeRodeioRowComponent
 
   private updateParent(isSaved: boolean): void {
     this.rowChange.emit({
-      row: this.profissionalDeRodeio,
+      row: this.adminProfissional,
       isSaved,
       isValid: this.isRowValid(),
     });
@@ -162,12 +162,12 @@ export class ProfissionaisDeRodeioRowComponent
   public onUpdateSaveBtn(state: SaveBtnState): void {
     if (state === SaveBtnState.SAVED) {
       this.dirty = false;
-      this.initialProfissionalDeRodeio = this.profissionalDeRodeio;
+      this.initialProfissionalDeRodeio = this.adminProfissional;
 
       this.updateParent(true);
     } else if (state === SaveBtnState.CHANGED) {
       this.dirty =
-        this.profissionalDeRodeio !== this.initialProfissionalDeRodeio;
+        this.adminProfissional !== this.initialProfissionalDeRodeio;
 
       this.updateParent(false);
     }
@@ -185,20 +185,20 @@ export class ProfissionaisDeRodeioRowComponent
     if (editType === EditType.CONTATO) {
       message += this.getProfissionalFullname();
     } else if (editType === EditType.ENDERECO) {
-      if (this.profissionalDeRodeio.endereco.cidade) {
-        message += `${this.profissionalDeRodeio.endereco.cidade} `;
+      if (this.adminProfissional.endereco.cidade) {
+        message += `${this.adminProfissional.endereco.cidade} `;
       }
 
-      const estadoFound = this.estadoService.find(this.profissionalDeRodeio.endereco.estadoId);
+      const estadoFound = this.estadoService.find(this.adminProfissional.endereco.estadoId);
 
       if (estadoFound) {
         message += `${estadoFound.uf} `;
       }
     } else if (editType === EditType.INFORMACOES_GERAIS) {
       message += `${this.informacocesGeraisService.getStatus(
-        this.profissionalDeRodeio.ativo
+        this.adminProfissional.ativo
       )} ${this.informacocesGeraisService.getClassificacao(
-        this.profissionalDeRodeio.sindicalizado
+        this.adminProfissional.sindicalizado
       )}`;
     }
     return message;
@@ -209,37 +209,37 @@ export class ProfissionaisDeRodeioRowComponent
     if (editType === EditType.CONTATO) {
       if (this.isContatoChanged && this.dirty) {
         btnClass += `${
-          this.profissionalDeRodeio.ativo
+          this.adminProfissional.ativo
             ? BtnClass.CHANGED_ACTIVE
             : BtnClass.CHANGED_INACTIVE
         }`;
       } else {
         btnClass += `${
-          this.profissionalDeRodeio.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
+          this.adminProfissional.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
         }`;
       }
     } else if (editType === EditType.ENDERECO) {
       if (this.isEnderecoChanged && this.dirty) {
         btnClass += `${
-          this.profissionalDeRodeio.ativo
+          this.adminProfissional.ativo
             ? BtnClass.CHANGED_ACTIVE
             : BtnClass.CHANGED_INACTIVE
         }`;
       } else {
         btnClass += `${
-          this.profissionalDeRodeio.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
+          this.adminProfissional.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
         }`;
       }
     } else if (editType === EditType.INFORMACOES_GERAIS) {
       if (this.isInformacoesGeraisChanged && this.dirty) {
         btnClass += `${
-          this.profissionalDeRodeio.ativo
+          this.adminProfissional.ativo
             ? BtnClass.CHANGED_ACTIVE
             : BtnClass.CHANGED_INACTIVE
         }`;
       } else {
         btnClass += `${
-          this.profissionalDeRodeio.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
+          this.adminProfissional.ativo ? BtnClass.DEFAULT : BtnClass.INACTIVE
         }`;
       }
     }
@@ -250,12 +250,12 @@ export class ProfissionaisDeRodeioRowComponent
   public getProfissionalFullname(): string {
     let fullname = '';
 
-    if (this.profissionalDeRodeio.contato.nome) {
-      fullname += `${this.profissionalDeRodeio.contato.nome} `;
+    if (this.adminProfissional.contato.nome) {
+      fullname += `${this.adminProfissional.contato.nome} `;
     }
 
-    if (this.profissionalDeRodeio.contato.sobrenome) {
-      fullname += `${this.profissionalDeRodeio.contato.sobrenome} `;
+    if (this.adminProfissional.contato.sobrenome) {
+      fullname += `${this.adminProfissional.contato.sobrenome} `;
     }
 
     return fullname;

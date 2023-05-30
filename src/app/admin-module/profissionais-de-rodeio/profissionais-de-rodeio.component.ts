@@ -26,7 +26,7 @@ export class ProfissionaisDeRodeioComponent
 {
   private pageChanged = new Subject<PageInfo>();
 
-  public profissionaisDeRodeio: Array<AdminProfissional>;
+  public adminProfissionals: Array<AdminProfissional>;
   public searchFilter: SearchFilter;
   public totalPerPage = 10;
   public rowChanges = new Array<RowInfo>();
@@ -63,8 +63,8 @@ export class ProfissionaisDeRodeioComponent
         finalize(() => (this.isLoading = false))
       )
       .subscribe((x) => {
-        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
-        this.profissionaisDeRodeio = x.profissionaisDeRodeio;
+        this.adminProfissionals = x.profissionaisDeRodeio;
+        this.adminProfissionals = x.profissionaisDeRodeio;
 
         this.isLoading = false;
       });
@@ -146,7 +146,7 @@ export class ProfissionaisDeRodeioComponent
       .subscribe((items) => {
         if (items) {
           this.totalDeProfissionais = items.totalResults;
-          this.profissionaisDeRodeio = items.profissionaisDeRodeio;
+          this.adminProfissionals = items.profissionaisDeRodeio;
           this.totalPerPage = items.totalPerPage;
 
           if (items.changesSaved) {
@@ -164,7 +164,7 @@ export class ProfissionaisDeRodeioComponent
     this.totalDeProfissionais++;
 
     // Push to the top of the list of videos
-    this.profissionaisDeRodeio.unshift(newProfissional);
+    this.adminProfissionals.unshift(newProfissional);
   }
 
   public onSearch(searchFilter: SearchFilter): void {
@@ -203,7 +203,7 @@ export class ProfissionaisDeRodeioComponent
     ).pipe(takeUntil(this.destroy));
   }
 
-  public onRowChanges(change: RowInfo) {
+  public onRowChanges(change: RowInfo): void {
     if (change) {
       if (change.isSaved) {
         this.rowChanges = this.rowChanges.filter(
@@ -219,7 +219,7 @@ export class ProfissionaisDeRodeioComponent
   }
 
   public onRowRemoved(id: number): void {
-    this.profissionaisDeRodeio = this.profissionaisDeRodeio.filter(
+    this.adminProfissionals = this.adminProfissionals.filter(
       (x) => x.id !== id
     );
     // Reduce the total number of items, until the new data is picked up again
