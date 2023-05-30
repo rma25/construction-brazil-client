@@ -12,9 +12,6 @@ export class AppInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    request = request.clone({ params: request.params.delete('NO_TOKEN') });
-    debugger;
-
     return next.handle(
       request.clone({
         setHeaders: {
