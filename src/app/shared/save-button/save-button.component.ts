@@ -3,6 +3,7 @@ import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { finalize, Observable, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
+import { ToastTimer } from '../toasts/enums/toast-timer.enum';
 import { ToastType } from '../toasts/enums/toast-type.enum';
 import { ToastService } from '../toasts/services/toast.service';
 import { SaveBtnClass } from './enums/save-btn-class.enum';
@@ -84,7 +85,7 @@ export class SaveButtonComponent
         httpStatusCode: 500,
         header: ToastType.BUG,
         body: 'Não foi possível salvar. Por favor entre em contato com o administrador.',
-        delay: 3000,
+        delay: ToastTimer.DEFAULT,
         type: ToastType.BUG,
       });
     }
@@ -94,19 +95,21 @@ export class SaveButtonComponent
         takeUntil(this.destroy),
         finalize(() => (this.isSaving = false))
       )
-      .subscribe((x) => {
-        this.dataRequestResult.emit(x);
+      .subscribe((saved) => {
+        this.dataRequestResult.emit(saved);
 
         this.isSaving = false;
         this.onUpdateSaveBtn(SaveBtnState.SAVED);
 
-        this.toastService.triggerToast({
-          httpStatusCode: 200,
-          header: ToastType.SUCCESS,
-          body: 'Mudanças salvado com sucesso.',
-          delay: 3000,
-          type: ToastType.SUCCESS,
-        });
+        if (saved === true) {
+          this.toastService.triggerToast({
+            httpStatusCode: 200,
+            header: ToastType.SUCCESS,
+            body: 'Mudanças salvada com sucesso.',
+            delay: ToastTimer.DEFAULT,
+            type: ToastType.SUCCESS,
+          });
+        }
       });
   }
 

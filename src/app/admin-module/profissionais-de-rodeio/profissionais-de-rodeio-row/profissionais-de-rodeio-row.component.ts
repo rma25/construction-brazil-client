@@ -12,6 +12,7 @@ import { SaveButtonComponent } from 'src/app/shared/save-button/save-button.comp
 import { DateService } from 'src/app/shared/services/date.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { EstadoService } from 'src/app/shared/services/static/estado.service';
+import { ToastTimer } from 'src/app/shared/toasts/enums/toast-timer.enum';
 import { ToastType } from 'src/app/shared/toasts/enums/toast-type.enum';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
@@ -120,8 +121,8 @@ export class ProfissionaisDeRodeioRowComponent
           this.toastService.triggerToast({
             httpStatusCode: 200,
             header: 'Successo',
-            body: 'Profissional de Rodeio deletado.',
-            delay: 3000,
+            body: 'Profissional foi deletado.',
+            delay: ToastTimer.DEFAULT,
             type: ToastType.SUCCESS,
           });
 
@@ -137,16 +138,8 @@ export class ProfissionaisDeRodeioRowComponent
       .pipe(takeUntil(this.destroy));
   }
 
-  public onSaved(isUpdated: boolean): void {
-    if (isUpdated === true) {
-      this.toastService.triggerToast({
-        httpStatusCode: 200,
-        header: 'Successo',
-        body: 'Mudanças foram salvas.',
-        delay: 3000,
-        type: ToastType.SUCCESS,
-      });
-
+  public onSaved(saved: boolean): void {
+    if (saved === true) {
       // Update save button
       this.onUpdateSaveBtn(SaveBtnState.SAVED);
     }

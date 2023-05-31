@@ -35,28 +35,34 @@ export class ToastsComponent extends AbstractBaseComponent implements OnInit {
       .pipe(
         filter((toast) => !!toast),
         map((toast) => {
-          const timer = new ToastTimer(
-            // Initial progress bar value 100%
-            100
-          );
-          2;
-          return { timer, toast };
+          if (toast) {
+            const timer = new ToastTimer(
+              // Initial progress bar value 100%
+              100
+            );
+            2;
+            return { timer, toast };
+          } else {
+            return undefined;
+          }
         }),
         takeUntil(this.destroy)
       )
-      .subscribe((filteredToasts) => {
-        this.filteredToasts.push(filteredToasts);
+      .subscribe((filteredToast) => {
+        if (filteredToast) {
+          this.filteredToasts.push(filteredToast);
 
-        // Start countdown for progress bar
-        this.filteredToasts.forEach((x) => {
-          x.timer.interval = setInterval(() => {
-            if (x.timer.timeLeft > 0) {
-              // Seconds = Delay / 1000
-              // ProgressBar Percentage = 100(%) / Seconds
-              x.timer.timeLeft -= 100 / (x.toast.delay / 1000);
-            }
-          }, 1000);
-        });
+          // Start countdown for progress bar
+          this.filteredToasts.forEach((x) => {
+            x.timer.interval = setInterval(() => {
+              if (x.timer.timeLeft > 0) {
+                // Seconds = Delay / 1000
+                // ProgressBar Percentage = 100(%) / Seconds
+                x.timer.timeLeft -= 100 / (x.toast.delay / 1000);
+              }
+            }, 1000);
+          });
+        }
       });
   }
 

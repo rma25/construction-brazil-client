@@ -10,7 +10,7 @@ import { Toast } from '../interface/toast.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-  private toastSource = new BehaviorSubject<Toast>({} as Toast);
+  private toastSource = new BehaviorSubject<Toast | undefined>(undefined);
 
   public toasts = this.toastSource.asObservable();
 

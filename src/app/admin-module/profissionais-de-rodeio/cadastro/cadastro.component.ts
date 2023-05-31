@@ -56,7 +56,7 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
             httpStatusCode: 200,
             header: ToastType.SUCCESS,
             body: 'Profissional cadastrado com successo.',
-            delay: 3000,
+            delay: ToastTimer.DEFAULT,
             type: ToastType.SUCCESS,
           });
         }
