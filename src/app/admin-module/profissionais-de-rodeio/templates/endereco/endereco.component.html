@@ -9,7 +9,7 @@
       id="inp-cep"
       class="form-control"
       [(ngModel)]="adminEndereco.cep"
-      (ngModelChange)="onChange()"
+      (ngModelChange)="onChange(); triggerCepCheck()"
       (input)="onCepInput($event.target)"
       #cep="ngModel"
       placeholder="Por favor digite o CEP..."

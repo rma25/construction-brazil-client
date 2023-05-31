@@ -29,7 +29,7 @@
       id="inp-cpf"
       class="form-control"
       [(ngModel)]="adminContato.cpf"
-      (ngModelChange)="onChange()"
+      (ngModelChange)="onChange(); triggerCpfCheck()"
       (input)="onCpfInput($event.target)"
       #cpf="ngModel"
       placeholder="Por favor digite o CPF..."

@@ -49,7 +49,10 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         concatMap((cpf) => {
           if (!!cpf && cpf.length > 0) {
             return this.contatoAdminData
-              .isCpfUnique(cpf, this.adminContato.id > 0 ? this.adminContato.id : 0)
+              .isCpfUnique(
+                cpf,
+                this.adminContato.id > 0 ? this.adminContato.id : 0
+              )
               .pipe(map((isCpfUnique) => ({ isCpfUnique, cpf })));
           } else {
             return of({ isCpfUnique: false, cpf });
@@ -95,6 +98,10 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
     }
 
     this.cpfText.next(cpfText);
+  }
+
+  public triggerCpfCheck(): void {
+    this.cpfText.next(this.adminContato.cpf);
   }
 
   public onChange(): void {

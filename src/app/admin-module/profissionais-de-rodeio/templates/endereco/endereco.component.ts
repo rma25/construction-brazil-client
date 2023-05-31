@@ -44,7 +44,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
     this.cepText
       .pipe(
         distinctUntilChanged(),
-        debounceTime(300),
+        debounceTime(100),
         map((cep) => this.formatCEP(cep)),
         concatMap((formattedCep) => {
           if (formattedCep && formattedCep.length === 9) {
@@ -113,5 +113,9 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
     this.isValid.emit(
       !!this.adminEndereco.cep && this.adminEndereco.cep.length === 9
     );
+  }
+
+  public triggerCepCheck(): void {
+    this.cepText.next(this.adminEndereco.cep);
   }
 }
