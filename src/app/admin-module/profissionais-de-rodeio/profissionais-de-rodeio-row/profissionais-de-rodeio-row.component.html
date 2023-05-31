@@ -59,7 +59,7 @@
     <span class="fw-bold">Adicionado: </span>
     <span> {{ getFormattedDate(adminProfissional.criado) }}</span>
   </div>
-  <div>
+  <div *ngIf="!isMinDate(adminProfissional.modificado)">
     <fa-icon icon="calendar-alt" class="me-2"></fa-icon>
     <span class="fw-bold">Modificado: </span>
     <span> {{ getFormattedDate(adminProfissional.modificado) }}</span>

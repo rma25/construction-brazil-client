@@ -179,6 +179,10 @@ export class ProfissionaisDeRodeioRowComponent
     return this.dateService.getFormattedDate(date);
   }
 
+  public isMinDate(date: any): boolean {
+    return this.dateService.isMinDate(date);
+  }
+
   public getEditMessage(editType: EditType): string {
     let message = 'Editar ';
 
