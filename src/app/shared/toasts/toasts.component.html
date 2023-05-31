@@ -21,21 +21,21 @@
       style="font-size: 1rem"
       [ngClass]="{
         'd-inline-flex': true,
-        'text-capitalize': toast.toast.type === types.ERROR
+        'text-capitalize': toast.toast.type === errorType
       }"
     >
       <div
         [innerHTML]="toast.toast.body"
         [ngClass]="{
           'text-wrap': true,
-          'text-dark': toast.toast.type === types.WARNING,
-          'text-light': toast.toast.type !== types.WARNING
+          'text-dark': toast.toast.type === warningType,
+          'text-light': toast.toast.type !== warningType
         }"
       ></div>
     </div>
     <div class="pt-2">
       <ngb-progressbar
-        *ngIf="toast.toast.type === types.WARNING; else progressBar"
+        *ngIf="toast.toast.type === warningType; else progressBar"
         type="dark"
         [value]="toast.timer.timeLeft"
         height=".5rem"

@@ -23,7 +23,8 @@ class ToastTimer {
 })
 export class ToastsComponent extends AbstractBaseComponent implements OnInit {
   public filteredToasts = new Array<{ timer: ToastTimer; toast: Toast }>();
-  public types = ToastType;
+  public warningType: ToastType.WARNING = ToastType.WARNING;
+  public errorType: ToastType.ERROR = ToastType.ERROR;
 
   constructor(public toastService: ToastService) {
     super();

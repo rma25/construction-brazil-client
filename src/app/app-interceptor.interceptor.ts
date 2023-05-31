@@ -7,6 +7,8 @@ import { ToastService } from './shared/toasts/services/toast.service';
 
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
+  private isServerClosed: boolean = false;
+
   constructor(private toastService: ToastService) {}
 
   public intercept(
@@ -24,7 +26,7 @@ export class AppInterceptor implements HttpInterceptor {
       )
       .pipe(
         tap((event) => {
-          if (event.type === 0) {
+          if (!this.isServerClosed && event.type === 0) {
             this.toastService.triggerToast({
               httpStatusCode: 0,
               header: ToastType.ERROR,
@@ -32,10 +34,10 @@ export class AppInterceptor implements HttpInterceptor {
               delay: 3000,
               type: ToastType.ERROR,
             });
-          } else if (event instanceof HttpResponse && event.status !== 200) {
-            debugger;
 
-            if (event.status === 0) {
+            this.isServerClosed = true;
+          } else if (event instanceof HttpResponse && event.status !== 200) {
+            if (!this.isServerClosed && event.status === 0) {
               this.toastService.triggerToast({
                 httpStatusCode: event.status,
                 header: ToastType.ERROR,
@@ -43,6 +45,8 @@ export class AppInterceptor implements HttpInterceptor {
                 delay: 3000,
                 type: ToastType.ERROR,
               });
+
+              this.isServerClosed = true;
             } else if (event.status === 500) {
               this.toastService.triggerToast({
                 httpStatusCode: event.status,
@@ -51,6 +55,10 @@ export class AppInterceptor implements HttpInterceptor {
                 delay: 3000,
                 type: ToastType.BUG,
               });
+
+              this.isServerClosed = false;
+            } else {
+              this.isServerClosed = false;
             }
           }
         })
