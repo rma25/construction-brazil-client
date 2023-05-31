@@ -60,7 +60,7 @@
     *ngIf="searchDisplay?.dateFilterColumns"
   >
     <div class="input-group">
-      <label class="input-group-text text-light bg-primary" for="dateFilter">
+      <label class="input-group-text text-light bg-primary" for="select-search-dateFilter">
         Filtro de Data:
       </label>
       <select
@@ -72,7 +72,7 @@
               : ''
         }"
         class="form-select"
-        name="dateFilter"
+        name="select-search-dateFilter"
         [(ngModel)]="searchFilter.dateFilterOption"
         (change)="onSearch()"
         id="select-search-dateFilter"

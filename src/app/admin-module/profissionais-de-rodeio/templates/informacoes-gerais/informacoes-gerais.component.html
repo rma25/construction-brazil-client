@@ -5,6 +5,7 @@
       <label for="inp-ativo" class="fw-bold">Ativo?</label>
       <app-yes-no-switcher
         aria-label="inp-ativo"
+        id="inp-ativo"
         [(yesNo)]="adminProfissional.ativo"
         (yesNoChange)="onChange()"
       ></app-yes-no-switcher>
@@ -13,6 +14,7 @@
       <label for="inp-sindicalizado" class="fw-bold">Sindicalizado?</label>
       <app-yes-no-switcher
         aria-label="inp-sindicalizado"
+        id="inp-sindicalizado"
         [yesNo]="adminProfissional.sindicalizado"
         (yesNoChange)="
           adminProfissional.sindicalizado = $event;
@@ -26,9 +28,9 @@
 <!-- This must be unique -->
 <div class="mb-3">
   <app-required-icon></app-required-icon>
-  <label for="select-profissionalType" class="fw-bold"
-    >Tipo de Profissional</label
-  >
+  <label for="select-profissionalType" class="fw-bold">
+    Tipo de Profissional
+  </label>
   <div class="input-group">
     <select
       class="form-select"
