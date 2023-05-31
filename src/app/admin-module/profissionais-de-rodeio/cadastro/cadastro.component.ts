@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { ToastTimer } from 'src/app/shared/toasts/enums/toast-timer.enum';
 import { ToastType } from 'src/app/shared/toasts/enums/toast-type.enum';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
