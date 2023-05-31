@@ -24,8 +24,8 @@
     (pageChange)="onPageChange($event)"
     size="{{ size ? size : 'md' }}"
   >
-    <ng-template ngbPaginationPrevious>Prev</ng-template>
-    <ng-template ngbPaginationNext> Next </ng-template>
+    <ng-template ngbPaginationPrevious>Anterior</ng-template>
+    <ng-template ngbPaginationNext> Próxima </ng-template>
   </ngb-pagination>
 
   <div class="ms-3">
@@ -36,9 +36,9 @@
       [(ngModel)]="totalPerPageFilter"
       (change)="onPageChange(currentPage)"
     >
-      <option [ngValue]="10" [defaultSelected]="true">10 Per Page</option>
-      <option [ngValue]="25">25 Per Page</option>
-      <option [ngValue]="50">50 Per Page</option>
+      <option [ngValue]="25" [defaultSelected]="true">25 Por Página</option>
+      <option [ngValue]="50">50 Por Página</option>
+      <option [ngValue]="100">100 Por Página</option>
     </select>
   </div>
 </div>

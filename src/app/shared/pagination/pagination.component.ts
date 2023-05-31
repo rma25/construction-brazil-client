@@ -16,12 +16,12 @@ export class PaginationComponent implements OnInit {
   @Input() totalCollectionSize: number;
   @Input() paginationName: string;
   @Input() size: string;
-  @Input() maxSize: number = 10;
+  @Input() maxSize: number = 25;
 
   @Output() pageChanged = new EventEmitter<PageInfo>();
 
   public currentPage = 1;
-  public totalPerPageFilter = 10;
+  public totalPerPageFilter = 25;
 
   constructor(private paginationService: PaginationService) {}
 
