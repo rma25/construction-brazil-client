@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { ToastType } from 'src/app/shared/toasts/enums/toast-type.enum';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionalAdminDataService } from '../data/profissional-admin-data.service';
@@ -51,11 +52,12 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
             JSON.parse(JSON.stringify(this.newProfissional))
           );
 
-          this.toastService.toasts.next({
+          this.toastService.triggerToast({
             httpStatusCode: 200,
-            header: 'Successo',
+            header: ToastType.SUCCESS,
             body: 'Profissional cadastrado com successo.',
             delay: 3000,
+            type: ToastType.SUCCESS,
           });
         }
 

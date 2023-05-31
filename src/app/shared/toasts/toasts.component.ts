@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IconName } from '@fortawesome/free-solid-svg-icons';
-import { map, takeUntil } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
+import { ToastType } from './enums/toast-type.enum';
 import { Toast } from './interface/toast.interface';
 import { ToastService } from './services/toast.service';
 
@@ -22,7 +22,8 @@ class ToastTimer {
   styleUrls: ['./toasts.component.css'],
 })
 export class ToastsComponent extends AbstractBaseComponent implements OnInit {
-  public filteredToasts: { timer: ToastTimer; toast: Toast }[] = [];
+  public filteredToasts = new Array<{ timer: ToastTimer; toast: Toast }>();
+  public types = ToastType;
 
   constructor(public toastService: ToastService) {
     super();
@@ -31,31 +32,30 @@ export class ToastsComponent extends AbstractBaseComponent implements OnInit {
   ngOnInit() {
     this.toastService.toasts
       .pipe(
-        map((toast, i) => {
+        filter((toast) => !!toast),
+        map((toast) => {
           const timer = new ToastTimer(
             // Initial progress bar value 100%
             100
           );
-
+          2;
           return { timer, toast };
         }),
         takeUntil(this.destroy)
       )
       .subscribe((filteredToasts) => {
-        if (filteredToasts) {
-          this.filteredToasts.push(filteredToasts);
+        this.filteredToasts.push(filteredToasts);
 
-          // Start countdown for progress bar
-          this.filteredToasts.forEach((x) => {
-            x.timer.interval = setInterval(() => {
-              if (x.timer.timeLeft > 0) {
-                // Seconds = Delay / 1000
-                // ProgressBar Percentage = 100(%) / Seconds
-                x.timer.timeLeft -= 100 / (x.toast.delay / 1000);
-              }
-            }, 1000);
-          });
-        }
+        // Start countdown for progress bar
+        this.filteredToasts.forEach((x) => {
+          x.timer.interval = setInterval(() => {
+            if (x.timer.timeLeft > 0) {
+              // Seconds = Delay / 1000
+              // ProgressBar Percentage = 100(%) / Seconds
+              x.timer.timeLeft -= 100 / (x.toast.delay / 1000);
+            }
+          }, 1000);
+        });
       });
   }
 
@@ -67,27 +67,5 @@ export class ToastsComponent extends AbstractBaseComponent implements OnInit {
     this.filteredToasts = this.filteredToasts.filter(
       (filteredToast) => filteredToast !== toastInfo
     );
-  }
-
-  public getToastIcon(filteredToast: {
-    timer: ToastTimer;
-    toast: Toast;
-  }): IconName {
-    if (filteredToast.toast.httpStatusCode === 500) return 'bug';
-    else if (filteredToast.toast.isDanger || filteredToast.toast.isWarning)
-      return 'exclamation-triangle';
-    else return 'check';
-  }
-
-  public getToastIconClass(filteredToast: {
-    timer: ToastTimer;
-    toast: Toast;
-  }): string {
-    if (filteredToast.toast.isDanger || filteredToast.toast.isWarning)
-      return 'text-warning';
-    else if (!filteredToast.toast.isDanger && !filteredToast.toast.isWarning)
-      return 'text-success';
-    else if (filteredToast.toast.httpStatusCode === 500) return 'text-danger';
-    else return '';
   }
 }

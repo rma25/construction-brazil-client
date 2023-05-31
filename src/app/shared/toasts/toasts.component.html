@@ -1,60 +1,52 @@
 <div class="toastStyle">
   <ngb-toast
-    *ngFor="let filteredToast of filteredToasts"
-    [ngClass]="{
-      'bg-warning': filteredToast.toast.isWarning,
-      'bg-danger':
-        filteredToast.toast.isDanger && !filteredToast.toast.isWarning,
-      'bg-success':
-        !filteredToast.toast.isDanger && !filteredToast.toast.isWarning,
-      'text-light': true,
-      rounded: true,
-      border: true
-    }"
+    *ngFor="let toast of filteredToasts"
+    [ngClass]="toastService.getToastBgClass(toast.toast.type)"
     [autohide]="true"
-    [delay]="filteredToast.toast.delay || 5000"
-    (hide)="onHideToast(filteredToast)"
+    [delay]="toast.toast.delay || 5000"
+    (hide)="onHideToast(toast)"
   >
     <ng-template ngbToastHeader>
       <fa-icon
         style="font-size: 1.25rem !important"
-        [ngClass]="['me-2', getToastIconClass(filteredToast)]"
-        [icon]="getToastIcon(filteredToast)"
+        [ngClass]="['me-2', toastService.getToastTextClass(toast.toast.type)]"
+        [icon]="toastService.getToastIcon(toast.toast.type)"
       ></fa-icon>
       <strong class="mx-1">
-        {{ filteredToast.toast.httpStatusCode }} -
-        {{ filteredToast.toast.header }}
+        {{ toast.toast.httpStatusCode }} -
+        {{ toast.toast.header }}
       </strong>
     </ng-template>
     <div
       style="font-size: 1rem"
       [ngClass]="{
         'd-inline-flex': true,
-        'text-capitalize': filteredToast.toast.isDanger
+        'text-capitalize': toast.toast.type === types.ERROR
       }"
     >
       <div
-        [innerHTML]="filteredToast.toast.body"
+        [innerHTML]="toast.toast.body"
         [ngClass]="{
           'text-wrap': true,
-          'text-dark': filteredToast.toast.isWarning,
-          'text-light': !filteredToast.toast.isWarning
+          'text-dark': toast.toast.type === types.WARNING,
+          'text-light': toast.toast.type !== types.WARNING
         }"
       ></div>
     </div>
     <div class="pt-2">
       <ngb-progressbar
-        *ngIf="filteredToast.toast.isWarning"
+        *ngIf="toast.toast.type === types.WARNING; else progressBar"
         type="dark"
-        [value]="filteredToast.timer.timeLeft"
+        [value]="toast.timer.timeLeft"
         height=".5rem"
       ></ngb-progressbar>
-      <ngb-progressbar
-        *ngIf="!filteredToast.toast.isWarning"
-        type="warning"
-        [value]="filteredToast.timer.timeLeft"
-        height=".5rem"
-      ></ngb-progressbar>
+      <ng-template #progressBar>
+        <ngb-progressbar
+          type="warning"
+          [value]="toast.timer.timeLeft"
+          height=".5rem"
+        ></ngb-progressbar>
+      </ng-template>
     </div>
   </ngb-toast>
 </div>

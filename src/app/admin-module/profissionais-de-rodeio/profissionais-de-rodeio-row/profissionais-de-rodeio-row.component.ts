@@ -12,6 +12,7 @@ import { SaveButtonComponent } from 'src/app/shared/save-button/save-button.comp
 import { DateService } from 'src/app/shared/services/date.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { EstadoService } from 'src/app/shared/services/static/estado.service';
+import { ToastType } from 'src/app/shared/toasts/enums/toast-type.enum';
 import { ToastService } from 'src/app/shared/toasts/services/toast.service';
 
 import { ProfissionalAdminDataService } from '../data/profissional-admin-data.service';
@@ -104,9 +105,7 @@ export class ProfissionaisDeRodeioRowComponent
       .pipe(
         concatMap((isYes) => {
           if (isYes === true) {
-            return this.profissionalAdminData.delete(
-              this.adminProfissional.id
-            );
+            return this.profissionalAdminData.delete(this.adminProfissional.id);
           } else {
             return of(false);
           }
@@ -118,11 +117,12 @@ export class ProfissionaisDeRodeioRowComponent
           // Let the parent component what id has been deleted
           this.deletedId.emit(this.adminProfissional.id);
 
-          this.toastService.toasts.next({
+          this.toastService.triggerToast({
             httpStatusCode: 200,
             header: 'Successo',
             body: 'Profissional de Rodeio deletado.',
             delay: 3000,
+            type: ToastType.SUCCESS,
           });
 
           // Close modal
@@ -139,11 +139,12 @@ export class ProfissionaisDeRodeioRowComponent
 
   public onSaved(isUpdated: boolean): void {
     if (isUpdated === true) {
-      this.toastService.toasts.next({
+      this.toastService.triggerToast({
         httpStatusCode: 200,
         header: 'Successo',
         body: 'Mudanças foram salvas.',
         delay: 3000,
+        type: ToastType.SUCCESS,
       });
 
       // Update save button
@@ -166,8 +167,7 @@ export class ProfissionaisDeRodeioRowComponent
 
       this.updateParent(true);
     } else if (state === SaveBtnState.CHANGED) {
-      this.dirty =
-        this.adminProfissional !== this.initialProfissionalDeRodeio;
+      this.dirty = this.adminProfissional !== this.initialProfissionalDeRodeio;
 
       this.updateParent(false);
     }
@@ -193,7 +193,9 @@ export class ProfissionaisDeRodeioRowComponent
         message += `${this.adminProfissional.endereco.cidade} `;
       }
 
-      const estadoFound = this.estadoService.find(this.adminProfissional.endereco.estadoId);
+      const estadoFound = this.estadoService.find(
+        this.adminProfissional.endereco.estadoId
+      );
 
       if (estadoFound) {
         message += `${estadoFound.uf} `;
