@@ -30,7 +30,7 @@ export class ProfissionaisDeRodeioComponent
   public searchFilter: SearchFilter;
   public totalPerPage = 10;
   public rowChanges = new Array<RowInfo>();
-  public totalDeProfissionais = 0;
+  public totalDeProfissionais: number = 0;
   public isLoading: boolean = true;
   public isUserPaging: boolean = false;
 
@@ -63,7 +63,7 @@ export class ProfissionaisDeRodeioComponent
         finalize(() => (this.isLoading = false))
       )
       .subscribe((x) => {
-        this.adminProfissionals = x.profissionaisDeRodeio;
+        this.totalDeProfissionais = x.totalDeProfissionais;
         this.adminProfissionals = x.profissionaisDeRodeio;
 
         this.isLoading = false;
