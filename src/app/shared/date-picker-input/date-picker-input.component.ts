@@ -44,4 +44,16 @@ export class DatePickerInputComponent implements OnChanges {
       this.datePickedChange.emit(undefined);
     }
   }
+
+  public displayCalendarText(): boolean{
+    return !!this.calendarText && this.calendarText.length > 0 && !this.model;
+  }
+
+  public minDate(): NgbDateStruct{
+    return {
+      year: 1900,
+      month: 1,
+      day: 1
+    }
+  }
 }

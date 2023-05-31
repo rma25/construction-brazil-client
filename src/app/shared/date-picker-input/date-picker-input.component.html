@@ -9,12 +9,10 @@
         <fa-icon
           icon="calendar-alt"
           [ngClass]="{
-            'me-2': !!calendarText && calendarText.length > 0 && !model
+            'me-2': displayCalendarText()
           }"
         ></fa-icon>
-        <span *ngIf="!!calendarText && calendarText.length > 0 && !model">{{
-          calendarText
-        }}</span>
+        <span *ngIf="displayCalendarText()">{{ calendarText }}</span>
       </button>
       <button
         class="btn btn-secondary"
@@ -36,6 +34,7 @@
         #datePicker="ngbDatepicker"
         (change)="onDateSelected($event)"
         (dateSelect)="onDateSelected($event)"
+        [minDate]="minDate()"
         readonly
       />
     </div>

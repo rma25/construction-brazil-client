@@ -28,10 +28,16 @@ export class DateService {
       // Moment() month is 0 index, and JavaScript is not
       const parsedDate = moment(date);
       if (parsedDate.isValid()) {
-        result = subtractDate ? moment(parsedDate.toDate()).subtract(1, 'month').toDate() : moment(parsedDate.toDate()).toDate();
+        result = subtractDate
+          ? moment(parsedDate.toDate()).subtract(1, 'month').toDate()
+          : moment(parsedDate.toDate()).toDate();
       } else {
-        const newDate = moment(date.year + '-' + date.month + '-' + date.day).toDate();
-        result = subtractDate ? moment(newDate).subtract(1, 'month').toDate() : newDate;
+        const newDate = moment(
+          date.year + '-' + date.month + '-' + date.day
+        ).toDate();
+        result = subtractDate
+          ? moment(newDate).subtract(1, 'month').toDate()
+          : newDate;
       }
     }
 
@@ -69,19 +75,34 @@ export class DateService {
     return moment().add(days, 'd').toDate();
   }
 
-  public getDateRangeForDateFilterOption(dateFilterOption: string, isUtc: boolean): { from: Date | undefined; to: Date | undefined } {
+  public getDateRangeForDateFilterOption(
+    dateFilterOption: string,
+    isUtc: boolean
+  ): { from: Date | undefined; to: Date | undefined } {
     if (dateFilterOption !== DateFilterOptions.Intervalo_Personalizado) {
       if (!dateFilterOption || dateFilterOption.length === 0) {
         // Reset the date
         return { from: undefined, to: undefined };
       } else if (dateFilterOption === DateFilterOptions.Hoje) {
-        return { from: this.getDateNow(isUtc), to: this.getDatePlusDays(1, isUtc) };
+        return {
+          from: this.getDateNow(isUtc),
+          to: this.getDatePlusDays(1, isUtc),
+        };
       } else if (dateFilterOption === DateFilterOptions.Trinta_Dias) {
-        return { from: this.getDateMinusDays(30, true), to: this.getDatePlusDays(1, isUtc) };
+        return {
+          from: this.getDateMinusDays(30, true),
+          to: this.getDatePlusDays(1, isUtc),
+        };
       } else if (dateFilterOption === DateFilterOptions.Sessenta_Dias) {
-        return { from: this.getDateMinusDays(60, true), to: this.getDatePlusDays(1, isUtc) };
+        return {
+          from: this.getDateMinusDays(60, true),
+          to: this.getDatePlusDays(1, isUtc),
+        };
       } else if (dateFilterOption === DateFilterOptions.Noventa_Dias) {
-        return { from: this.getDateMinusDays(90, true), to: this.getDatePlusDays(1, isUtc) };
+        return {
+          from: this.getDateMinusDays(90, true),
+          to: this.getDatePlusDays(1, isUtc),
+        };
       } else {
         return { from: undefined, to: undefined };
       }
@@ -123,7 +144,11 @@ export class DateService {
     return momentDate.isValid();
   }
 
-  public getFormattedDate(date: any, includeHour: boolean = false, convertToLocalTime: boolean = false): string {
+  public getFormattedDate(
+    date: any,
+    includeHour: boolean = false,
+    convertToLocalTime: boolean = false
+  ): string {
     if (!date) {
       return '';
     }
@@ -142,7 +167,9 @@ export class DateService {
       formattedDate = formattedDate.local();
     }
 
-    return includeHour ? formattedDate.format('MMMM Do YYYY, h:mm:ss a') : formattedDate.format('ll');
+    return includeHour
+      ? formattedDate.format('MMMM Do YYYY, h:mm:ss a')
+      : formattedDate.format('ll');
   }
 
   public getNgFormattedDate(date: any): NgbDateStruct {
@@ -152,7 +179,7 @@ export class DateService {
       return {
         year: 0,
         month: 0,
-        day: 0
+        day: 0,
       };
     }
 
@@ -160,7 +187,7 @@ export class DateService {
     const formattedDate = {
       year: parsedDate.year(),
       month: parsedDate.month() + 1,
-      day: parsedDate.date()
+      day: parsedDate.date(),
     } as NgbDateStruct;
 
     return formattedDate;
@@ -191,6 +218,8 @@ export class DateService {
   }
 
   public getFormattedDateTime(date: any): string {
-    return this.isDateValid(date) ? moment(date).locale('pt-br').format('YYYY-MM-DD h:mm:ss a') : date;
+    return this.isDateValid(date)
+      ? moment(date).locale('pt-br').format('YYYY-MM-DD h:mm:ss a')
+      : date;
   }
 }
