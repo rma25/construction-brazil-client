@@ -240,7 +240,8 @@ body {
 }
 
 app-home,
-app-admin-menu {
+app-admin-menu,
+app-profissionais-de-rodeio {
   height: 100%;
   display: flex;
   flex-direction: column;
