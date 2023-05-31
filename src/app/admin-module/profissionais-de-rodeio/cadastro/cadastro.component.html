@@ -1,18 +1,26 @@
 <app-modal-header title="Cadastrar Profissional"></app-modal-header>
 <div class="modal-body">
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <app-contato [(adminContato)]="newProfissional.contato" (isValid)="isContatoValid = $event"></app-contato>
+  <div class="scrollbarContent vh75 container-padding">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <app-contato
+          [(adminContato)]="newProfissional.contato"
+          (isValid)="isContatoValid = $event"
+        ></app-contato>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <app-informacoes-gerais
+          [(adminProfissional)]="newProfissional"
+        ></app-informacoes-gerais>
+      </div>
     </div>
-    <div class="col-sm-12 col-md-6">
-      <app-informacoes-gerais
-        [(adminProfissional)]="newProfissional"
-      ></app-informacoes-gerais>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <app-endereco [(adminEndereco)]="newProfissional.endereco" (isValid)="isEnderecoValid = $event"></app-endereco>
+    <div class="row">
+      <div class="col">
+        <app-endereco
+          [(adminEndereco)]="newProfissional.endereco"
+          (isValid)="isEnderecoValid = $event"
+        ></app-endereco>
+      </div>
     </div>
   </div>
 </div>
