@@ -41,12 +41,15 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
       .insert(this.newProfissional)
       .pipe(takeUntil(this.destroy))
       .subscribe((newId) => {
-        if (newId) {
+        if (newId > 0) {
           // Set the new Id from the database to the existing videos
           this.newProfissional.criado = new Date();
           this.newProfissional.id = newId;
 
-          this.newProfissionalAdded.emit(this.newProfissional);
+          // This is so it doesn't pass the reference but the value
+          this.newProfissionalAdded.emit(
+            JSON.parse(JSON.stringify(this.newProfissional))
+          );
 
           this.toastService.toasts.next({
             httpStatusCode: 200,
