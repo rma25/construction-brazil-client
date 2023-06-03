@@ -16,14 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
           
       - name: npm install and build (client)
         run: |
-          cd /home/runner/work/construction-brazil-client/construction-brazil-client
           npm install
           npm run build
           
@@ -31,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: dist/construction-brazil-client/
+          path: construction-brazil-client
 
   deploy:
     runs-on: ubuntu-latest
