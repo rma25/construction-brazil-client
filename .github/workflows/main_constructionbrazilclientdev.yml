@@ -41,13 +41,10 @@ jobs:
         run: npm list        
         
       - name: List files in directory
-        run: ls /home/runner/work/construction-brazil-client/construction-brazil-client
+        run: ls /home/runner/work/construction-brazil-client/construction-brazil-client        
         
-      - name: Remove Package-lock.json
-        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client/package-lock.json
-        
-      - name: Remove Node Modules
-        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client -rf node_modules      
+      - name: Remove node_modules & package-lock.json
+        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client -rf node_modules package-lock.json
         
       - name: Angular Install
         run: npm install @angular/cli@13 -g
