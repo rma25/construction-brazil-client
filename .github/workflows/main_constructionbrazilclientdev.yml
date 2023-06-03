@@ -23,7 +23,7 @@ jobs:
           
       - name: npm install and build (client)
         run: |
-          cd client
+          cd /home/runner/work/construction-brazil-client/construction-brazil-client
           npm install
           npm run build
           
