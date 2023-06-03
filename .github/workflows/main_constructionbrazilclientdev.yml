@@ -38,13 +38,13 @@ jobs:
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: List the state of node modules
         continue-on-error: true
-        run: npm list
+        run: npm list        
         
-      - name: Go to Project Folder
-        run: cd /home/runner/work/construction-brazil-client/construction-brazil-client
+      - name: Testing
+        run: ls /home/runner/work/construction-brazil-client/construction-brazil-client
         
       - name: Remove Node_modules
-        run: rm -rf node_modules
+        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client -rf node_modules
         
       - name: Angular Install
         run: npm install @angular/cli@13 -g
@@ -52,11 +52,8 @@ jobs:
       - name: Npm Install
         run: npm install --save
 
-      - name: Npm Build
-        run: npm run build
-        
-      - name: Ng Build
-        run: ng build
+      - name: Npm Build (runs Ng Build as well)
+        run: npm run build             
         
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
