@@ -24,8 +24,11 @@ jobs:
       - name: List files in directory
         run: ls /home/runner/work/construction-brazil-client/construction-brazil-client        
         
+      - name: Go to directory
+        run: cd /home/runner/work/construction-brazil-client/construction-brazil-client
+        
       - name: Remove node_modules & package-lock.json
-        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client -rf node_modules package-lock.json
+        run: rm -rf node_modules package-lock.json
         
       - name: Angular Install
         run: npm install @angular/cli@13 -g
