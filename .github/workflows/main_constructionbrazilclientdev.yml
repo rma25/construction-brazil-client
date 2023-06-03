@@ -40,17 +40,14 @@ jobs:
         continue-on-error: true
         run: npm list        
         
-      - name: Check Package-lock.json before
+      - name: List files in directory
         run: ls /home/runner/work/construction-brazil-client/construction-brazil-client
         
       - name: Remove Package-lock.json
         run: rm /home/runner/work/construction-brazil-client/construction-brazil-client/package-lock.json
         
       - name: Remove Node Modules
-        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client -rf node_modules
-        
-      - name: Check Package-lock.json After
-        run: ls /home/runner/work/construction-brazil-client/construction-brazil-client
+        run: rm /home/runner/work/construction-brazil-client/construction-brazil-client -rf node_modules      
         
       - name: Angular Install
         run: npm install @angular/cli@13 -g
