@@ -30,6 +30,9 @@ jobs:
       - name: Remove node_modules & package-lock.json
         run: rm -rf node_modules package-lock.json
         
+      - name: Update NPM
+        run: npm install -g npm@9.6.7
+        
       - name: Angular Install
         run: npm install @angular/cli@13 -g
         
