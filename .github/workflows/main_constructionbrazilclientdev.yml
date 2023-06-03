@@ -42,8 +42,11 @@ jobs:
       - name: Bootstrap@5.1.3 Install
         run: npm install -g bootstrap@5.1.3
         
-      - name: Npm Install
+      - name: Npm Install Globally
         run: npm install -g
+        
+      - name: Npm Install Regular
+        run: npm install --save
 
       - name: Npm Build (runs Ng Build as well)
         run: npm run build             
