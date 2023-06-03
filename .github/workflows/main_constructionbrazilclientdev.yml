@@ -40,20 +40,22 @@ jobs:
         continue-on-error: true
         run: npm list
         
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Install dependencies
+      - name: Go to Project Folder
+        run: cd /home/runner/work/construction-brazil-client/construction-brazil-client
+        
+      - name: Remove Node_modules
+        run: rm -rf node_modules
+        
+      - name: Npm Install
         run: npm install
 
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Build
+      - name: Build
         run: npm run build
         
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Zip artifact for deployment
+      - name: Zip artifact for deployment
         run: zip release.zip ./* -r
         
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
+      - name: Npm list
         continue-on-error: true
         run: npm list
         
@@ -80,8 +82,7 @@ jobs:
         with:
           name: node-app
           
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Unzip artifact for deployment
+      - name: Unzip artifact for deployment
         run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
