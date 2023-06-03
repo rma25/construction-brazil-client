@@ -62,7 +62,7 @@ jobs:
         run: zip release.zip ./* -r
         
       - name: Npm list
-        continue-on-error: false
+        continue-on-error: true
         run: npm list
         
       # Commenting this until I have tests implemented
