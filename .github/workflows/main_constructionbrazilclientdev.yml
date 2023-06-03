@@ -33,11 +33,8 @@ jobs:
       - name: Angular/Cli@13 Install
         run: npm install -g @angular/cli@13
         
-      - name: Angular/Compiler@13 Install
-        run: npm install -g @angular/compiler@13
-        
-      - name: Angular/Devkit:Browser Install
-        run: npm install -g @angular-devkit/build-angular:browser
+      #- name: Angular/Compiler@13 Install
+       # run: npm install -g @angular/compiler@13
       
       - name: Bootstrap@5.1.3 Install
         run: npm install -g bootstrap@5.1.3
