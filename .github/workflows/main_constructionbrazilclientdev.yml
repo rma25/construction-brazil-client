@@ -33,6 +33,9 @@ jobs:
       - name: Angular/Cli@13 Install
         run: npm install -g @angular/cli@13
         
+      - name: Angular-devkit/build-angular Install
+        run: npm install -g --save-dev @angular-devkit/build-angular
+        
       #- name: Angular/Compiler@13 Install
        # run: npm install -g @angular/compiler@13
       
