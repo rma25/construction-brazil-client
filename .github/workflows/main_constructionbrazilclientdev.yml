@@ -27,8 +27,8 @@ jobs:
       - name: Go to directory
         run: cd /home/runner/work/construction-brazil-client/construction-brazil-client
         
-      - name: Remove node_modules & package-lock.json
-        run: rm -rf node_modules package-lock.json      
+      - name: Remove node_modules
+        run: rm -rf node_modules     
         
       - name: Angular/Cli@13 Install
         run: npm install -g @angular/cli@13
@@ -36,8 +36,8 @@ jobs:
       - name: Angular/Compiler@13 Install
         run: npm install -g @angular/compiler@13
         
-      - name: Angular/Devkit Install
-        run: npm install -g @angular-devkit/build-angular
+      - name: Angular/Devkit:Browser Install
+        run: npm install -g @angular-devkit/build-angular:browser
       
       - name: Bootstrap@5.1.3 Install
         run: npm install -g bootstrap@5.1.3
