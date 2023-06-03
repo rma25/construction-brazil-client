@@ -46,6 +46,9 @@ jobs:
       - name: Remove Node_modules
         run: rm -rf node_modules
         
+      - name: Angular Install
+        run: npm install @angular/cli -g
+        
       - name: Npm Install
         run: npm install --save
 
