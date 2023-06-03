@@ -47,7 +47,7 @@ jobs:
         run: rm -rf node_modules
         
       - name: Angular Install
-        run: npm install @angular/cli -g
+        run: npm install @angular/cli@13 -g
         
       - name: Npm Install
         run: npm install --save
