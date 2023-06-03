@@ -31,13 +31,13 @@ jobs:
         run: rm -rf node_modules package-lock.json      
         
       - name: Angular/Cli@13 Install
-        run: npm install @angular/cli@13 -g
+        run: npm install -g @angular/cli@13
         
       - name: Angular/Compiler@13 Install
-        run: npm install @angular/compiler@13
+        run: npm install -g @angular/compiler@13
       
       - name: Bootstrap@5.1.3 Install
-        run: npm install bootstrap@5.1.3 --save
+        run: npm install -g bootstrap@5.1.3
         
       - name: Npm Install
         run: npm install -g
