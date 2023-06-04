@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActiveRouteService } from 'src/app/services/active-route.service';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   public isNavbarCollapsed: boolean = true;
+  public activeRoute: string = '';
 
-  constructor() {}
+  constructor(private activeRouteService: ActiveRouteService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeRouteService.activeRoute.subscribe((activeRoute) => {
+      this.activeRoute = activeRoute;
+    });
+  }
 }
