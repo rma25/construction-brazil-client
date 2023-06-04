@@ -1,11 +1,26 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark border-bottom px-2">
+<nav
+  class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark border-bottom px-2"
+>
   <div class="container-fluid">
     <!-- <img src="/assets/images/sinproego-transparent.png" class="companyLogo-navbrand" alt="" /> -->
     <a class="navbar-brand" routerLink="/">SINPROEGO</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      [ngbCollapse]="isNavbarCollapsed"
+    >
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
