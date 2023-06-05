@@ -48,11 +48,6 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
           this.newProfissional.criado = new Date();
           this.newProfissional.id = newId;
 
-          // This is so it doesn't pass the reference but the value
-          this.newProfissionalAdded.emit(
-            JSON.parse(JSON.stringify(this.newProfissional))
-          );
-
           this.toastService.triggerToast({
             httpStatusCode: 200,
             header: ToastType.SUCCESS,
@@ -60,11 +55,15 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
             delay: ToastTimer.DEFAULT,
             type: ToastType.SUCCESS,
           });
+
+          // This is so it doesn't pass the reference but the value
+          this.newProfissionalAdded.emit(
+            JSON.parse(JSON.stringify(this.newProfissional))
+          );
         }
 
         this.newProfissional = new AdminProfissional();
+        this.modalService.closeModal();
       });
-
-    this.modalService.closeModal();
   }
 }
