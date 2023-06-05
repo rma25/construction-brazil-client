@@ -7,6 +7,7 @@ import { EstadoService } from 'src/app/shared/services/static/estado.service';
 import { Estado } from '../../interfaces/estado.interface';
 import { AdminEndereco } from '../../models/admin-endereco.model';
 import { InformacoesGeraisService } from '../informacoes-gerais/services/informacoes-gerais.service';
+import { EnderecoService } from './services/endereco.service';
 
 @Component({
   selector: 'app-endereco',
@@ -27,7 +28,8 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   constructor(
     private estadoService: EstadoService,
     private externalCepDataService: ExternalCepDataService,
-    private informacoesGeraisService: InformacoesGeraisService
+    private informacoesGeraisService: InformacoesGeraisService,
+    private enderecoService: EnderecoService
   ) {
     super();
 
@@ -45,7 +47,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
       .pipe(
         distinctUntilChanged(),
         debounceTime(100),
-        map((cep) => this.formatCEP(cep)),
+        map((cep) => this.enderecoService.formatCEP(cep)),
         concatMap((formattedCep) => {
           if (formattedCep && formattedCep.length === 9) {
             return this.externalCepDataService
@@ -68,31 +70,15 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
           this.adminEndereco.rua = x.cepInfo.logradouro;
           this.adminEndereco.bairro = x.cepInfo.bairro;
         } else {
-          this.adminEndereco.cep = x.formattedCep;
+          if (x.formattedCep && x.formattedCep.length === 9) {
+            this.adminEndereco.cep = x.formattedCep;
+          }
         }
       });
   }
 
-  public formatCEP(cpf?: string): string {
-    let formattedCpf = '';
-    // CPF Format: 123.456.789-01
-    if (!cpf) {
-      return formattedCpf;
-    }
-
-    for (let i = 0; i < cpf.length; i++) {
-      const value = cpf[i];
-
-      if (value === '-' || value === '.') continue;
-
-      formattedCpf += cpf[i];
-
-      if (i === 4) {
-        formattedCpf += '-';
-      }
-    }
-
-    return formattedCpf;
+  public cepContainNaN(cep?: string): boolean {
+    return this.enderecoService.cepContainNaN(cep);
   }
 
   public onCepInput(target: EventTarget | null): void {

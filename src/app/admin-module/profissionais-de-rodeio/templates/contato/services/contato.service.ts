@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
+import { StringManipulationService } from 'src/app/shared/services/string-manipulation.service';
 
 @Injectable({ providedIn: 'root' })
 export class ContatoService {
-  constructor() {}
+  constructor(private stringManipulationService: StringManipulationService) {}
 
   public cleanCpf(cpf?: string): string {
-    const cleanCpf = cpf
-      ? Array.from(cpf)
-          .filter((x) => !isNaN(parseInt(x)))
-          .join('')
-      : '';
-
-    return cleanCpf;
+    return this.stringManipulationService.removeNaN(cpf);
   }
 
   public cpfContainNaN(cpf?: string): boolean {

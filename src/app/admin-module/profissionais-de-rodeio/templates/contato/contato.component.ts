@@ -49,7 +49,7 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         debounceTime(100),
         map((cpf) => this.contatoService.formatCPF(cpf)),
         concatMap((cpf) => {
-          if (!!cpf && cpf.length > 0) {
+          if (!!cpf && cpf.length === 14) {
             return this.contatoAdminData
               .isCpfUnique(
                 cpf,

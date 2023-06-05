@@ -32,6 +32,12 @@
     >
       Por favor digite o CEP.
     </div>
+    <div
+      class="text-danger font-italic"
+      *ngIf="cepContainNaN(adminEndereco.cep)"
+    >
+      Por favor digite apenas numeros.
+    </div>
   </div>
   <div class="mb-3" [hidden]="hideAddressForm()">
     <label for="inp-rua" class="fw-bold">Rua</label>

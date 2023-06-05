@@ -60,19 +60,16 @@
       Por favor digite CPF completo. Tem que ser 11 caracteres.
     </div>
     <div
-    class="text-danger font-italic"
-    *ngIf="cpfContainNaN(adminContato.cpf)"
-  >
-    Por favor digite apenas numeros.
-  </div>
+      class="text-danger font-italic"
+      *ngIf="cpfContainNaN(adminContato.cpf)"
+    >
+      Por favor digite apenas numeros.
+    </div>
   </div>
   <!-- Required -->
   <div class="mb-3">
     <app-required-icon></app-required-icon>
-    <label
-      for="date-picker-data-de-nascimento"
-      class="fw-bold"
-    >
+    <label for="date-picker-data-de-nascimento" class="fw-bold">
       Data de Nascimento
     </label>
     <app-date-picker-input
