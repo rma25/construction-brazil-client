@@ -61,28 +61,34 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         takeUntil(this.destroy)
       )
       .subscribe((x) => {
-        this.adminContato.cpf = x.cpf;
+        if (x.cpf && x.cpf.length > 11) {
+          this.adminContato.cpf = x.cpf;
+        }
+
         this.isCpfUnique = x.isCpfUnique;
       });
   }
 
   public formatCPF(cpf?: string): string {
-    let formattedCpf = '';
     // CPF Format: 123.456.789-01
-    if (!cpf) {
-      return formattedCpf;
-    }
+    let formattedCpf = '';
 
-    for (let i = 0; i < cpf.length; i++) {
-      const value = cpf[i];
+    if (!cpf) return formattedCpf;
 
-      if (value === '-' || value === '.') continue;
+    const filteredCpf = cpf.replaceAll('.', '').replaceAll('-', '');
 
-      formattedCpf += cpf[i];
+    if (filteredCpf.length < 11) return formattedCpf;
 
-      if (i === 10) {
+    for (let i = 0; i < filteredCpf.length; i++) {
+      const value = filteredCpf[i];
+
+      if (value === '.' || value === '-') continue;
+
+      formattedCpf += filteredCpf[i];
+
+      if (i === 8) {
         formattedCpf += '-';
-      } else if (i === 2 || i === 6) {
+      } else if (i === 2 || i === 5) {
         formattedCpf += '.';
       }
     }
