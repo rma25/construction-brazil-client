@@ -36,13 +36,13 @@
       class="text-danger font-italic"
       *ngIf="cep.touched && !isValidCepFormat"
     >
-      O Formato do CEP é inválido. Exemplo de formato válido "12345-678"
+      O formato do CEP é inválido. Exemplo de formato válido "12345-678"
     </div>
     <div
       class="text-danger font-italic"
       *ngIf="cepContainNaN(adminEndereco.cep)"
     >
-      Por favor digite apenas numeros.
+      Por favor digite apenas números.
     </div>
   </div>
   <div class="mb-3" [hidden]="hideAddressForm()">
