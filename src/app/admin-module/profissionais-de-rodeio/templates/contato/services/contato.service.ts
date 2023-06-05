@@ -10,12 +10,21 @@ export class ContatoService {
   }
 
   public cpfContainNaN(cpf?: string): boolean {
-    if (!cpf) return false;
-    let filteredCpf = cpf ? cpf.replaceAll('.', '').replaceAll('-', '') : '';
+    return this.stringManipulationService.containsNaN(cpf, ['-', '.']);
+  }
 
-    const containsNaN = Array.from(filteredCpf).some((x) => isNaN(parseInt(x)));
-
-    return containsNaN;
+  public isValidCpfFormat(cpf?: string): boolean {
+    // CPF Format: 123.456.789-01
+    return (
+      !!cpf &&
+      cpf.length === 14 &&
+      cpf[3] === '.' &&
+      cpf[7] === '.' &&
+      cpf[11] === '-' &&
+      Array.from(cpf).every(
+        (x, i) => i === 3 || i === 7 || i === 11 || !isNaN(parseInt(x))
+      )
+    );
   }
 
   public formatCPF(cpf?: string): string {

@@ -55,6 +55,12 @@
     </div>
     <div
       class="text-danger font-italic"
+      *ngIf="cpf.touched && !isValidCpfFormat"
+    >
+      O Formato do CPF é inválido. Exemplo de formato válido "123.456.789-01"
+    </div>
+    <div
+      class="text-danger font-italic"
       *ngIf="cpf.touched && !!adminContato.cpf && adminContato.cpf.length < 14"
     >
       Por favor digite CPF completo. Tem que ser 11 caracteres.

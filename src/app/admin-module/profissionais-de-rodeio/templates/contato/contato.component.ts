@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { concatMap, debounceTime, distinctUntilChanged, map, of, Subject, takeUntil } from 'rxjs';
+import { concatMap, distinctUntilChanged, map, of, Subject, takeUntil, tap } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { DddService } from 'src/app/shared/services/static/ddd.service';
 import { SexoService } from 'src/app/shared/services/static/sexo.service';
@@ -25,7 +25,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   public ddds!: Array<Ddd>;
   public sexos!: Array<Sexo>;
   public dataDeNascimentoTouched: boolean;
-  public isCpfUnique: boolean = false;
+  public isCpfUnique: boolean;
+  public isValidCpfFormat: boolean;
 
   constructor(
     private sexoService: SexoService,
@@ -40,14 +41,17 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Set the initial to true if it's being edited.
-    this.isCpfUnique = this.adminContato.id > 0;
+    this.setup();
 
     this.cpfText
       .pipe(
         distinctUntilChanged(),
-        debounceTime(100),
         map((cpf) => this.contatoService.formatCPF(cpf)),
+        tap(
+          (formattedCpf) =>
+            (this.isValidCpfFormat =
+              this.contatoService.isValidCpfFormat(formattedCpf))
+        ),
         concatMap((cpf) => {
           if (!!cpf && cpf.length === 14) {
             return this.contatoAdminData
@@ -63,12 +67,18 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         takeUntil(this.destroy)
       )
       .subscribe((x) => {
-        if (x.cpf && x.cpf.length === 14) {
+        if (this.isValidCpfFormat) {
           this.adminContato.cpf = x.cpf;
         }
 
         this.isCpfUnique = x.isCpfUnique;
       });
+  }
+
+  private setup(): void {
+    // Set the initial to true if it's being edited.
+    this.isCpfUnique = this.adminContato.id > 0;
+    this.isValidCpfFormat = this.adminContato.id > 0;
   }
 
   public cpfContainNaN(cpf?: string): boolean {
@@ -90,9 +100,12 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   }
 
   public onChange(): void {
+    this.isValidCpfFormat = this.contatoService.isValidCpfFormat(
+      this.adminContato.cpf
+    );
+
     this.isValid.emit(
-      !!this.adminContato.cpf &&
-        this.adminContato.cpf.length === 14 &&
+      this.isValidCpfFormat &&
         !!this.adminContato.nome &&
         this.adminContato.nome.length > 0 &&
         !!this.adminContato.sobrenome &&

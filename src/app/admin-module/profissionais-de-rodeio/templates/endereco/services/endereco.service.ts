@@ -10,7 +10,16 @@ export class EnderecoService {
   }
 
   public cepContainNaN(cep?: string): boolean {
-    return this.stringManipulationService.containsNaN(cep, ['.', '-']);
+    return this.stringManipulationService.containsNaN(cep, ['-']);
+  }
+
+  public isValidCepFormat(cep?: string): boolean {
+    return (
+      !!cep &&
+      cep.length === 9 &&
+      cep[5] === '-' &&
+      Array.from(cep).every((x, i) => i === 5 || !isNaN(parseInt(x)))
+    );
   }
 
   public formatCEP(cep?: string): string {

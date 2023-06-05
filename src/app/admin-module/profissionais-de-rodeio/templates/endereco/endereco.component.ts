@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { concatMap, debounceTime, distinctUntilChanged, map, of, Subject, takeUntil } from 'rxjs';
+import { concatMap, distinctUntilChanged, map, of, Subject, takeUntil, tap } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 import { ExternalCepDataService } from 'src/app/shared/data/external/external-cep-data.service';
 import { EstadoService } from 'src/app/shared/services/static/estado.service';
@@ -22,7 +22,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
 
   public estados!: Array<Estado>;
   public cepText = new Subject<string>();
-
+  public isValidCepFormat: boolean;
   public isSindicalizado: boolean;
 
   constructor(
@@ -37,6 +37,8 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setup();
+
     this.informacoesGeraisService.isSindicalizado
       .pipe(takeUntil(this.destroy))
       .subscribe((isSindicalizado) => {
@@ -46,8 +48,12 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
     this.cepText
       .pipe(
         distinctUntilChanged(),
-        debounceTime(100),
         map((cep) => this.enderecoService.formatCEP(cep)),
+        tap(
+          (formattedCep) =>
+            (this.isValidCepFormat =
+              this.enderecoService.isValidCepFormat(formattedCep))
+        ),
         concatMap((formattedCep) => {
           if (formattedCep && formattedCep.length === 9) {
             return this.externalCepDataService
@@ -70,11 +76,16 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
           this.adminEndereco.rua = x.cepInfo.logradouro;
           this.adminEndereco.bairro = x.cepInfo.bairro;
         } else {
-          if (x.formattedCep && x.formattedCep.length === 9) {
+          if (this.isValidCepFormat) {
             this.adminEndereco.cep = x.formattedCep;
           }
         }
       });
+  }
+
+  private setup(): void {
+    // Set it to true if it's in edit mode
+    this.isValidCepFormat = this.adminEndereco.id > 0;
   }
 
   public cepContainNaN(cep?: string): boolean {
@@ -92,13 +103,15 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   }
 
   public hideAddressForm(): boolean {
-    return !this.adminEndereco.cep || this.adminEndereco.cep.length !== 9;
+    return !this.isValidCepFormat;
   }
 
   public onChange(): void {
-    this.isValid.emit(
-      !!this.adminEndereco.cep && this.adminEndereco.cep.length === 9
+    this.isValidCepFormat = this.enderecoService.isValidCepFormat(
+      this.adminEndereco.cep
     );
+
+    this.isValid.emit(this.isValidCepFormat);
   }
 
   public triggerCepCheck(): void {

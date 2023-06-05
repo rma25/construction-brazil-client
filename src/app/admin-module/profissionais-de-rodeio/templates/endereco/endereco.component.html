@@ -34,6 +34,12 @@
     </div>
     <div
       class="text-danger font-italic"
+      *ngIf="cep.touched && !isValidCepFormat"
+    >
+      O Formato do CEP é inválido. Exemplo de formato válido "12345-678"
+    </div>
+    <div
+      class="text-danger font-italic"
       *ngIf="cepContainNaN(adminEndereco.cep)"
     >
       Por favor digite apenas numeros.
