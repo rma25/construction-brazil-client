@@ -59,6 +59,12 @@
     >
       Por favor digite CPF completo. Tem que ser 11 caracteres.
     </div>
+    <div
+    class="text-danger font-italic"
+    *ngIf="cpfContainNaN(adminContato.cpf)"
+  >
+    Por favor digite apenas numeros.
+  </div>
   </div>
   <!-- Required -->
   <div class="mb-3">

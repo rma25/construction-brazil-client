@@ -8,6 +8,7 @@ import { Ddd } from '../../interfaces/ddd.interface';
 import { Sexo } from '../../interfaces/sexo.interface';
 import { AdminContato } from '../../models/admin-contato.model';
 import { ContatoAdminDataService } from './data/contato-admin-data.service';
+import { ContatoService } from './services/contato.service';
 
 @Component({
   selector: 'app-contato',
@@ -29,7 +30,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
   constructor(
     private sexoService: SexoService,
     private dddService: DddService,
-    private contatoAdminData: ContatoAdminDataService
+    private contatoAdminData: ContatoAdminDataService,
+    private contatoService: ContatoService
   ) {
     super();
 
@@ -44,8 +46,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
     this.cpfText
       .pipe(
         distinctUntilChanged(),
-        debounceTime(300),
-        map((cpf) => this.formatCPF(cpf)),
+        debounceTime(100),
+        map((cpf) => this.contatoService.formatCPF(cpf)),
         concatMap((cpf) => {
           if (!!cpf && cpf.length > 0) {
             return this.contatoAdminData
@@ -61,7 +63,7 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
         takeUntil(this.destroy)
       )
       .subscribe((x) => {
-        if (x.cpf && x.cpf.length > 11) {
+        if (x.cpf && x.cpf.length === 14) {
           this.adminContato.cpf = x.cpf;
         }
 
@@ -69,31 +71,8 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
       });
   }
 
-  public formatCPF(cpf?: string): string {
-    // CPF Format: 123.456.789-01
-    let formattedCpf = '';
-
-    if (!cpf) return formattedCpf;
-
-    const filteredCpf = cpf.replaceAll('.', '').replaceAll('-', '');
-
-    if (filteredCpf.length < 11) return formattedCpf;
-
-    for (let i = 0; i < filteredCpf.length; i++) {
-      const value = filteredCpf[i];
-
-      if (value === '.' || value === '-') continue;
-
-      formattedCpf += filteredCpf[i];
-
-      if (i === 8) {
-        formattedCpf += '-';
-      } else if (i === 2 || i === 5) {
-        formattedCpf += '.';
-      }
-    }
-
-    return formattedCpf;
+  public cpfContainNaN(cpf?: string): boolean {
+    return this.contatoService.cpfContainNaN(cpf);
   }
 
   public onCpfInput(target: EventTarget | null): void {
