@@ -24,10 +24,10 @@ export class ActiveRouteService {
   private getActiveRoute(): string {
     let activeRoute = '';
     const url = this.router.url;
-    const adminParent = '/admin';
+    const configuracoesParent = '/configuracoes';
 
-    if (url.startsWith(adminParent)) {
-      activeRoute = adminParent;
+    if (url.startsWith(configuracoesParent)) {
+      activeRoute = configuracoesParent;
     } else {
       activeRoute = url;
     }
