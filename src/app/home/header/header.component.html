@@ -1,5 +1,5 @@
 <nav
-  class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark border-bottom px-2"
+  class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark border-bottom px-2 container-padding"
 >
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">
@@ -27,34 +27,31 @@
       id="navbarSupportedContent"
       [ngbCollapse]="isNavbarCollapsed"
     >
-      <div class="row align-items-center w-100">
-        <div class="col-xs-12 col-md-11"></div>
-        <div class="col-xs-12 col-md-1">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a
-                [ngClass]="{
-                  'nav-link': true,
-                  active: activeRoute === '/home'
-                }"
-                aria-current="page"
-                routerLink="/"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                [ngClass]="{
-                  'nav-link': true,
-                  active: activeRoute === '/admin'
-                }"
-                routerLink="/admin"
-                >Admin</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            [ngClass]="{
+              'nav-link': true,
+              active: activeRoute === '/home'
+            }"
+            aria-current="page"
+            routerLink="/"
+          >
+            Página Inicial
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [ngClass]="{
+              'nav-link': true,
+              active: activeRoute === '/admin'
+            }"
+            routerLink="/admin"
+          >
+            Configurações
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
