@@ -6,14 +6,14 @@ import { ShellComponent } from './home/shell/shell.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'pagina-inicial', pathMatch: 'full' },
   {
     path: '',
     component: ShellComponent,
     children: [
-      { path: 'home', component: HomeComponent },
+      { path: 'pagina-inicial', component: HomeComponent },
       {
-        path: 'admin',
+        path: 'configuracoes',
         loadChildren: () =>
           import('./admin-module/admin.module').then((m) => m.AdminModule),
       },
