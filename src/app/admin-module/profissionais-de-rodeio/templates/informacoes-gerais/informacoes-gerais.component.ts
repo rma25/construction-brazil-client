@@ -32,10 +32,6 @@ export class InformacoesGeraisComponent {
   }
 
   public onChange(): void {
-    /*
-     * This will always be true for now since none of the fields are required.
-     * In case it changes in the future I will follow the same pattern as the other components
-     */
     this.isValid.emit(this.adminProfissional.profissionalTypeId > 0);
   }
 }
