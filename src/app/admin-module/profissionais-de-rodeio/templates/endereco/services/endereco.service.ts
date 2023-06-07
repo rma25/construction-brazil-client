@@ -34,12 +34,12 @@ export class EnderecoService {
 
     if (filteredCep.length < 8) return formattedCep;
 
-    for (let i = 0; i < cep.length; i++) {
-      const value = cep[i];
+    for (let i = 0; i < filteredCep.length; i++) {
+      const value = filteredCep[i];
 
       if (value === '-' || value === '.') continue;
 
-      formattedCep += cep[i];
+      formattedCep += filteredCep[i];
 
       if (i === 4) {
         formattedCep += '-';
