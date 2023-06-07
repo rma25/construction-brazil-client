@@ -101,7 +101,7 @@ export class ContatoComponent extends AbstractBaseComponent implements OnInit {
 
   public onChange(): void {
     this.isValidCpfFormat = this.contatoService.isValidCpfFormat(
-      this.adminContato.cpf
+      this.contatoService.formatCPF(this.adminContato.cpf)
     );
 
     this.isValid.emit(

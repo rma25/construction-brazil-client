@@ -22,7 +22,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
 
   public estados!: Array<Estado>;
   public cepText = new Subject<string>();
-  public isValidCepFormat: boolean;
+  public isValidCepFormat: boolean = false;
   public isSindicalizado: boolean;
 
   constructor(
@@ -86,6 +86,8 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
   private setup(): void {
     // Set it to true if it's in edit mode
     this.isValidCepFormat = this.adminEndereco.id > 0;
+
+    console.log('set up isValidCepFormat', this.isValidCepFormat);
   }
 
   public cepContainNaN(cep?: string): boolean {
@@ -108,7 +110,7 @@ export class EnderecoComponent extends AbstractBaseComponent implements OnInit {
 
   public onChange(): void {
     this.isValidCepFormat = this.enderecoService.isValidCepFormat(
-      this.adminEndereco.cep
+      this.enderecoService.formatCEP(this.adminEndereco.cep)
     );
 
     this.isValid.emit(this.isValidCepFormat);
