@@ -11,6 +11,7 @@
       <div class="col-sm-12 col-md-6">
         <app-informacoes-gerais
           [(adminProfissional)]="newProfissional"
+          (isValid)="isInformacoesGeraisValid = $event"
         ></app-informacoes-gerais>
       </div>
     </div>

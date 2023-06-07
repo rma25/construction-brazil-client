@@ -20,6 +20,7 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
   public newProfissional = new AdminProfissional();
   public isContatoValid: boolean = false;
   public isEnderecoValid: boolean = false;
+  public isInformacoesGeraisValid: boolean = false;
 
   constructor(
     public modalService: ModalService,
@@ -34,7 +35,7 @@ export class CadastroComponent extends AbstractBaseComponent implements OnInit {
   }
 
   public isAddValid(): boolean {
-    return this.isContatoValid && this.isEnderecoValid;
+    return this.isContatoValid && this.isEnderecoValid && this.isInformacoesGeraisValid;
   }
 
   public onAdd(): void {
