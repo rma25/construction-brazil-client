@@ -4,4 +4,5 @@ export class ProfissionalAdminFilter {
   public searchText?: string;
   public startedOn?: Date | null;
   public endedOn?: Date | null;
+  public userOffset: number = 0;
 }

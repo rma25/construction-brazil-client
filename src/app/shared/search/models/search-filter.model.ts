@@ -7,4 +7,5 @@ export class SearchFilter {
   public fromDate?: Date | null;
   public toDate?: Date | null;
   public dateFilterOption?: DateFilterOptions;
+  public userOffset: number = 0;
 }

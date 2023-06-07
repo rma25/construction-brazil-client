@@ -74,6 +74,7 @@
         class="form-select"
         name="select-search-dateFilter"
         [(ngModel)]="searchFilter.dateFilterOption"
+        (ngModelChange)="onDateFilterChange()"
         (change)="onSearch()"
         id="select-search-dateFilter"
       >

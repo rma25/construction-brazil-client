@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { AbstractBaseComponent } from 'src/app/abstract-base/abstract-base.component';
 
+import { DateService } from '../services/date.service';
 import { DateFilterOptions } from './enums/date-filter-options';
 import { SearchFilter } from './models/search-filter.model';
 
@@ -39,7 +40,7 @@ export class SearchComponent extends AbstractBaseComponent implements OnInit {
 
   public searchFilter: SearchFilter = new SearchFilter();
 
-  constructor() {
+  constructor(private dateService: DateService) {
     super();
   }
 
@@ -81,5 +82,23 @@ export class SearchComponent extends AbstractBaseComponent implements OnInit {
 
   public onSearch(): void {
     this.searchFor.emit(this.searchFilter);
+  }
+
+  public onDateFilterChange(): void {
+    // Custom Date Range will be triggered when the user selectes a From & To Date
+    if (this.searchFilter.dateFilterOption && this.searchFilter.dateFilterOption !== this.dateFilterCustomRangeOption) {
+      const fromAndTo = this.dateService.getDateRangeForDateFilterOption(this.searchFilter.dateFilterOption, true);
+
+      this.searchFilter.fromDate = fromAndTo.from;
+      this.searchFilter.toDate = fromAndTo.to;
+      this.searchFilter.userOffset = new Date().getTimezoneOffset();
+
+      this.onSearch();
+    } else {
+      // Reset for Custom Range
+      this.searchFilter.fromDate = undefined;
+      this.searchFilter.toDate = undefined;
+      this.searchFilter.userOffset = new Date().getTimezoneOffset();
+    }
   }
 }

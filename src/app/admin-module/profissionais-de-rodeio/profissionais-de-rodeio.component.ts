@@ -111,6 +111,7 @@ export class ProfissionaisDeRodeioComponent
               filter.searchText = this.searchFilter.searchText;
               filter.startedOn = this.searchFilter.fromDate;
               filter.endedOn = this.searchFilter.toDate;
+              filter.userOffset = this.searchFilter.userOffset;
             }
 
             return this.profissionalSettingsData.getAdminTotal(filter).pipe(
